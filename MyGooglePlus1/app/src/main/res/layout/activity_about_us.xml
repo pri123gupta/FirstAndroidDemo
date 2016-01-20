@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.applop.demo.activities.AboutUsActivity">
+    <include layout="@layout/toolbar_about_us"/>
+    <WebView
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webViewAboutUs"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/transparent"/>
+</RelativeLayout>

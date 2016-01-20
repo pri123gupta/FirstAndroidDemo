@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:id="@+id/cardview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:background="#ffffff"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/titledesclayout"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/titleName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="2dp"
+                android:lineSpacingMultiplier="1.1"
+                android:text="text" android:textColor="#FF000000"
+                android:textSize="18dp" >
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/homeFeedPostTime"
+                android:textSize="14dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+
+                android:layout_height="match_parent"
+                android:text="time" />
+
+            <ImageView android:layout_width="match_parent"
+                android:background="#00000000"
+                android:layout_height="200dp"
+                android:id="@+id/coverImageView"
+                android:cropToPadding="true"
+                android:layout_gravity="center_vertical"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+               />
+            <TextView
+                android:padding="5dp"
+                android:id="@+id/introduction"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:lineSpacingMultiplier="1.1"
+                android:text="text" android:textColor="#FF222222"
+                android:textSize="15dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/share"
+                    android:text="Share"
+                    android:textAllCaps="false"
+                    android:textColor="#000000"
+                    android:background="#DDDDDD"
+
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:textAllCaps="false"
+                    android:id="@+id/abc"
+                    android:layout_margin="5dp"
+                    android:text="Enquiry"
+
+                    android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:background="#DDDDDD"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

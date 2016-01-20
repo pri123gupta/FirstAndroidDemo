@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="250dp"
+    android:layout_gravity="start"
+    android:id="@+id/relative_left_drawer">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/left_drawer_list"
+ android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="15dp"
+        android:layout_width="match_parent"
+        android:choiceMode="singleChoice"
+        android:divider="#eeeeee"
+        android:background="#ffffff"
+        android:dividerHeight="0.5dp"
+        android:layout_alignParentTop="true"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
+</RelativeLayout>

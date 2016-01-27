@@ -1,0 +1,43 @@
+ <android.support.v4.widget.DrawerLayout
+        android:background="#ffffff"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:background="#CCCCCC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include
+                layout="@layout/toolbar_main"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:background="#CCCCCC"
+                android:layout_below="@+id/toolbar"
+                android:layout_height="wrap_content">
+                <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/swipeRefreshLayout"
+                    android:layout_width="fill_parent"
+                    android:gravity="center"
+                    android:layout_height="fill_parent">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/itemsRecyclerView"
+                        android:layout_width="match_parent"
+                        android:background="#CCCCCC"
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical" />
+                </android.support.v4.widget.SwipeRefreshLayout>
+
+            </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:indeterminateTint="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                />
+        </RelativeLayout>
+        <include layout="@layout/left_drawer_layout"/>
+    </android.support.v4.widget.DrawerLayout>

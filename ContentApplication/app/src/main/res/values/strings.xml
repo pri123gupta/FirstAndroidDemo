@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Your App</string>
+    <string name="btn_logout_from_google">Logout from Google</string>
+    <string name="btn_revoke_access">Revoke Access</string>
+    <string name="facebook_app_id">1733630290201847</string>
+    <string name="openDrawer">openDrawer</string>
+    <string name="closeDrawer">closeDrawer</string>
+    <string name="contact_us_p1">Applop Mobile Solutions Pvt. Ltd.</string>
+    <string name="contact_us_p2">737B, JMD Megapolis, Setor 48</string>
+    <string name="contact_us_p3">Sohna Road, Gurgaon - 122001</string>
+    <string name="contact_us_p4">Phone number : 01244939799</string>
+<string name="our_mission">Make application without coding : Applop helps in expanding and managing your business, a single tool in form of mobile app that serves as an integrated solution to retain old customers and attract new. With click of a button
+    you updates will be notified through push notification to all your users.
+</string>
+    <string name="about_us">Make application without coding : Applop helps in expanding and managing your business, a single tool in form of mobile app that serves as an integrated solution to retain old customers and attract new. With click of a button
+    you updates will be notified through push notification to all your users.
+</string>
+    <string name="who_we_are">To Make Mobile App you just need 5 minutes, Give a Miss call to 18002700222 or visit http://applop.com and download Applop app, from there click on "Make your own app" and fill in the details, your App will be live in 24 hours in play store. This is a demo app just to show you how your app will look like  </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

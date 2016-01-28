@@ -15,10 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="200dp">
             <ImageView
-                android:layout_width="match_parent"
-                android:src="@drawable/drawer_logo"
+                android:layout_width="150dp"
+                android:src="@drawable/ic_launcher"
                 android:scaleType="fitCenter"
-                android:layout_height="200dp"/>
+                android:layout_centerInParent="true"
+                android:layout_height="150dp"/>
         </RelativeLayout>
     </RelativeLayout>
 

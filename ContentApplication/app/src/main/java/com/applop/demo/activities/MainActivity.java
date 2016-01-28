@@ -3,6 +3,7 @@ package com.applop.demo.activities;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -114,6 +115,7 @@ TextView myTitle;
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer_list);
         mDrawerList.setLayoutManager(new LinearLayoutManager(context));
         mDrawerList.setAdapter(drawer1MenuAdapter);
+        ((RelativeLayout)findViewById(R.id.upperBar)).setBackgroundColor(Color.parseColor(AppConfiguration.getInstance(this).bgcolor));
         //for second drawer with id itemsRecyclerView
         itemsRecyclerView = (RecyclerView) findViewById(R.id.itemsRecyclerView);
         linearLayoutManager = new LinearLayoutManager(this);

@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 
@@ -28,7 +29,7 @@ public class Helper {
             Drawable colorDrawable = new ColorDrawable(Color.parseColor(AppConfiguration.getInstance(context).bgcolor));
             Drawable bottomDrawable = new ColorDrawable(context.getResources().getColor(android.R.color.transparent));
             LayerDrawable ld = new LayerDrawable(new Drawable[]{colorDrawable, bottomDrawable});
-            ((ActionBarActivity) context).getSupportActionBar().setBackgroundDrawable(ld);
+            ((AppCompatActivity) context).getSupportActionBar().setBackgroundDrawable(ld);
         }catch (Exception ex){
 
         }

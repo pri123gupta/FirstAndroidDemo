@@ -10,12 +10,19 @@ import android.webkit.WebView;
 
 import com.applop.demo.R;
 import com.applop.demo.helperClasses.Helper;
+import com.applop.demo.model.AppConfiguration;
+import com.applop.demo.model.NameConstant;
 
 public class ContactUsActivity extends AppCompatActivity {
 Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (AppConfiguration.getInstance(this).iconTheme.equalsIgnoreCase(NameConstant.ICON_THEME_LIGHT)){
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeLight);
+        }
         setContentView(R.layout.activity_about_us);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

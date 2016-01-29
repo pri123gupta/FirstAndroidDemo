@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.applop.demo.R;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.model.AppConfiguration;
+import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.Story;
 
 public class OverAllEnquiryMailActivity extends AppCompatActivity {
@@ -25,6 +26,11 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (AppConfiguration.getInstance(this).iconTheme.equalsIgnoreCase(NameConstant.ICON_THEME_LIGHT)){
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeLight);
+        }
         setContentView(R.layout.activity_enquiry_mail);
        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,6 +75,10 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
             Toast.makeText(this,"Please enter your phone number",Toast.LENGTH_LONG).show();
             return;
         }
+        if (number.getText().toString().length()!=10){
+            Toast.makeText(this,"Please enter 10 digit phone number",Toast.LENGTH_LONG).show();
+            return;
+        }
         if (message.getText().toString().equalsIgnoreCase("")){
             Toast.makeText(this,"Please enter your address",Toast.LENGTH_LONG).show();
             return;
@@ -79,6 +89,7 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
         Email.putExtra(Intent.EXTRA_SUBJECT, "General Enquiry");
         Email.putExtra(Intent.EXTRA_TEXT, "Name : "+name.getText().toString()
                 +"\n\nAddress : "+address.getText().toString()
+                +"\n\nPhone no. : "+number.getText().toString()
                 +"\n\nMessage : "+message.getText().toString());
         startActivity(Intent.createChooser(Email, "Send Enquiry:"));
     }

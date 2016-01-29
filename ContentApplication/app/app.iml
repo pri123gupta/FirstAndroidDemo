@@ -8,53 +8,53 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="oytRelease" />
+        <option name="SELECTED_BUILD_VARIANT" value="uangtemanRelease" />
         <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleOytRelease" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileOytReleaseSources" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleUangtemanRelease" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileUangtemanReleaseSources" />
         <afterSyncTasks>
-          <task>generateOytReleaseSources</task>
+          <task>generateUangtemanReleaseSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/oyt/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/uangteman/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/oyt/release" />
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/uangteman/release" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/androidTest/demo/debug" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/oyt/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/oyt/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/oyt/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/oyt/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/oyt/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/oyt/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oytRelease/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oytRelease/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oytRelease/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oytRelease/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oytRelease/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oytRelease/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oytRelease/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oyt/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oyt/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oyt/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oyt/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oyt/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oyt/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/oyt/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestOyt/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestOyt/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestOyt/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestOyt/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestOyt/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestOyt/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestOyt/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/uangteman/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/uangteman/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/uangteman/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/uangteman/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/uangteman/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/uangteman/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangtemanRelease/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangtemanRelease/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangtemanRelease/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangtemanRelease/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangtemanRelease/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangtemanRelease/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangtemanRelease/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangteman/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangteman/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangteman/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangteman/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangteman/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangteman/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/uangteman/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestUangteman/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestUangteman/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestUangteman/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestUangteman/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestUangteman/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestUangteman/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestUangteman/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/assets" type="java-resource" />
@@ -118,6 +118,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/multi-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/proguard-rules" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />

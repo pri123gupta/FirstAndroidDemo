@@ -38,6 +38,11 @@ android {
             versionCode 2016012714
             versionName "1.0"
         }
+        uangteman{
+            applicationId "com.applop.uangteman"
+            versionCode 2016012814
+            versionName "1.0"
+        }
     }
     buildTypes {
         release {
@@ -45,6 +50,7 @@ android {
             proguardFiles getDefaultProguardFile('prog   uard-android.txt'), 'proguard-rules.pro'
             productFlavors.demo.signingConfig signingConfigs.demo
             productFlavors.oyt.signingConfig signingConfigs.demo
+            productFlavors.uangteman.signingConfig signingConfigs.demo
         }
     }
     dependencies {

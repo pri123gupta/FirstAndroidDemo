@@ -19,6 +19,7 @@ import com.applop.demo.fragments.Tab1Fragment;
 import com.applop.demo.R;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.model.AppConfiguration;
+import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.Story;
 
 import org.json.JSONObject;
@@ -42,6 +43,11 @@ static ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (AppConfiguration.getInstance(this).iconTheme.equalsIgnoreCase(NameConstant.ICON_THEME_LIGHT)){
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeLight);
+        }
         setContentView(R.layout.activity_view_pager1);
         loadResources();
         getBundleData();

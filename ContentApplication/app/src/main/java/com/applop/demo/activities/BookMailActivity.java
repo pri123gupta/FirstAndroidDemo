@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.applop.demo.R;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.model.AppConfiguration;
+import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.Story;
 
 public class BookMailActivity extends AppCompatActivity {
@@ -26,6 +27,11 @@ public class BookMailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (AppConfiguration.getInstance(this).iconTheme.equalsIgnoreCase(NameConstant.ICON_THEME_LIGHT)){
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeLight);
+        }
         setContentView(R.layout.activity_book_mail);
        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,6 +76,10 @@ public class BookMailActivity extends AppCompatActivity {
             Toast.makeText(this,"Please enter your phone number",Toast.LENGTH_LONG).show();
             return;
         }
+        if (number.getText().toString().length()!=10){
+            Toast.makeText(this,"Please enter 10 digit phone number",Toast.LENGTH_LONG).show();
+            return;
+        }
         if (item==null){
             Toast.makeText(this,"Error Please Try Again",Toast.LENGTH_LONG).show();
             return;
@@ -80,6 +90,7 @@ public class BookMailActivity extends AppCompatActivity {
         Email.putExtra(Intent.EXTRA_SUBJECT, "Booking For : "+ item.title );
         Email.putExtra(Intent.EXTRA_TEXT, "Name : "+name.getText().toString()
                 +"\n\nAddress : "+address.getText().toString()
+                +"\n\nPhone no. : "+number.getText().toString()
                 +"\n\nMessage : "+message.getText().toString());
         startActivity(Intent.createChooser(Email, "Send Booking:"));
     }

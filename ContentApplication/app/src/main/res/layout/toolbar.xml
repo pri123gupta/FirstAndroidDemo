@@ -22,7 +22,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:text="ssssss"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="20sp"/>
 </LinearLayout>
 

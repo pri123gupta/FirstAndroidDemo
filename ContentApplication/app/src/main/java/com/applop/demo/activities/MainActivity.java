@@ -81,6 +81,11 @@ TextView myTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (AppConfiguration.getInstance(this).iconTheme.equalsIgnoreCase(NameConstant.ICON_THEME_LIGHT)){
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeLight);
+        }
         setContentView(R.layout.activity_drawer);
         context = this;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -287,6 +292,7 @@ TextView myTitle;
 
             @Override
             protected void VResponse(JSONObject response, String tag) {
+                swipeRefreshLayout.setRefreshing(false);
                 endLoadMore();
                 JSONObject json=response;
             try{
@@ -316,6 +322,7 @@ TextView myTitle;
 
             @Override
             protected void VError(VolleyError error, String tag) {
+                swipeRefreshLayout.setRefreshing(false);
                 endLoadMore();
                 progressBar.setVisibility(View.GONE);
                 itemsRecyclerView.setVisibility(View.VISIBLE);

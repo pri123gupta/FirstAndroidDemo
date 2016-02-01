@@ -38,6 +38,27 @@ android {
             versionCode 2016012714
             versionName "1.0"
         }
+        uangteman{
+            applicationId "com.applop.uangteman"
+            versionCode 2016012814
+            versionName "1.0"
+        }
+        hallo{
+            applicationId "com.applop.hallo"
+            versionCode 2016012714
+            versionName "1.0"
+        }
+        premdigitalstudio{
+            applicationId "com.applop.premdigitalstudio"
+            versionCode 2016012714
+            versionName "1.0"
+        }
+        saicomputers{
+            applicationId "com.applop.saicomputers"
+            versionCode 2016012714
+            versionName "1.0"
+        }
+
     }
     buildTypes {
         release {
@@ -45,6 +66,10 @@ android {
             proguardFiles getDefaultProguardFile('prog   uard-android.txt'), 'proguard-rules.pro'
             productFlavors.demo.signingConfig signingConfigs.demo
             productFlavors.oyt.signingConfig signingConfigs.demo
+            productFlavors.uangteman.signingConfig signingConfigs.demo
+            productFlavors.hallo.signingConfig signingConfigs.demo
+            productFlavors.saicomputers.signingConfig signingConfigs.demo
+            productFlavors.premdigitalstudio.signingConfig signingConfigs.demo
         }
     }
     dependencies {

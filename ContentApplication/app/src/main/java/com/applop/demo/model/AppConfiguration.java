@@ -18,6 +18,7 @@ public class AppConfiguration {
     public String appDescription="";
     public String bgcolor="";
     public String websiteKey="";
+    public String iconTheme="";
     public String parseApplicationKey="";
     public String parseClientID="";
     public boolean notificationsEnabled;
@@ -124,6 +125,13 @@ public class AppConfiguration {
                 appName = "";
             }
             try{
+                iconTheme = data.getString("iconTheme");
+            }
+            catch (Exception ex)
+            {
+                iconTheme = "light";
+            }
+            try{
                 email = data.getString("email");
             }
             catch (Exception ex)
@@ -143,7 +151,7 @@ public class AppConfiguration {
             }
             catch (Exception ex)
             {
-                bgcolor = "";
+                bgcolor = "#000000";
             }
             try{
                 websiteKey = data.getString("APIKey");

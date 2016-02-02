@@ -30,6 +30,7 @@ public class Helper {
             Drawable bottomDrawable = new ColorDrawable(context.getResources().getColor(android.R.color.transparent));
             LayerDrawable ld = new LayerDrawable(new Drawable[]{colorDrawable, bottomDrawable});
             ((AppCompatActivity) context).getSupportActionBar().setBackgroundDrawable(ld);
+
         }catch (Exception ex){
 
         }

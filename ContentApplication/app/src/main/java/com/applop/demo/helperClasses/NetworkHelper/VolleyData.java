@@ -35,9 +35,9 @@ public abstract class VolleyData {
     }
 
     public void getJsonObject(final String _url, final Boolean _cache_response, final String  _tag, final Context context) {
+        String response = Helper.getCachedDataForUrl(_url, context);
         if(!NetworkHelper.isNetworkAvailable(_activity)) {
                 try {
-                    String response = Helper.getCachedDataForUrl(_url, context);
                     Log.v("chache", "returned cache data");
                     VResponse(new JSONObject(response), _tag);
                     return;
@@ -46,8 +46,8 @@ public abstract class VolleyData {
                     VError(new VolleyError(), _tag);
                     e.printStackTrace();
                 }
-
         } else {
+            MyRequestQueue.Instance(context).getRequestQueue().getCache().remove(_url);
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                     _url, (String) null,
                     new Response.Listener<JSONObject>() {

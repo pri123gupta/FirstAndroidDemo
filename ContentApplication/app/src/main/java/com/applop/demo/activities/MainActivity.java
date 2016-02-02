@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 Toolbar toolbar;
     Button btnShare,btnEnquiry;
     String  appname="Demo App";
-TextView myTitle;
+    TextView myTitle;
     SwipeRefreshLayout swipeRefreshLayout;
     StoryAdapter storyAdapter;
     ProgressBar progressBar;
@@ -90,6 +90,7 @@ TextView myTitle;
         context = this;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         Helper.setToolbarColor(this);
         storyAdapter=new StoryAdapter(stories,this);
         loadResources();
@@ -99,6 +100,11 @@ TextView myTitle;
     private void loadResources() {
 
         myTitle= (TextView) findViewById(R.id.mytitle);
+        if (AppConfiguration.getInstance(this).iconTheme.equalsIgnoreCase(NameConstant.ICON_THEME_LIGHT)){
+            myTitle.setTextColor(Color.WHITE);
+        }else {
+            myTitle.setTextColor(Color.BLACK);
+        }
         cardview= (CardView) findViewById(R.id.cardview);
         progressBar= (ProgressBar) findViewById(R.id.progress_bar);
         storyAdapter=new StoryAdapter(stories,this);
@@ -106,10 +112,7 @@ TextView myTitle;
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Refresh items
-                //refreshItems();
                 loadCategory(currentCategory, 1, true, false);
-                //loadCategory(currentCategory, 1, true);
             }
         });
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -246,13 +249,13 @@ TextView myTitle;
                             JSONArray jsonCategories=json.getJSONArray("categories");
                             drawer1MenuAdapter.clear();
                             ArrayList<Category> menuCategories=new ArrayList<Category>();
-                            menuCategories.add(new Category("", "Enquiry", "enquiry"));
                             menuCategories.add(new Category("", "Home", "Home"));
+                            menuCategories.add(new Category("", "Enquiry", "enquiry"));
                             for (int i=0;i<jsonCategories.length();i++){
                                 menuCategories.add(new Category(jsonCategories.getJSONObject(i)));
                             }
                             //for getting story on home page.........only first line
-                            loadCategory(menuCategories.get(1),1,false,false);
+                            loadCategory(menuCategories.get(0),1,false,false);
                             drawer1MenuAdapter.insertCategories(menuCategories);
                         }
                         catch (Exception e){
@@ -374,7 +377,7 @@ TextView myTitle;
             case R.id.action_feedback:
                 Intent Email = new Intent(Intent.ACTION_SEND);
                 Email.setType("text/email");
-                Email.putExtra(Intent.EXTRA_EMAIL, new String[]{"narayan.r@applop.com"});
+                Email.putExtra(Intent.EXTRA_EMAIL, new String[]{AppConfiguration.getInstance(this).email,"narayan.r@applop.com"});
                 Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback For "+ getResources().getString(R.string.app_name)+" android application");
                 Helper.MobileInfo mobileInfo = new Helper.MobileInfo(context);
                 Email.putExtra(Intent.EXTRA_TEXT, "\tDevice Info :\n\tModel Name : " + mobileInfo.getMobileName() + "\n\tAndroid OS Version : " + mobileInfo.getMobileOs() + "\n\tMobile Resolution : " + mobileInfo.getMobileResolution() + "\n\tManufacturer : " + mobileInfo.getManufacturer() + "\n\tApplication Version : " + mobileInfo.getappVersionName() + "\n\n");

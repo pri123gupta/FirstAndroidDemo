@@ -48,8 +48,8 @@ android {
             versionCode 2016012814
             versionName "1.0"
         }
-        hallo{
-            applicationId "com.applop.hallo"
+        hello{
+            applicationId "com.applop.hello"
             versionCode 2016012714
             versionName "1.0"
         }
@@ -72,7 +72,7 @@ android {
             productFlavors.demo.signingConfig signingConfigs.demo
             productFlavors.oyt.signingConfig signingConfigs.contentapplication
             productFlavors.uangteman.signingConfig signingConfigs.contentapplication
-            productFlavors.hallo.signingConfig signingConfigs.contentapplication
+            productFlavors.hello.signingConfig signingConfigs.contentapplication
             productFlavors.saicomputers.signingConfig signingConfigs.contentapplication
             productFlavors.premdigitalstudio.signingConfig signingConfigs.contentapplication
         }

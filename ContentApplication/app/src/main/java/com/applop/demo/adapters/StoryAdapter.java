@@ -7,7 +7,9 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,8 @@ import com.applop.demo.R;
 import com.applop.demo.activities.BookMailActivity;
 import com.applop.demo.activities.EnquiryMailActivity;
 import com.applop.demo.model.Story;
+import com.joanzapata.android.iconify.IconDrawable;
+import com.joanzapata.android.iconify.Iconify;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,6 +28,7 @@ import java.util.ArrayList;
 /**
  * Created by intel on 2/9/2016.
  */
+
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
     ArrayList<Story> data=new ArrayList<Story>();
     Context context;
@@ -31,10 +36,22 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 OnItemClickListener mItemClickListener;
     private boolean isLoadingMoreData =false ;
     RequestQueue requestQueue;
+    IconDrawable shareIcon;
+    IconDrawable bookIcon;
+    IconDrawable enquiryIcon;
     public StoryAdapter(ArrayList<Story> data, final Context context){
         this.data=data;
         this.context=context;
         this.requestQueue= Volley.newRequestQueue(context);
+        shareIcon = new IconDrawable(context, Iconify.IconValue.fa_share )
+                .colorRes(R.color.grey)
+                .actionBarSize();
+        enquiryIcon = new IconDrawable(context, Iconify.IconValue.fa_question )
+                .colorRes(R.color.grey)
+                .actionBarSize();
+        bookIcon = new IconDrawable(context, Iconify.IconValue.fa_shopping_cart )
+                .colorRes(R.color.grey)
+                .actionBarSize();
     }
     @Override
     public StoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,12 +79,14 @@ OnItemClickListener mItemClickListener;
 
         holder.titleName.setText(data.get(position).title);
         holder.homeFeedPostTime.setText(Html.fromHtml(item.categoryNameAndTime));
-
+        holder.share_image_view.setImageDrawable(shareIcon);
+        holder.enquiry_image_view.setImageDrawable(enquiryIcon);
+        holder.book_image_view.setImageDrawable(bookIcon);
         holder.share_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = "Title : " + item.title + "\n\n";
-                String body = "Description :\n" + item.excerpt + "\n\n";
+                String title = item.title + "\n\n";
+                String body = item.excerpt + "\n\n";
                 String appLink = "To Read Full Story Download: " + context.getResources().getString(R.string.app_name) + "\n http://play.google.com/store/apps/details?id=" + context.getPackageName();
                 Intent sendintent = new Intent();
                 sendintent.setAction(Intent.ACTION_SEND);
@@ -124,15 +143,21 @@ OnItemClickListener mItemClickListener;
    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 TextView titleName,homeFeedPostTime,introduction;
         ImageView coverImageView;
-       TextView share_tv;
-       TextView enquiry_tv;
-       TextView book_tv;
+       LinearLayout share_tv;
+       LinearLayout enquiry_tv;
+       LinearLayout book_tv;
+       ImageView share_image_view;
+       ImageView enquiry_image_view;
+       ImageView book_image_view;
         public ViewHolder(View itemView,int viewType) {
             super(itemView);
             if (viewType==0) {
-                share_tv = (TextView) itemView.findViewById(R.id.share);
-                enquiry_tv = (TextView) itemView.findViewById(R.id.enquiry);
-                book_tv = (TextView) itemView.findViewById(R.id.book);
+                share_tv = (LinearLayout) itemView.findViewById(R.id.share_ll);
+                enquiry_tv = (LinearLayout) itemView.findViewById(R.id.enquiry_ll);
+                book_tv = (LinearLayout) itemView.findViewById(R.id.book_ll);
+                share_image_view = (ImageView) itemView.findViewById(R.id.share_image);
+                enquiry_image_view = (ImageView) itemView.findViewById(R.id.enquiry_image);
+                book_image_view = (ImageView) itemView.findViewById(R.id.book_image);
                 titleName = (TextView) itemView.findViewById(R.id.titleName);
                 homeFeedPostTime = (TextView) itemView.findViewById(R.id.homeFeedPostTime);
                 coverImageView = (ImageView) itemView.findViewById(R.id.coverImageView);

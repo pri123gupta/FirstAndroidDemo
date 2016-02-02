@@ -1,6 +1,7 @@
 package com.applop.demo.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -58,6 +59,11 @@ static ViewPager viewPager;
     public void loadResources(){
         progressBar= (ProgressBar) findViewById(R.id.progress_bar);
         currentPageNo= (TextView) findViewById(R.id.current_page_no);
+        if (AppConfiguration.getInstance(this).iconTheme.equalsIgnoreCase(NameConstant.ICON_THEME_LIGHT)){
+            currentPageNo.setTextColor(Color.WHITE);
+        }else {
+            currentPageNo.setTextColor(Color.BLACK);
+        }
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Helper.setToolbarColor(this);
@@ -158,7 +164,9 @@ static ViewPager viewPager;
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_open_detail, menu);
-
+        if (AppConfiguration.getInstance(this).iconTheme.equalsIgnoreCase(NameConstant.ICON_THEME_LIGHT)){
+            menu.findItem(R.id.share).setIcon(R.drawable.share);
+        }
         return true;
     }
     @Override
@@ -183,8 +191,8 @@ static ViewPager viewPager;
     }
     public void  openShareDialog(){
         int index=viewPager.getCurrentItem();
-        String title="Title : "+stories.get(index).title+"\n\n";
-        String body="Description :\n"+stories.get(index).excerpt+"\n\n";
+        String title=stories.get(index).title+"\n\n";
+        String body=stories.get(index).excerpt+"\n\n";
         String appLink = "To Read Full Story Download: " + getResources().getString(R.string.app_name) + "\n http://play.google.com/store/apps/details?id=" + getPackageName();
         Intent sendintent=new Intent();
         sendintent.setAction(Intent.ACTION_SEND);

@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.applop.demo.activities.SplashActivity;
 import com.applop.demo.model.AppConfiguration;
+import com.facebook.FacebookSdk;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
 import com.parse.PushService;
@@ -22,6 +23,7 @@ public static ApplicationClass ourApplication;
       //  super.onCreate(savedInstanceState);
        // setContentView(R.layout.activity_my_first_running);
         super.onCreate();
+        FacebookSdk.sdkInitialize(getApplicationContext());
         Parse.initialize(this, AppConfiguration.getInstance(getApplicationContext()).parseClientID, AppConfiguration.getInstance(getApplicationContext()).parseApplicationKey);
         PushService.setDefaultPushCallback(this,SplashActivity.class);
         try{

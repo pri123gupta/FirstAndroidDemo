@@ -11,4 +11,7 @@ public class NameConstant {
     public static final String HTTP_CLIENT_CACHE_DATABASE = "URL_CACHE";
     public static final String ICON_THEME_LIGHT = "light";
     public static final String ICON_THEME_DARK = "dark";
+    public static final String LOGIN_TYPE_FACEBOOK = "facebook";
+    public static final String LOGIN_TYPE_GMAIL = "gmail";
+    public static final int REQUEST_CODE_BACK_FROM_SIGN_IN = 2;
 }

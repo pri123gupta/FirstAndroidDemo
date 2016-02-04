@@ -5,28 +5,72 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="280dp"
     android:layout_gravity="start"
+    android:background="#ffffff"
     android:id="@+id/relative_left_drawer">
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
         android:background="@color/colorPrimaryDark"
         android:id="@+id/upperBar">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="280dp">
             <ImageView
-                android:layout_width="150dp"
-                android:src="@drawable/ic_launcher"
-                android:scaleType="fitCenter"
+                android:layout_width="match_parent"
+                android:src="@drawable/splash_logo"
+                android:scaleType="centerCrop"
                 android:layout_centerInParent="true"
-                android:layout_height="150dp"/>
+                android:layout_height="280dp"/>
         </RelativeLayout>
-    </RelativeLayout>
 
+    </RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:id="@+id/rl_login"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_below="@+id/upperBar"
+    android:layout_height="40dp">
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:src="@drawable/default_profile_pic"
+        android:id="@+id/profile_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        app:civ_border_width="0.5dp"
+        android:layout_marginRight= "10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        app:civ_border_color="#ffffff"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/userName"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/profile_image"
+        android:text="Your Name"
+        android:layout_marginBottom="15dp"
+        android:textSize="16sp" android:textColor="#000000" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/signIn_tv"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Sign In"
+        android:layout_marginBottom="15dp"
+        android:textSize="16sp" android:textColor="#000000" />
+</RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/left_drawer_list"
  android:paddingBottom="5dp"
-        android:layout_below="@+id/upperBar"
+        android:layout_below="@+id/rl_login"
         android:paddingTop="5dp"
         android:paddingRight="5dp"
         android:paddingLeft="15dp"

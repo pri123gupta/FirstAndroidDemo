@@ -1,6 +1,8 @@
 package com.applop.demo.helperClasses;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -13,12 +15,25 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.applop.demo.R;
+import com.applop.demo.activities.SignInActivity;
 import com.applop.demo.model.AppConfiguration;
 import com.applop.demo.model.NameConstant;
+import com.applop.demo.model.User;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.plus.Plus;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Admin on 25-01-2016.
@@ -34,6 +49,51 @@ public class Helper {
         }catch (Exception ex){
 
         }
+    }
+
+    public static void setDetailsInDrawerlayout(final RelativeLayout drawerlayout, final Context context){
+        User user = User.getInstance(context);
+        if (!user.loginType.equalsIgnoreCase("")){
+            ((TextView) drawerlayout.findViewById(R.id.userName)).setText(user.name);
+            ((TextView)drawerlayout.findViewById(R.id.signIn_tv)).setText("Sign Out");
+            CircleImageView circleImageView = (CircleImageView) drawerlayout.findViewById(R.id.profile_image);
+            circleImageView.setImageBitmap(user.bitmap);
+
+        }else {
+            ((TextView) drawerlayout.findViewById(R.id.userName)).setText("Your Name");
+            ((TextView)drawerlayout.findViewById(R.id.signIn_tv)).setText("Sign In");
+        }
+    }
+
+    public static void setOnSignInClickListner(Activity context,RelativeLayout drawerLayout){
+        if (((TextView)drawerLayout.findViewById(R.id.signIn_tv)).getText().toString().equalsIgnoreCase("Sign In")){
+            Intent intent = new Intent(context, SignInActivity.class);
+            context.startActivityForResult(intent, NameConstant.REQUEST_CODE_BACK_FROM_SIGN_IN);
+        }else{
+            logout(drawerLayout, context);
+            Toast.makeText(context, "Signed Out", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public static void logout(RelativeLayout drawerlayout,Context context){
+        LoginManager.getInstance().logOut();
+        GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(context)
+                .addApi(Plus.API)
+                .addScope(new Scope(Scopes.EMAIL))
+                .addScope(new Scope(Scopes.PLUS_LOGIN))
+                .addScope(new Scope(Scopes.PLUS_ME))
+                .build();
+        if (mGoogleApiClient.isConnected()) {
+            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+            mGoogleApiClient.disconnect();
+            mGoogleApiClient.connect();
+        }
+        DatabaseHelper feedWLDBHelper = new DatabaseHelper(context);
+        feedWLDBHelper.removeUser();
+        ((TextView) drawerlayout.findViewById(R.id.userName)).setText("Your Name");
+        CircleImageView circleImageView = (CircleImageView)drawerlayout.findViewById(R.id.profile_image);
+        circleImageView.setImageResource(R.drawable.default_profile_pic);
+        ((TextView)drawerlayout.findViewById(R.id.signIn_tv)).setText("Sign In");
     }
 
     public static String getCachedDataForUrl(String url,Context context){

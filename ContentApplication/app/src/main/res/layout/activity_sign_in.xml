@@ -8,8 +8,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
+        android:title="Sign In"
         android:layout_height="?attr/actionBarSize"
-        android:background="#00000000"
         />
     <LinearLayout
         android:layout_width="match_parent"

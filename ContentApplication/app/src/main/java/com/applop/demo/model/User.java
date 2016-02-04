@@ -21,7 +21,7 @@ public  class User {
     }
 
     public static User getInstance(Context context){
-        DatabaseHelper feedWLDBHelper = new FeedWLDBHelper(context);
+        DatabaseHelper feedWLDBHelper = new DatabaseHelper(context);
         me = feedWLDBHelper.getUser();
         return me;
     }

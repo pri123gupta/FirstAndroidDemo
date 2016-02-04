@@ -17,6 +17,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.applop.demo.R;
+import com.applop.demo.helperClasses.Helper;
+import com.applop.demo.model.AppConfiguration;
+import com.applop.demo.model.NameConstant;
+import com.applop.demo.model.User;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -63,6 +67,11 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (AppConfiguration.getInstance(this).iconTheme.equalsIgnoreCase(NameConstant.ICON_THEME_LIGHT)){
+            setTheme(R.style.AppTheme);
+        }else{
+            setTheme(R.style.AppThemeLight);
+        }
         setContentView(R.layout.activity_sign_in);
         context = this;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -71,7 +80,8 @@ public class SignInActivity extends AppCompatActivity {
             Toast.makeText(this, token.getToken(), Toast.LENGTH_LONG).show();
         }
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Sign In");
+        Helper.setToolbarColor(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Button loginButton = (Button) findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
@@ -80,6 +90,7 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.d("Success", "Login");
+
                         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(
@@ -99,13 +110,14 @@ public class SignInActivity extends AppCompatActivity {
                                                 setResult(RESULT_OK);
                                                 finish();
                                             } catch (Exception ex) {
-
+                                                Toast.makeText(context,"1 :"+ex.getMessage(),Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     }).build();
                                     ImageDownloader.downloadAsync(request);
                                 } catch (Exception ex) {
-
+                                    ex.printStackTrace();
+                                    Toast.makeText(context,ex.getMessage(),Toast.LENGTH_LONG).show();
                                 }
                                 Log.v("LoginActivity", response.toString());
                             }
@@ -129,7 +141,7 @@ public class SignInActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginManager.getInstance().logInWithReadPermissions(SignInActivity.this, Arrays.asList("public_profile"));
+                LoginManager.getInstance().logInWithReadPermissions(SignInActivity.this, Arrays.asList("public_profile","email"));
             }
         });
 
@@ -205,21 +217,9 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        AdColony.resume(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        AdColony.pause();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sign_in, menu);
+        getMenuInflater().inflate(R.menu.enquiry, menu);
         return true;
     }
 

@@ -16,8 +16,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.applop.demo.R;
 import com.applop.demo.helperClasses.Helper;
+import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
 import com.applop.demo.model.AppConfiguration;
 import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.User;
@@ -42,9 +44,13 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class SignInActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
@@ -53,6 +59,8 @@ public class SignInActivity extends AppCompatActivity {
     String email;
     Bitmap bitmap;
     Toolbar toolbar;
+    final  String userDetailURL = "http://applop.biz/merchant/api/getUserByEmail.php?email=";
+    final  String submitUserDetailURL = "http://applop.biz/merchant/api/submitUserTable.php";
     private static final String TAG = "ExampleActivity";
     private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
     /* Request code used to invoke sign in user interactions. */
@@ -91,33 +99,137 @@ public class SignInActivity extends AppCompatActivity {
                     public void onSuccess(LoginResult loginResult) {
                         Log.d("Success", "Login");
 
-                        GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                        final GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(
                                     final JSONObject object,
                                     GraphResponse response) {
                                 // Application code
+                                final ProgressDialog progressDialog = new ProgressDialog(context);
+                                progressDialog.setTitle("Loading");
+                                progressDialog.show();
                                 try {
                                     name = object.getString("name");
                                     email = object.getString("email");
-                                    ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100));
-                                    ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
-                                        public void onCompleted(ImageResponse response) {
-                                            bitmap = response.getBitmap();
-                                            Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
+                                    new VolleyData(context){
+                                        @Override
+                                        protected void VPreExecute() {
+
+                                        }
+
+                                        @Override
+                                        protected void VResponse(JSONObject response, String tag) {
                                             try {
-                                                User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString());
-                                                setResult(RESULT_OK);
-                                                finish();
-                                            } catch (Exception ex) {
-                                                Toast.makeText(context,"1 :"+ex.getMessage(),Toast.LENGTH_LONG).show();
+                                                JSONArray userInfo = response.getJSONArray("UserInfo");
+                                                if (userInfo.length()==0){
+                                                    final HashMap<String, String> params = new HashMap<String, String>();
+                                                    params.put("email", email);
+                                                    Toast.makeText(context,"length = 0",Toast.LENGTH_SHORT).show();
+                                                    params.put("name", name);
+                                                    params.put("address", "");
+                                                    params.put("phoneNumber", "");
+                                                    params.put("packageName",getPackageName());
+                                                    params.put("photoLink",ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString());
+                                                    new VolleyData(context){
+                                                        @Override
+                                                        protected void VPreExecute() {
+
+                                                        }
+
+                                                        @Override
+                                                        protected void VResponse(JSONObject response, String tag) {
+                                                            progressDialog.hide();
+                                                            try {
+                                                                ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100));
+                                                                ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
+                                                                    public void onCompleted(ImageResponse response) {
+                                                                        bitmap = response.getBitmap();
+                                                                        Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
+                                                                        try {
+                                                                            progressDialog.hide();
+                                                                            User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString(), "", "");
+                                                                            setResult(RESULT_OK);
+                                                                            finish();
+                                                                        } catch (Exception ex) {
+                                                                            progressDialog.hide();
+                                                                            Toast.makeText(context, "1 :" + ex.getMessage(), Toast.LENGTH_LONG).show();
+                                                                        }
+                                                                    }
+                                                                }).build();
+                                                                ImageDownloader.downloadAsync(request);
+                                                            }catch (Exception ex){
+                                                                Toast.makeText(context,1+ex.getMessage(),Toast.LENGTH_LONG).show();
+                                                                progressDialog.hide();
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        protected void VError(VolleyError error, String tag) {
+                                                            Toast.makeText(context,1+error.getMessage(),Toast.LENGTH_LONG).show();
+                                                            progressDialog.hide();
+                                                        }
+                                                    }.getPOSTJsonObject(submitUserDetailURL,"post_user",params);
+                                                }else {
+                                                    progressDialog.hide();
+                                                    final String address = userInfo.getJSONObject(0).getString("address");
+                                                    final String phoneNumber = userInfo.getJSONObject(0).getString("phoneNumber");
+                                                    ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100));
+                                                    ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
+                                                        public void onCompleted(ImageResponse response) {
+                                                            bitmap = response.getBitmap();
+                                                            Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
+                                                            try {
+                                                                progressDialog.hide();
+                                                                User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString(), address, phoneNumber);
+                                                                setResult(RESULT_OK);
+                                                                finish();
+                                                            } catch (Exception ex) {
+                                                                progressDialog.hide();
+
+                                                            }
+                                                        }
+                                                    }).build();
+                                                    ImageDownloader.downloadAsync(request);
+                                                }
+                                            }catch (Exception ex){
+                                                Toast.makeText(context,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                                                progressDialog.hide();
+                                                ex.printStackTrace();
                                             }
                                         }
-                                    }).build();
-                                    ImageDownloader.downloadAsync(request);
+
+                                        @Override
+                                        protected void VError(VolleyError error, String tag) {
+                                            try {
+                                                progressDialog.hide();
+                                                ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100));
+                                                ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
+                                                    public void onCompleted(ImageResponse response) {
+                                                        bitmap = response.getBitmap();
+                                                        Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
+                                                        try {
+                                                            progressDialog.hide();
+                                                            User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString(), "", "");
+                                                            setResult(RESULT_OK);
+                                                            finish();
+                                                        } catch (Exception ex) {
+                                                            progressDialog.hide();
+                                                            Toast.makeText(context, "1 :" + ex.getMessage(), Toast.LENGTH_LONG).show();
+                                                        }
+                                                    }
+                                                }).build();
+                                                ImageDownloader.downloadAsync(request);
+                                            }catch (Exception ex){
+                                                Toast.makeText(context,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                                                ex.printStackTrace();
+                                            }
+                                        }
+                                    }.getJsonObject(userDetailURL + email+"&packageName="+getPackageName(), true, "userDetail", context);
+
                                 } catch (Exception ex) {
+                                    progressDialog.hide();
+                                    Toast.makeText(context,ex.getMessage(),Toast.LENGTH_SHORT).show();
                                     ex.printStackTrace();
-                                    Toast.makeText(context,ex.getMessage(),Toast.LENGTH_LONG).show();
                                 }
                                 Log.v("LoginActivity", response.toString());
                             }
@@ -161,19 +273,126 @@ public class SignInActivity extends AppCompatActivity {
                                 if (currentPerson != null) {
                                     name = currentPerson.getDisplayName();
                                     final String imageUrl = currentPerson.getImage().getUrl();
-                                    Uri uri = Uri.parse(imageUrl);
+                                    final Uri uri = Uri.parse(imageUrl);
                                     email = Plus.AccountApi.getAccountName(mGoogleApiClient);
-                                    ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, uri);
-                                    ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
-                                        public void onCompleted(ImageResponse response) {
-                                            bitmap = response.getBitmap();
-                                            Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
-                                            User.setUser(context, email, name, NameConstant.LOGIN_TYPE_GMAIL, bitmap,imageUrl);
-                                            setResult(RESULT_OK);
-                                            finish();
+                                    final ProgressDialog progressDialog = new ProgressDialog(context);
+                                    progressDialog.setTitle("Loading");
+                                    progressDialog.show();
+                                    new VolleyData(context){
+                                        @Override
+                                        protected void VPreExecute() {
+
                                         }
-                                    }).build();
-                                    ImageDownloader.downloadAsync(request);
+
+                                        @Override
+                                        protected void VResponse(JSONObject response, String tag) {
+                                            try {
+                                                JSONArray userInfo = response.getJSONArray("UserInfo");
+                                                if (userInfo.length()==0){
+                                                    final HashMap<String, String> params = new HashMap<String, String>();
+                                                    params.put("email", email);
+                                                    Toast.makeText(context,"length = 0",Toast.LENGTH_SHORT).show();
+                                                    params.put("name", name);
+                                                    params.put("address", "");
+                                                    params.put("phoneNumber", "");
+                                                    params.put("packageName",getPackageName());
+                                                    params.put("photoLink",uri.toString());
+                                                    new VolleyData(context){
+                                                        @Override
+                                                        protected void VPreExecute() {
+
+                                                        }
+
+                                                        @Override
+                                                        protected void VResponse(JSONObject response, String tag) {
+                                                            progressDialog.hide();
+                                                            try {
+                                                                ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context,uri);
+                                                                ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
+                                                                    public void onCompleted(ImageResponse response) {
+                                                                        bitmap = response.getBitmap();
+                                                                        Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
+                                                                        try {
+                                                                            progressDialog.hide();
+                                                                            User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, uri.toString(), "", "");
+                                                                            setResult(RESULT_OK);
+                                                                            finish();
+                                                                        } catch (Exception ex) {
+                                                                            progressDialog.hide();
+                                                                            Toast.makeText(context, "1 :" + ex.getMessage(), Toast.LENGTH_LONG).show();
+                                                                        }
+                                                                    }
+                                                                }).build();
+                                                                ImageDownloader.downloadAsync(request);
+                                                            }catch (Exception ex){
+                                                                Toast.makeText(context,1+ex.getMessage(),Toast.LENGTH_LONG).show();
+                                                                progressDialog.hide();
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        protected void VError(VolleyError error, String tag) {
+                                                            Toast.makeText(context,1+error.getMessage(),Toast.LENGTH_LONG).show();
+                                                            progressDialog.hide();
+                                                        }
+                                                    }.getPOSTJsonObject(submitUserDetailURL,"post_user",params);
+                                                }else {
+                                                    progressDialog.hide();
+                                                    final String address = userInfo.getJSONObject(0).getString("address");
+                                                    final String phoneNumber = userInfo.getJSONObject(0).getString("phoneNumber");
+                                                    ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, uri);
+                                                    ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
+                                                        public void onCompleted(ImageResponse response) {
+                                                            bitmap = response.getBitmap();
+                                                            Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
+                                                            try {
+                                                                progressDialog.hide();
+                                                                User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, uri.toString(), address, phoneNumber);
+                                                                setResult(RESULT_OK);
+                                                                finish();
+                                                            } catch (Exception ex) {
+                                                                progressDialog.hide();
+
+                                                            }
+                                                        }
+                                                    }).build();
+                                                    ImageDownloader.downloadAsync(request);
+                                                }
+                                            }catch (Exception ex){
+                                                Toast.makeText(context,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                                                progressDialog.hide();
+                                                ex.printStackTrace();
+                                            }
+                                        }
+
+                                        @Override
+                                        protected void VError(VolleyError error, String tag) {
+                                            try {
+                                                progressDialog.hide();
+                                                ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, uri);
+                                                ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
+                                                    public void onCompleted(ImageResponse response) {
+                                                        bitmap = response.getBitmap();
+                                                        Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
+                                                        try {
+                                                            progressDialog.hide();
+                                                            User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, uri.toString(), "", "");
+                                                            setResult(RESULT_OK);
+                                                            finish();
+                                                        } catch (Exception ex) {
+                                                            progressDialog.hide();
+
+                                                        }
+                                                    }
+                                                }).build();
+                                                ImageDownloader.downloadAsync(request);
+                                            }catch (Exception ex){
+                                                Toast.makeText(context,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                                                ex.printStackTrace();
+                                            }
+                                        }
+                                    }.getJsonObject(userDetailURL + email + "&packageName=" + getPackageName(), true, "userDetail", context);
+
                                 }else{
                                     Toast.makeText(context, "Try Again", Toast.LENGTH_SHORT).show();
                                 }

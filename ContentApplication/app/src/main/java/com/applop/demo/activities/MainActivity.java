@@ -123,7 +123,8 @@ Toolbar toolbar;
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer_list);
         mDrawerList.setLayoutManager(new LinearLayoutManager(context));
         mDrawerList.setAdapter(drawer1MenuAdapter);
-        ((RelativeLayout)findViewById(R.id.upperBar)).setBackgroundColor(Color.parseColor(AppConfiguration.getInstance(this).bgcolor));
+        Helper.setDetailsInDrawerlayout(mDrawerRealativeLayout, context);
+                ((RelativeLayout) findViewById(R.id.upperBar)).setBackgroundColor(Color.parseColor(AppConfiguration.getInstance(this).bgcolor));
         //for second drawer with id itemsRecyclerView
         itemsRecyclerView = (RecyclerView) findViewById(R.id.itemsRecyclerView);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -220,6 +221,13 @@ Toolbar toolbar;
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loadMenu();
+        TextView signIn_tv = (TextView) findViewById(R.id.signIn_tv);
+        signIn_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSignInClick();
+            }
+        });
     }
 
     //for creating setting/hamburger icon on toolbar's left side
@@ -228,6 +236,13 @@ Toolbar toolbar;
         super.onPostCreate(savedInstanceState);
         actionBarDrawerToggle.syncState();
     }
+
+    public void onSignInClick(){
+        Helper.setOnSignInClickListner(this, mDrawerRelativelayout);
+        mDrawerLayout.closeDrawer(mDrawerRelativelayout);
+    }
+
+
 
     public void loadMenu(){
         String url = NameConstant.BASE_API_URL_V1+"getCategoriesByApiKey.php?APIKey="+ AppConfiguration.getInstance(context).websiteKey;
@@ -340,11 +355,6 @@ Toolbar toolbar;
         return  NameConstant.BASE_API_URL_V1 + "getStoriesByCategory.php?categoryId="+category.categoryId+"&APIKey="+AppConfiguration.getInstance(context).websiteKey+"&page="+page;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-    }
     public static interface MyClickListener{
         public  void onClick(View view,int position);
     }
@@ -407,5 +417,20 @@ Toolbar toolbar;
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+           if (requestCode==NameConstant.REQUEST_CODE_BACK_FROM_SIGN_IN){
+                if (resultCode==RESULT_OK){
+                    Helper.setDetailsInDrawerlayout(mDrawerRelativelayout,this);
+                }
+            }
+        }catch (Exception ex){
+
+        }
+
     }
 }

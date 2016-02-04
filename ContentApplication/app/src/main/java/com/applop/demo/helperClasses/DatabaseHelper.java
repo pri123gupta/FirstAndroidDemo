@@ -31,7 +31,7 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase database) {
-        query = "CREATE TABLE IF NOT EXISTS user(loginType TEXT,name TEXT,email TEXT,bitmap BLOB,imageUrl TEXT)";
+        query = "CREATE TABLE IF NOT EXISTS user(loginType TEXT,name TEXT,email TEXT,bitmap BLOB,imageUrl TEXT,address TEXT,phoneNo TEXT)";
         database.execSQL(query);
     }
 
@@ -44,7 +44,8 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
         database.execSQL(deleteQuery);
     }
 
-    public void insertUser(String loginType,String name,String email,Bitmap bitmap,String imageUrl){
+    public void insertUser(String loginType,String name,String email,Bitmap bitmap,String imageUrl,String address, String phoneNo){
+        removeUser();
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("loginType",loginType);
@@ -52,6 +53,8 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
         values.put("email",email);
         values.put("bitmap",getBytes(bitmap));
         values.put("imageUrl",imageUrl);
+        values.put("address",address);
+        values.put("phoneNo",phoneNo);
         database.insert("user", null, values);
         database.close();
     }
@@ -69,6 +72,8 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
             byte[] image = cursor.getBlob(3);
             user.bitmap = getImage(image);
             user.imageUrl = cursor.getString(4);
+            user.address = cursor.getString(5);
+            user.phoneNumber = cursor.getString(6);
             return user;
         }catch (Exception ex){
             return new User();

@@ -182,7 +182,6 @@ static ViewPager viewPager;
             case R.id.share:
                 shareStoryButtonPressed();
                 return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -199,7 +198,6 @@ static ViewPager viewPager;
         sendintent.putExtra(Intent.EXTRA_TEXT, title + body + appLink);
         sendintent.setType("text/plain");
         startActivity(sendintent);
-
     }
     public void toGetNextPageNo(){
       int i=  viewPager.getCurrentItem();

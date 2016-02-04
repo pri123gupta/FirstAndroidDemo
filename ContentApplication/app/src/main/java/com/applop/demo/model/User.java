@@ -3,6 +3,7 @@ package com.applop.demo.model;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.widget.Toast;
 
 import com.applop.demo.helperClasses.DatabaseHelper;
 
@@ -15,6 +16,8 @@ public  class User {
     public String imageUrl;
     public Bitmap bitmap;
     public String loginType = "";
+    public String phoneNumber = "";
+    public String address = "";
     static User me;
 
     public User(){
@@ -26,8 +29,8 @@ public  class User {
         return me;
     }
 
-    public static void setUser(Context context,String email,String name,String loginType,Bitmap bitmap,String imageUrl){
+    public static void setUser(Context context,String email,String name,String loginType,Bitmap bitmap,String imageUrl,String address,String phoneNumber){
         DatabaseHelper feedWLDBHelper = new DatabaseHelper(context);
-        feedWLDBHelper.insertUser(loginType,name,email,bitmap,imageUrl);
+        feedWLDBHelper.insertUser(loginType,name,email,bitmap,imageUrl,address,phoneNumber);
     }
 }

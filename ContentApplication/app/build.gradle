@@ -50,17 +50,37 @@ android {
         }
         hello{
             applicationId "com.applop.hello"
-            versionCode 2016012714
+            versionCode 2016012816
             versionName "1.0"
         }
         premdigitalstudio{
             applicationId "com.applop.premdigitalstudio"
-            versionCode 2016012714
+            versionCode 2016012911
             versionName "1.0"
         }
         saicomputers{
             applicationId "com.applop.saicomputers"
-            versionCode 2016012714
+            versionCode 2016012914
+            versionName "1.0"
+        }
+        stylistawear{
+            applicationId "com.applop.stylistawear"
+            versionCode 2016020112
+            versionName "1.0"
+        }
+        exp{
+            applicationId "com.applop.exp"
+            versionCode 2016020214
+            versionName "1.0"
+        }
+        sejal{
+            applicationId "com.applop.sejal"
+            versionCode 2016020214
+            versionName "1.0"
+        }
+        rrenterprises{
+            applicationId "com.applop.rrenterprises"
+            versionCode 2016020314
             versionName "1.0"
         }
 
@@ -68,13 +88,17 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('prog   uard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             productFlavors.demo.signingConfig signingConfigs.demo
             productFlavors.oyt.signingConfig signingConfigs.contentapplication
             productFlavors.uangteman.signingConfig signingConfigs.contentapplication
             productFlavors.hello.signingConfig signingConfigs.contentapplication
             productFlavors.saicomputers.signingConfig signingConfigs.contentapplication
             productFlavors.premdigitalstudio.signingConfig signingConfigs.contentapplication
+            productFlavors.exp.signingConfig signingConfigs.contentapplication
+            productFlavors.sejal.signingConfig signingConfigs.contentapplication
+            productFlavors.stylistawear.signingConfig signingConfigs.contentapplication
+            productFlavors.rrenterprises.signingConfig signingConfigs.contentapplication
         }
     }
     dependencies {

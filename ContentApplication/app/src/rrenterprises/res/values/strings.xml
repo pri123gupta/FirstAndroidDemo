@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">R R Enterprises</string>
+    <string name="contact_us_p1">6, Industrial Area P.O. Korba - Chhattisgarh </string>
+    <string name="contact_us_p2">737B, JMD Megapolis, Sector 48, Gurgaon - Haryana</string>
+    <string name="contact_us_p3"></string>
+    <string name="contact_us_p4">Phone number : 9015591373</string>
+    <string name="about_us"> Designers | Manufacturers | Suppliers | Reclaimers
+        Equipment and Spare Part for – Ropeways, Conveyors,
+        Heavy Earth Movers, Power Plant, Aluminium Plant,
+        Sponge Iron Plant, Coal Washeries and General Fabrication
+    </string>
+</resources>

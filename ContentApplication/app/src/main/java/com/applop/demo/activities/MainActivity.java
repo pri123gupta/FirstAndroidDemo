@@ -163,6 +163,7 @@ Toolbar toolbar;
             }
         });
         drawer1MenuAdapter.setmyOnItemClickListener(new DrawerMenuAdapter.OnItemClickListener() {
+
             @Override
             public void onItemClick(View view, int position) {
                 DrawerMenuAdapter.ViewHolder viewHolder = (DrawerMenuAdapter.ViewHolder) view.getTag();
@@ -210,6 +211,11 @@ Toolbar toolbar;
                 startActivity(intent);
                 return;
             }
+        if (category.name.equalsIgnoreCase("buynow")){
+            Intent intent = new Intent(this,OverAllEnquiryMailActivity.class);
+            startActivity(intent);
+            return;
+        }
             loadCategory(category, 1, false, false);
             return;
 
@@ -266,6 +272,7 @@ Toolbar toolbar;
                             ArrayList<Category> menuCategories=new ArrayList<Category>();
                             menuCategories.add(new Category("", "Home", "Home"));
                             menuCategories.add(new Category("", "Enquiry", "enquiry"));
+
                             for (int i=0;i<jsonCategories.length();i++){
                                 menuCategories.add(new Category(jsonCategories.getJSONObject(i)));
                             }
@@ -280,6 +287,7 @@ Toolbar toolbar;
                 catch (Exception e){
                 }
             }
+
             @Override
             protected void VError(VolleyError error, String tag) {
                 progressBar.setVisibility(View.GONE);
@@ -396,7 +404,6 @@ Toolbar toolbar;
             case R.id.action_rateUs:
                 Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
                 Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-
                 goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                         Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET |
                         Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
@@ -431,6 +438,5 @@ Toolbar toolbar;
         }catch (Exception ex){
 
         }
-
     }
 }

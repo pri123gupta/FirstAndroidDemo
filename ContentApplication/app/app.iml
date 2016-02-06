@@ -8,53 +8,53 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="demoRelease" />
+        <option name="SELECTED_BUILD_VARIANT" value="ghvaccleratorRelease" />
         <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleDemoRelease" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileDemoReleaseSources" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleGhvaccleratorRelease" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileGhvaccleratorReleaseSources" />
         <afterSyncTasks>
-          <task>generateDemoReleaseSources</task>
+          <task>generateGhvaccleratorReleaseSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/demo/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/ghvacclerator/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/demo/release" />
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/ghvacclerator/release" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/androidTest/demo/debug" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/demo/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/demo/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/demo/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/demo/release" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/demo/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/demo/release" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demoRelease/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demoRelease/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demoRelease/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demoRelease/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demoRelease/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demoRelease/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demoRelease/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demo/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demo/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demo/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demo/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demo/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demo/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demo/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/ghvacclerator/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/ghvacclerator/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/ghvacclerator/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/ghvacclerator/release" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/ghvacclerator/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/ghvacclerator/release" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvaccleratorRelease/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvaccleratorRelease/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvaccleratorRelease/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvaccleratorRelease/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvaccleratorRelease/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvaccleratorRelease/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvaccleratorRelease/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvacclerator/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvacclerator/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvacclerator/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvacclerator/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvacclerator/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvacclerator/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ghvacclerator/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestGhvacclerator/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestGhvacclerator/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestGhvacclerator/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestGhvacclerator/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestGhvacclerator/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestGhvacclerator/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestGhvacclerator/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/release/assets" type="java-resource" />
@@ -119,7 +119,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/multi-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/proguard-rules" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />

@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "com.applop.demo"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 6
         versionName "1.6"
         multiDexEnabled true
@@ -36,52 +35,67 @@ android {
         demo{
                     applicationId "com.applop.demo"
                     versionCode 2016020117
-                    versionName "2.0"
+            versionName "1.2"
         }
         oyt{
-             applicationId "com.applop.oytfood"
-            versionCode 2016012714
-            versionName "1.0"
-        }
+            applicationId "com.applop.oytfood"
+            versionCode 2016020609
+            versionName "1.2"        }
         uangteman{
             applicationId "com.applop.uangteman"
-            versionCode 2016012814
-            versionName "1.0"
+            versionCode 2016020510
+            versionName "1.2"
         }
         hello{
             applicationId "com.applop.hello"
-            versionCode 2016012816
-            versionName "1.0"
+            versionCode 2016020511
+            versionName "1.2"
         }
         premdigitalstudio{
             applicationId "com.applop.premdigitalstudio"
-            versionCode 2016012911
-            versionName "1.0"
+            versionCode 2016020512
+            versionName "1.2"
         }
         saicomputers{
             applicationId "com.applop.saicomputers"
-            versionCode 2016012914
-            versionName "1.0"
+            versionCode 2016020513
+            versionName "1.2"
         }
         stylistawear{
             applicationId "com.applop.stylistawear"
-            versionCode 2016020112
-            versionName "1.0"
+            versionCode 2016020514
+            versionName "1.2"
         }
-        exp{
-            applicationId "com.applop.exp"
-            versionCode 2016020214
-            versionName "1.0"
-        }
+
         sejal{
             applicationId "com.applop.sejal"
-            versionCode 2016020214
-            versionName "1.0"
+            versionCode 2016020505
+            versionName "1.2"
         }
         rrenterprises{
             applicationId "com.applop.rrenterprises"
-            versionCode 2016020314
-            versionName "1.0"
+            versionCode 2016020516
+            versionName "1.2"
+        }
+        venturemantra{
+            applicationId "com.applop.venturemantra"
+            versionCode 2016020517
+            versionName "1.2"
+        }
+        ghvacclerator{
+            applicationId "com.applop.ghvacclerator"
+            versionCode 2016020518
+            versionName "1.2"
+        }
+        omworld{
+            applicationId "com.applop.omworld"
+            versionCode 2016020519
+            versionName "1.2"
+        }
+        govindanx{
+            applicationId "com.applop.govindanx"
+            versionCode 2016020520
+            versionName "1.2"
         }
 
     }
@@ -95,10 +109,14 @@ android {
             productFlavors.hello.signingConfig signingConfigs.contentapplication
             productFlavors.saicomputers.signingConfig signingConfigs.contentapplication
             productFlavors.premdigitalstudio.signingConfig signingConfigs.contentapplication
-            productFlavors.exp.signingConfig signingConfigs.contentapplication
             productFlavors.sejal.signingConfig signingConfigs.contentapplication
             productFlavors.stylistawear.signingConfig signingConfigs.contentapplication
             productFlavors.rrenterprises.signingConfig signingConfigs.contentapplication
+            productFlavors.venturemantra.signingConfig signingConfigs.contentapplication
+            productFlavors.ghvacclerator.signingConfig signingConfigs.contentapplication
+            productFlavors.omworld.signingConfig signingConfigs.contentapplication
+            productFlavors.govindanx.signingConfig signingConfigs.contentapplication
+
         }
     }
     dependencies {

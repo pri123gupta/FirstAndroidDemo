@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name"> Venture Mantra</string>
+    <string name="contact_us_p1"> Venture Mantra</string>
+    <string name="contact_us_p2">Delhi</string>
+    <string name="contact_us_p3">India</string>
+    <string name="contact_us_p4">Phone number : 9873473434</string>
+    <string name="about_us"> Venture Mantra
+</string>
+</resources>

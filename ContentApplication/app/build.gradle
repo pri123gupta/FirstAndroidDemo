@@ -30,6 +30,12 @@ android {
             storePassword "rahul123"
             keyPassword "rahul123"
         }
+        govindanx{
+            storeFile file("../keystore/govindanx.jks") //Path to the keystore file
+            keyAlias "govindanxcer"
+            storePassword "rahul123"
+            keyPassword "rahul123"
+        }
     }
     productFlavors {
         demo{

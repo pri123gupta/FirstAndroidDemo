@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GHV Acclerator</string>
+    <string name="contact_us_p1">Suite #209, 2nd Floor,</string>
+    <string name="contact_us_p2">Vipul Agora Building, M.G.Road,</string>
+    <string name="contact_us_p3">Gurgaon-122001, India</string>
+    <string name="contact_us_p4">Phone number : </string>
+    <string name="about_us">GHV Accelerator stands for Green House Ventures Accelerator. Green House is a controlled environment where accelerated growth of plants help to increase the yield of the plants even in non-seasonal phase. On the lines of Green House, GHV Accelerator will be providing Startups with a controlled environment, optimized and appropriate resources, along with sustainability funding, helping them to grow multifold in a shorter timeframe. This enables greater control over the growing environment of Ventures.
+</string>
+</resources>

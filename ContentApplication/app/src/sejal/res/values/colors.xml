@@ -4,5 +4,9 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#0B8043</color>
     <color name="grey">#888888</color>
+<<<<<<< HEAD
+    <color name="splash_background">#180908</color>
+=======
     <color name="splash_background">#ffffff</color>
+>>>>>>> e031ae725233c387a0f488bb906e0aab35526093
 </resources>

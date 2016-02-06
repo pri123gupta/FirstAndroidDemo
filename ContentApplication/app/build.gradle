@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.applop.demo"
         minSdkVersion 15
-        targetSdkVersion 23
+       targetSdkVersion 23
         versionCode 6
         versionName "1.6"
         multiDexEnabled true
@@ -96,7 +96,7 @@ android {
             applicationId "com.applop.govindanx"
             versionCode 2016020520
             versionName "1.2"
-        }
+ }
 
     }
     buildTypes {
@@ -116,6 +116,7 @@ android {
             productFlavors.ghvacclerator.signingConfig signingConfigs.contentapplication
             productFlavors.omworld.signingConfig signingConfigs.contentapplication
             productFlavors.govindanx.signingConfig signingConfigs.contentapplication
+            
 
         }
     }

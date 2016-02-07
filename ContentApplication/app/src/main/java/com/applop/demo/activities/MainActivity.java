@@ -124,7 +124,7 @@ Toolbar toolbar;
         mDrawerList.setLayoutManager(new LinearLayoutManager(context));
         mDrawerList.setAdapter(drawer1MenuAdapter);
         Helper.setDetailsInDrawerlayout(mDrawerRealativeLayout, context);
-                ((RelativeLayout) findViewById(R.id.upperBar)).setBackgroundColor(Color.parseColor(AppConfiguration.getInstance(this).bgcolor));
+        ((RelativeLayout) findViewById(R.id.upperBar)).setBackgroundColor(Color.parseColor(AppConfiguration.getInstance(this).bgcolor));
         //for second drawer with id itemsRecyclerView
         itemsRecyclerView = (RecyclerView) findViewById(R.id.itemsRecyclerView);
         linearLayoutManager = new LinearLayoutManager(this);

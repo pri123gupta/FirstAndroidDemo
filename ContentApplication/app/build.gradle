@@ -95,7 +95,7 @@ android {
         }
         omworld{
             applicationId "com.applop.omworld"
-            versionCode 2016020519
+            versionCode 2016020609
             versionName "1.2"
         }
         govindanx{
@@ -103,7 +103,27 @@ android {
             versionCode 2016020520
             versionName "1.2"
  }
+        anamikamobiles{
+            applicationId "com.applop.anamikamobiles"
+            versionCode 2016020521
+            versionName "1.2"
+        }
 
+        craftsmart{
+            applicationId "com.applop.craftsmart"
+            versionCode 2016020522
+            versionName "1.2"
+        }
+        sangini{
+            applicationId "com.applop.Sangini"
+            versionCode 2016020523
+            versionName "1.2"
+        }
+        chasmaghar{
+            applicationId "com.applop.chasmaghar"
+            versionCode 2016020609
+            versionName "1.2"
+        }
     }
     buildTypes {
         release {
@@ -122,7 +142,10 @@ android {
             productFlavors.ghvacclerator.signingConfig signingConfigs.contentapplication
             productFlavors.omworld.signingConfig signingConfigs.contentapplication
             productFlavors.govindanx.signingConfig signingConfigs.contentapplication
-            
+            productFlavors.anamikamobiles.signingConfig signingConfigs.contentapplication
+            productFlavors.craftsmart.signingConfig signingConfigs.contentapplication
+            productFlavors.sangini.signingConfig signingConfigs.contentapplication
+            productFlavors.chasmaghar.signingConfig signingConfigs.contentapplication
 
         }
     }

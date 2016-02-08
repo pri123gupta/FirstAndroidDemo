@@ -115,6 +115,7 @@
                     android:orientation="horizontal"
                     android:gravity="center"
                     android:id="@+id/enquiry_ll"
+                    android:visibility="gone"
                     android:layout_gravity="center_vertical"
                     android:layout_height="wrap_content">
                     <ImageView

@@ -145,7 +145,7 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
             protected void VResponse(JSONObject response, String tag) {
                 try {
                     if (response.getBoolean("status")){
-                        Toast.makeText(OverAllEnquiryMailActivity.this,"Booked Successfully",Toast.LENGTH_LONG).show();
+                        Toast.makeText(OverAllEnquiryMailActivity.this,"Enquired Successfully",Toast.LENGTH_LONG).show();
                         onBackPressed();
                     }else {
                         Toast.makeText(OverAllEnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();

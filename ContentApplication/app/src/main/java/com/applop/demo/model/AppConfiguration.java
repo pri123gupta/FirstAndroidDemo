@@ -16,6 +16,13 @@ public class AppConfiguration {
     public String appName="";
     public String email="";
     public String appDescription="";
+    public String appContactLine1="";
+    public String appContactLine2="";
+    public String appContactLine3="";
+    public boolean isShareEnable=true;
+    public boolean isEnquryEnable=true;
+    public boolean isBookingEnable=true;
+    public String appContactLine4="";
     public String bgcolor="";
     public String websiteKey="";
     public String iconTheme="";
@@ -125,6 +132,27 @@ public class AppConfiguration {
                 appName = "";
             }
             try{
+                isShareEnable = data.getBoolean("isShareEnable");
+            }
+            catch (Exception ex)
+            {
+                isShareEnable = true;
+            }
+            try{
+                isBookingEnable = data.getBoolean("isBookingEnable");
+            }
+            catch (Exception ex)
+            {
+                isBookingEnable = true;
+            }
+            try{
+                isEnquryEnable = data.getBoolean("isEnquiryEnable");
+            }
+            catch (Exception ex)
+            {
+                isEnquryEnable = true;
+            }
+            try{
                 iconTheme = data.getString("iconTheme");
             }
             catch (Exception ex)
@@ -139,12 +167,42 @@ public class AppConfiguration {
                 email = "";
             }
             try{
-                appDescription = data.getString("AppDescription");
+                appDescription = data.getString("appDescription");
             }
             catch (Exception ex)
             {
-                appDescription = "";
+                appDescription = "Make application without coding : Applop helps in expanding and managing your business, a single tool in form of mobile app that serves as an integrated solution to retain old customers and attract new. With click of a button\n" +
+                        "    you updates will be notified through push notification to all your users.";
             }
+            try{
+                appContactLine1 = data.getString("contactLine1");
+            }
+            catch (Exception ex)
+            {
+                appContactLine1 = "Applop Mobile Solutions Pvt. Ltd.";
+            }
+            try{
+                appContactLine2 = data.getString("contactLine2");
+            }
+            catch (Exception ex)
+            {
+                appContactLine2 = "737B, JMD Megapolis, Setor 48";
+            }
+            try{
+                appContactLine3 = data.getString("contactLine3");
+            }
+            catch (Exception ex)
+            {
+                appContactLine3 = "Sohna Road, Gurgaon - 122001";
+            }
+            try{
+                appContactLine4 = data.getString("contactLine4");
+            }
+            catch (Exception ex)
+            {
+                appContactLine4 = "Phone number : 01244939799";
+            }
+
 
             try{
                 bgcolor = data.getString("toolbarColor");

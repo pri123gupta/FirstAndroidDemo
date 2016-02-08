@@ -35,10 +35,10 @@ Toolbar toolbar;
     private void loadAboutUsData() {
         String webstr = "<html><head><style>@font-face {font-family:'opensans';src: url('file:///android_asset/fonts/regular.ttf';font-weight: normal);}body {font-family:'opensans';}img{PADDING-BOTTOM: 5px;max-width:100%;}</style><script>window.onload = callOnload;window.onscroll=callOnScroll;function showLoader(){document.getElementById('loader').style.display='inline'};function hideLoader(){document.getElementById('loader').style.display='none'};function toggleFont(){var d=document.getElementById('multicolumn');var d1=document.getElementById('headline');if(d.className == 'large'){d.className='';}else{d.className='large';}if(d1.className == 'large'){d1.className='title';}else{d1.className='large';}};function callOnload(){ hideLoader();}</script></head><body >";
         webstr += "<p style='font-family:\"opensans\";line-height:25px;text-align:justify;color:'#00000'; font-size:18;'>";
-        webstr += "</br>"+getResources().getString(R.string.contact_us_p1);
-        webstr += "</br>"+getResources().getString(R.string.contact_us_p2);
-        webstr += "</br>"+getResources().getString(R.string.contact_us_p3);
-        webstr += "</br>"+getResources().getString(R.string.contact_us_p4)+"</p>";
+        webstr += "</br>"+AppConfiguration.getInstance(this).appContactLine1;
+        webstr += "</br>"+AppConfiguration.getInstance(this).appContactLine2;
+        webstr += "</br>"+AppConfiguration.getInstance(this).appContactLine3;
+        webstr += "</br>"+AppConfiguration.getInstance(this).appContactLine4+"</p>";
         webstr += "</body></html>";
         WebView webview= (WebView) findViewById(R.id.webViewAboutUs);
         webview.getSettings().getJavaScriptEnabled();

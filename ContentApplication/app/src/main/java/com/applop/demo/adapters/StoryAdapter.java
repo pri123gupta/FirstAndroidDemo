@@ -18,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 import com.applop.demo.R;
 import com.applop.demo.activities.BookMailActivity;
 import com.applop.demo.activities.EnquiryMailActivity;
+import com.applop.demo.model.AppConfiguration;
 import com.applop.demo.model.Story;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
@@ -76,7 +77,15 @@ OnItemClickListener mItemClickListener;
         //
         holder.itemView.setTag(holder);
        // holder.titleName.setTag(data.get(position));
-
+        if (!AppConfiguration.getInstance(context).isEnquryEnable){
+            holder.enquiry_tv.setVisibility(View.GONE);
+        }
+        if (!AppConfiguration.getInstance(context).isBookingEnable){
+            holder.book_tv.setVisibility(View.GONE);
+        }
+        if (!AppConfiguration.getInstance(context).isShareEnable){
+            holder.share_tv.setVisibility(View.GONE);
+        }
         holder.titleName.setText(data.get(position).title);
         holder.homeFeedPostTime.setText(Html.fromHtml(item.categoryNameAndTime));
         holder.share_image_view.setImageDrawable(shareIcon);

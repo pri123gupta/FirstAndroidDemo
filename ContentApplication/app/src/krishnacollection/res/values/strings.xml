@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Krishna Collection</string>
+    <string name="contact_us_p1">Shop No 3 And 4, New Shopper Stop,</string>
+    <string name="contact_us_p2">Film City Road, Malad East,</string>
+    <string name="contact_us_p3">Mumbai - 400097, Opposite Police Chowki, Dindoshi</string>
+    <string name="contact_us_p4">Phone number : 9769444837,28405222</string>
+    <string name="about_us">Krishna Collection</string>
+</resources>

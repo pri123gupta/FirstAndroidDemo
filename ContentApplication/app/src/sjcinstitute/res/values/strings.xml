@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sjc institute</string>
+    <string name="contact_us_p1"> 14B,RN mukherjee road,</string>
+    <string name="contact_us_p2">mangoe lane,</string>
+    <string name="contact_us_p3">chandni chowk metro,kolkata</string>
+    <string name="contact_us_p4">Phone number : 9339959877</string>
+    <string name="about_us">Sjc institute </string>
+</resources>

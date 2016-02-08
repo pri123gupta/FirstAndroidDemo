@@ -124,6 +124,43 @@ android {
             versionCode 2016020609
             versionName "1.2"
         }
+        musicnagari{
+            applicationId "com.applop.musicnagari"
+            versionCode 2016020610
+            versionName "1.2"
+        }
+        jayabookworld{
+            applicationId "com.applop.jayabookworld"
+            versionCode 2016020613
+            versionName "1.2"
+        }
+        relaxednow{
+            applicationId "com.applop.relaxednow"
+            versionCode 2016020614
+            versionName "1.2"
+        }
+        uniquepersonalisedgifts
+                {
+                    applicationId "com.applop.uniquepersonalisedgifts"
+                    versionCode 2016020615
+                    versionName "1.2"
+                }
+        sjcinstitute
+                {
+                    applicationId "com.applop.sjcinstitute"
+                    versionCode 2016020616
+                    versionName "1.2"
+                }
+        krishnacollection{
+            applicationId "com.applop.krishnacollection"
+            versionCode 2016020617
+            versionName "1.2"
+        }
+        rizharexiene{
+            applicationId "com.applop.rizharexiene"
+            versionCode 2016020618
+            versionName "1.2"
+        }
     }
     buildTypes {
         release {
@@ -146,6 +183,13 @@ android {
             productFlavors.craftsmart.signingConfig signingConfigs.contentapplication
             productFlavors.sangini.signingConfig signingConfigs.contentapplication
             productFlavors.chasmaghar.signingConfig signingConfigs.contentapplication
+            productFlavors.musicnagari.signingConfig signingConfigs.contentapplication
+            productFlavors.jayabookworld.signingConfig signingConfigs.contentapplication
+            productFlavors.relaxednow.signingConfig signingConfigs.contentapplication
+            productFlavors.uniquepersonalisedgifts.signingConfig signingConfigs.contentapplication
+            productFlavors.sjcinstitute.signingConfig signingConfigs.contentapplication
+            productFlavors.krishnacollection.signingConfig signingConfigs.contentapplication
+            productFlavors.rizharexiene.signingConfig signingConfigs.contentapplication
 
         }
     }

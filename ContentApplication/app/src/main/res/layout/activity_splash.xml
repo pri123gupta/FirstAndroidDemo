@@ -4,15 +4,11 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/splash_background">
-<<<<<<< HEAD
+
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-=======
-
->>>>>>> 86141856b75d8986402862d6dec3b813d5a9e91b
-
         <ImageView
             android:id="@+id/image"
             android:layout_marginTop="50dp"
@@ -22,18 +18,13 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/splash_logo"
             android:scaleType="fitCenter"/>
-
         <TextView
-            android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
             android:padding="20dp"
             android:textStyle="normal|bold|italic"
             android:textColor="@color/splash_text_color"
             android:textAlignment="center"
-<<<<<<< HEAD
 
-=======
->>>>>>> 86141856b75d8986402862d6dec3b813d5a9e91b
             android:text="@string/app_name"
             android:layout_gravity="center"
             android:layout_alignParentBottom="true"
@@ -41,9 +32,5 @@
             android:textSize="24dp"
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content" />
-<<<<<<< HEAD
     </RelativeLayout>
-=======
-
->>>>>>> 86141856b75d8986402862d6dec3b813d5a9e91b
 </RelativeLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Relaxed Now .com</string>
+    <string name="contact_us_p1">A-38,Emerald Apt,Grd Floor,</string>
+    <string name="contact_us_p2">Sunder Marg Corner, Main Rajapark Lane,</string>
+    <string name="contact_us_p3">Tilak Nagar, Jaipur - 302004, L B S</string>
+    <string name="contact_us_p4">Phone number : 9887272643,9785643000</string>
+    <string name="about_us">Relaxed Now .com</string>
+</resources>

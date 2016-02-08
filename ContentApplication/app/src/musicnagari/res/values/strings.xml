@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Music Nagari</string>
+    <string name="contact_us_p1">Um cs 06-07 ansal plaza,</string>
+    <string name="contact_us_p2">vaishali sector 1,</string>
+    <string name="contact_us_p3">Gaziabad</string>
+    <string name="contact_us_p4">Phone number : 9540507800</string>
+    <string name="about_us">Music Nagari</string>
+</resources>

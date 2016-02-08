@@ -31,7 +31,7 @@ android {
             keyPassword "rahul123"
         }
         govindanx{
-            storeFile file("../keystore/govindanx.jks") //Path to the keystore file
+            storeFile file("../keystore/govindanxkey.jks") //Path to the keystore file
             keyAlias "govindanxcer"
             storePassword "rahul123"
             keyPassword "rahul123"
@@ -126,12 +126,12 @@ android {
         }
         musicnagari{
             applicationId "com.applop.musicnagari"
-            versionCode 2016020811
+            versionCode 2016020813
             versionName "1.3"
         }
         jayabookworld{
             applicationId "com.applop.jayabookworld"
-            versionCode 2016020613
+            versionCode 2016020813
             versionName "1.2"
         }
         relaxednow{
@@ -142,7 +142,7 @@ android {
         uniquepersonalisedgifts
                 {
                     applicationId "com.applop.uniquepersonalisedgifts"
-                    versionCode 2016020615
+                    versionCode 2016020815
                     versionName "1.2"
                 }
         sjcinstitute
@@ -159,6 +159,17 @@ android {
         rizharexiene{
             applicationId "com.applop.rizharexiene"
             versionCode 2016020618
+            versionName "1.2"
+        }
+        freshto{
+            applicationId "com.applop.freshto"
+            versionCode 2016020816
+            versionName "1.2"
+        }
+        agrasenjayantisakticity
+        {
+            applicationId "com.applop.agrasenjayantisakticity"
+            versionCode 2016020816
             versionName "1.2"
         }
     }
@@ -178,7 +189,7 @@ android {
             productFlavors.venturemantra.signingConfig signingConfigs.contentapplication
             productFlavors.ghvacclerator.signingConfig signingConfigs.contentapplication
             productFlavors.omworld.signingConfig signingConfigs.contentapplication
-            productFlavors.govindanx.signingConfig signingConfigs.contentapplication
+            productFlavors.govindanx.signingConfig signingConfigs.govindanx
             productFlavors.anamikamobiles.signingConfig signingConfigs.contentapplication
             productFlavors.craftsmart.signingConfig signingConfigs.contentapplication
             productFlavors.sangini.signingConfig signingConfigs.contentapplication
@@ -190,6 +201,8 @@ android {
             productFlavors.sjcinstitute.signingConfig signingConfigs.contentapplication
             productFlavors.krishnacollection.signingConfig signingConfigs.contentapplication
             productFlavors.rizharexiene.signingConfig signingConfigs.contentapplication
+            productFlavors.freshto.signingConfig signingConfigs.contentapplication
+            productFlavors.freshto.signingConfig signingConfigs.contentapplication
 
         }
     }

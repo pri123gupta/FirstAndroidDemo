@@ -88,11 +88,6 @@ android {
             versionCode 2016020517
             versionName "1.2"
         }
-        ghvacclerator{
-            applicationId "com.applop.ghvacclerator"
-            versionCode 2016020518
-            versionName "1.2"
-        }
         omworld{
             applicationId "com.applop.omworld"
             versionCode 2016020609
@@ -103,25 +98,9 @@ android {
             versionCode 2016020520
             versionName "1.2"
  }
-        anamikamobiles{
-            applicationId "com.applop.anamikamobiles"
-            versionCode 2016020521
-            versionName "1.2"
-        }
-
-        craftsmart{
-            applicationId "com.applop.craftsmart"
-            versionCode 2016020522
-            versionName "1.2"
-        }
         sangini{
             applicationId "com.applop.Sangini"
             versionCode 2016020523
-            versionName "1.2"
-        }
-        chasmaghar{
-            applicationId "com.applop.chasmaghar"
-            versionCode 2016020609
             versionName "1.2"
         }
         musicnagari{
@@ -153,7 +132,7 @@ android {
                 }
         krishnacollection{
             applicationId "com.applop.krishnacollection"
-            versionCode 2016020617
+            versionCode 2016020909
             versionName "1.2"
         }
         rizharexiene{
@@ -169,7 +148,144 @@ android {
         agrasenjayantisakticity
         {
             applicationId "com.applop.agrasenjayantisakticity"
-            versionCode 2016020816
+            versionCode 2016020901
+            versionName "1.2"
+        }
+        balajifurniture
+                {
+                    applicationId "com.applop.balajifurniture"
+                    versionCode 2016020902
+                    versionName "1.2"
+                }
+        edumaster {
+            applicationId "com.applop.edumaster"
+            versionCode 2016020903
+            versionName "1.2"
+        }
+        milkymilkymilk{
+            applicationId "com.applop.milkymilkymilk"
+            versionCode 2016020904
+            versionName "1.2"
+        }
+        anamikamobiles{
+            applicationId "com.applop.anamikamobiles"
+            versionCode 2016020905
+            versionName "1.2"
+        }
+        applop{
+            applicationId "com.applop.applop"
+            versionCode 2016020906
+            versionName "1.2"
+        }
+        bansalclasses
+        {
+            applicationId "com.applop.bansalclasses"
+            versionCode 2016020907
+            versionName "1.2"
+        }
+        chasmaghar{
+            applicationId "com.applop.chasmaghar"
+            versionCode 2016020908
+            versionName "1.2"
+        }
+        craftsmart{
+            applicationId "com.applop.craftsmart"
+            versionCode 2016020910
+            versionName "1.2"
+        }
+        ghvacclerator{
+            applicationId "com.applop.ghvacclerator"
+            versionCode 2016020911
+            versionName "1.2"
+        }
+        hanuman{
+            applicationId "com.applop.hanuman"
+            versionCode 2016020912
+            versionName "1.2"
+        }
+        hellohome{
+            applicationId "com.applop.hellohome"
+            versionCode 2016020913
+            versionName "1.2"
+        }
+        hotelgreenparkkorba{
+            applicationId "com.applop.hotelgreenparkkorba"
+            versionCode 2016020914
+            versionName "1.2"
+        }
+        korbaudyogsangh{
+            applicationId "com.applop.korbaudyogsangh"
+            versionCode 2016020915
+            versionName "1.2"
+        }
+        minusuits{
+            applicationId "com.applop.minusuits"
+            versionCode 2016020916
+            versionName "1.2"
+        }
+        mohanam{
+            applicationId "com.applop.mohanam"
+            versionCode 2016020917
+            versionName "1.2"
+        }
+        mukundhonda{
+            applicationId "com.applop.mukundhonda"
+            versionCode 2016020918
+            versionName "1.2"
+        }
+        mumpyscakeandbakes{
+            applicationId "com.applop.mumpyscakeandbakes"
+            versionCode 2016020919
+            versionName "1.2"
+        }
+        nasscomwarehousekolkata{
+            applicationId "com.applop.nasscomwarehousekolkata"
+            versionCode 2016020920
+            versionName "1.2"
+        }
+        npc2015{
+            applicationId "com.applop.npc2015"
+            versionCode 2016020921
+            versionName "1.2"
+        }
+        paawanherbal{
+            applicationId "com.applop.paawanherbal"
+            versionCode 2016020922
+            versionName "1.2"
+        }
+        ramamagnetomall{
+            applicationId "com.applop.ramamagnetomall"
+            versionCode 2016020923
+            versionName "1.2"
+        }
+        rashmigroup{
+            applicationId "com.applop.rashmigroup"
+            versionCode 2016021000
+            versionName "1.2"
+        }
+        shardatelecom{
+            applicationId "com.applop.shardatelecom"
+            versionCode 2016021001
+            versionName "1.2"
+        }
+        shringarsadan{
+            applicationId "com.applop.shringarsadan"
+            versionCode 2016021002
+            versionName "1.2"
+        }
+        smilebox{
+            applicationId "com.applop.smilebox"
+            versionCode 2016021003
+            versionName "1.2"
+        }
+        vegoutrestaurant{
+            applicationId "com.applop.vegoutrestaurant"
+            versionCode 2016021004
+            versionName "1.2"
+        }
+        yourapp{
+            applicationId "com.applop.yourapp"
+            versionCode 2016021005
             versionName "1.2"
         }
     }
@@ -202,7 +318,29 @@ android {
             productFlavors.krishnacollection.signingConfig signingConfigs.contentapplication
             productFlavors.rizharexiene.signingConfig signingConfigs.contentapplication
             productFlavors.freshto.signingConfig signingConfigs.contentapplication
-            productFlavors.freshto.signingConfig signingConfigs.contentapplication
+            productFlavors.agrasenjayantisakticity.signingConfig signingConfigs.contentapplication
+            productFlavors.balajifurniture.signingConfig signingConfigs.contentapplication
+            productFlavors.edumaster.signingConfig signingConfigs.contentapplication
+            productFlavors.milkymilkymilk.signingConfig signingConfigs.contentapplication
+            productFlavors.applop.signingConfig signingConfigs.contentapplication
+            productFlavors.bansalclasses.signingConfig signingConfigs.contentapplication
+            productFlavors.hanuman.signingConfig signingConfigs.contentapplication
+            productFlavors.hellohome.signingConfig signingConfigs.contentapplication
+            productFlavors.hotelgreenparkkorba.signingConfig signingConfigs.contentapplication
+            productFlavors.korbaudyogsangh.signingConfig signingConfigs.contentapplication
+            productFlavors.minusuits.signingConfig signingConfigs.contentapplication
+            productFlavors.mohanam.signingConfig signingConfigs.contentapplication
+            productFlavors.mukundhonda.signingConfig signingConfigs.contentapplication
+            productFlavors.mumpyscakeandbakes.signingConfig signingConfigs.contentapplication
+            productFlavors.nasscomwarehousekolkata.signingConfig signingConfigs.contentapplication
+            productFlavors.paawanherbal.signingConfig signingConfigs.contentapplication
+            productFlavors.ramamagnetomall.signingConfig signingConfigs.contentapplication
+            productFlavors.rashmigroup.signingConfig signingConfigs.contentapplication
+            productFlavors.shardatelecom.signingConfig signingConfigs.contentapplication
+            productFlavors.shringarsadan.signingConfig signingConfigs.contentapplication
+            productFlavors.smilebox.signingConfig signingConfigs.contentapplication
+            productFlavors.vegoutrestaurant.signingConfig signingConfigs.contentapplication
+            productFlavors.yourapp.signingConfig signingConfigs.contentapplication
 
         }
     }

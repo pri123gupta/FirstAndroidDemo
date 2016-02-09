@@ -82,30 +82,6 @@ public class ETParsePushBroadcastReceiver extends ParsePushBroadcastReceiver {
                             openApp(context, alertData);
                         }
                     }
-                    //current_affiars_questions
-                    else if (notification_type.equalsIgnoreCase("current_affiars_questions")) {
-                        Toast.makeText(context, "no questions", Toast.LENGTH_LONG).show();
-                    }
-                    //comment
-                    else if (notification_type.equalsIgnoreCase("new_comment")) {
-                        String alertData;
-                        if (notif_obj.has("alert")) {
-                            alertData = notif_obj.getString("alert");
-                        } else {
-                            alertData = "";
-                        }
-                        if (notif_obj.has("post_id")) {
-                            String post_id = notif_obj.getString("post_id");
-                            if (post_id.equalsIgnoreCase("")) {
-                                openApp(context, alertData);
-                            } else {
-                                if (notif_obj.has("email")) {
-                                    String email = notif_obj.getString("email");
-                                    openComment(context, post_id, email);
-                                }
-                            }
-                        }
-                    }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,18 +155,13 @@ public class ETParsePushBroadcastReceiver extends ParsePushBroadcastReceiver {
             try {
                 JSONObject dataJSON = new JSONObject(intent.getExtras().getString(PARSE_DATA_KEY));
                 _id = (int) (long) System.currentTimeMillis();
-//                if (dataJSON.getString("notification_type").equalsIgnoreCase("new_comment")) {
-                    _title = ((String) dataJSON.getString("comment_title")).trim();
-//                } else {
-//                    _title = ((String) dataJSON.getString("title")).trim();
-//                }
+                _title = ((String) dataJSON.getString("title")).trim();
                 _message = ((String) dataJSON.getString("alert")).trim();
                 final Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
                 final Charset UTF_8 = Charset.forName("UTF-8");
                 byte ptext[] = _message.getBytes(ISO_8859_1);
                 _message = new String(ptext, UTF_8);
-//                if (ThemedSpinnerAdapter.Helper.isPushNotificationEnabled(context))
-                    handleNofificationNavigation(context, dataJSON);
+                handleNofificationNavigation(context, dataJSON);
             } catch (Exception e) {
                 e.printStackTrace();
             }

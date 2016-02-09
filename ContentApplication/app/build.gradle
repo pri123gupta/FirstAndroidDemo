@@ -38,6 +38,11 @@ android {
         }
     }
     productFlavors {
+        applop{
+            applicationId "com.applop"
+            versionCode 20160209015
+            versionName "6.0"
+        }
         demo{
                     applicationId "com.applop.demo"
                     versionCode 2016020117
@@ -168,6 +173,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             productFlavors.demo.signingConfig signingConfigs.demo
             productFlavors.oyt.signingConfig signingConfigs.contentapplication
+            productFlavors.applop.signingConfig signingConfigs.contentapplication
             productFlavors.uangteman.signingConfig signingConfigs.contentapplication
             productFlavors.hello.signingConfig signingConfigs.contentapplication
             productFlavors.saicomputers.signingConfig signingConfigs.contentapplication

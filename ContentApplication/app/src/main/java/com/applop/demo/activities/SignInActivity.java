@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,6 +77,7 @@ public class SignInActivity extends AppCompatActivity {
     // private ConnectionResult mConnectionResult;
 
     Button signIn;
+    String phoneNumber="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +89,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         context = this;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         AccessToken token = AccessToken.getCurrentAccessToken();
         if (token != null) {
             Toast.makeText(this, token.getToken(), Toast.LENGTH_LONG).show();
@@ -128,10 +131,9 @@ public class SignInActivity extends AppCompatActivity {
                                                 if (userInfo.length()==0){
                                                     final HashMap<String, String> params = new HashMap<String, String>();
                                                     params.put("email", email);
-                                                    Toast.makeText(context,"length = 0",Toast.LENGTH_SHORT).show();
                                                     params.put("name", name);
                                                     params.put("address", "");
-                                                    params.put("phoneNumber", "");
+                                                    params.put("phoneNumber", phoneNumber);
                                                     params.put("packageName",getPackageName());
                                                     params.put("photoLink",ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString());
                                                     new VolleyData(context){
@@ -196,7 +198,7 @@ public class SignInActivity extends AppCompatActivity {
                                                     ImageDownloader.downloadAsync(request);
                                                 }
                                             }catch (Exception ex){
-                                                Toast.makeText(context,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context,"2"+ex.getMessage(),Toast.LENGTH_SHORT).show();
                                                 progressDialog.hide();
                                                 ex.printStackTrace();
                                             }
@@ -224,7 +226,7 @@ public class SignInActivity extends AppCompatActivity {
                                                 }).build();
                                                 ImageDownloader.downloadAsync(request);
                                             }catch (Exception ex){
-                                                Toast.makeText(context,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context," :1"+ex.getMessage(),Toast.LENGTH_LONG).show();
                                                 ex.printStackTrace();
                                             }
                                         }
@@ -351,10 +353,9 @@ public class SignInActivity extends AppCompatActivity {
                     if (userInfo.length() == 0) {
                         final HashMap<String, String> params = new HashMap<String, String>();
                         params.put("email", email);
-                        Toast.makeText(context, "length = 0", Toast.LENGTH_SHORT).show();
                         params.put("name", name);
                         params.put("address", "");
-                        params.put("phoneNumber", "");
+                        params.put("phoneNumber", phoneNumber);
                         params.put("packageName", getPackageName());
                         params.put("photoLink", uri.toString());
                         new VolleyData(context) {

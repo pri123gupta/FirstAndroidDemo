@@ -1,7 +1,9 @@
 package com.applop.demo.helperClasses;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -49,6 +51,17 @@ public class Helper {
         }catch (Exception ex){
 
         }
+    }
+    public static void showAlertFeedNotification(Context context,String alertData){
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getString(R.string.app_name))
+                .setMessage(alertData)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .show();
     }
 
     public static void setDetailsInDrawerlayout(final RelativeLayout drawerlayout, final Context context){

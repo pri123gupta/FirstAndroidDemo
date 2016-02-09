@@ -44,6 +44,9 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Enquiry");
+        if (getPackageName().equalsIgnoreCase("com.applop")){
+            getSupportActionBar().setTitle("Make App Now");
+        }
         loadResources();
     }
     private void loadResources(){
@@ -57,7 +60,9 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
         }else {
             number.setText(user.phoneNumber);
             name.setText(user.name);
-            address.setText(user.address);
+            if (!getPackageName().equalsIgnoreCase("com.applop")) {
+                address.setText(user.address);
+            }
         }
         //item = getIntent().getExtras().getParcelable("item");
     }
@@ -85,10 +90,13 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
             Toast.makeText(this,"Please enter your phone number",Toast.LENGTH_LONG).show();
             return;
         }
-        if (number.getText().toString().length()!=10){
-            Toast.makeText(this,"Please enter 10 digit phone number",Toast.LENGTH_LONG).show();
-            return;
+        if (!getPackageName().equalsIgnoreCase("com.applop")) {
+            if (number.getText().toString().length()!=10){
+                Toast.makeText(this,"Please enter 10 digit phone number",Toast.LENGTH_LONG).show();
+                return;
+            }
         }
+
         if (message.getText().toString().equalsIgnoreCase("")){
             Toast.makeText(this,"Please enter your message",Toast.LENGTH_LONG).show();
             return;
@@ -114,7 +122,7 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
         params.put("phoneNumber", number.getText().toString());
         params.put("packageName", getPackageName());
         params.put("photoLink", user.imageUrl);
-        User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, user.address, user.phoneNumber);
+        User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString());
         new VolleyData(this){
             @Override
             protected void VPreExecute() {
@@ -145,7 +153,11 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
             protected void VResponse(JSONObject response, String tag) {
                 try {
                     if (response.getBoolean("status")){
-                        Toast.makeText(OverAllEnquiryMailActivity.this,"Enquired Successfully",Toast.LENGTH_LONG).show();
+                        if (getPackageName().equalsIgnoreCase("com.applop")){
+                            Toast.makeText(OverAllEnquiryMailActivity.this, "Successfully Created Will contact you soon", Toast.LENGTH_LONG).show();
+                        }else {
+                            Toast.makeText(OverAllEnquiryMailActivity.this, "Enquired Successfully", Toast.LENGTH_LONG).show();
+                        }
                         onBackPressed();
                     }else {
                         Toast.makeText(OverAllEnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
@@ -160,7 +172,7 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
             protected void VError(VolleyError error, String tag) {
                 Toast.makeText(OverAllEnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
             }
-        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitBooking.php", "post_user", paramsBooking);
+        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitGeneralEnquiry.php", "post_user", paramsBooking);
     }
 
     @Override
@@ -171,7 +183,9 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
                 if (resultCode==RESULT_OK){
                     user = User.getInstance(this);
                     name.setText(user.name);
-                    address.setText(user.address);
+                    if (!getPackageName().equalsIgnoreCase("com.applop")) {
+                        address.setText(user.address);
+                    }
                     number.setText(user.phoneNumber);
                 }
             }

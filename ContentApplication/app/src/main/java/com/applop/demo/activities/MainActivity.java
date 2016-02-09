@@ -95,6 +95,12 @@ Toolbar toolbar;
         storyAdapter=new StoryAdapter(stories,this);
         loadResources();
         setSideDrawer();
+        // show alert if exist
+        String alertMessage = getIntent().getStringExtra("alert_message");
+        if (alertMessage!=null)
+            if (!alertMessage.equalsIgnoreCase(""))
+                Helper.showAlertFeedNotification(this,alertMessage);
+
         return;
     }
     private void loadResources() {
@@ -206,16 +212,11 @@ Toolbar toolbar;
             startActivityForResult(intent, 1);
     }
     public void menuItemClicked(Category category){
-            if (category.name.equalsIgnoreCase("enquiry")){
+            if (category.type.equalsIgnoreCase("enquiry")){
                 Intent intent = new Intent(this,OverAllEnquiryMailActivity.class);
                 startActivity(intent);
                 return;
             }
-        if (category.name.equalsIgnoreCase("buynow")){
-            Intent intent = new Intent(this,OverAllEnquiryMailActivity.class);
-            startActivity(intent);
-            return;
-        }
             loadCategory(category, 1, false, false);
             return;
 
@@ -266,12 +267,16 @@ Toolbar toolbar;
                 itemsRecyclerView.setVisibility(View.VISIBLE);
                 try{
                     if(json!= null){
-                        try{
-                            JSONArray jsonCategories=json.getJSONArray("categories");
+                        try {
+                            JSONArray jsonCategories = json.getJSONArray("categories");
                             drawer1MenuAdapter.clear();
-                            ArrayList<Category> menuCategories=new ArrayList<Category>();
+                            ArrayList<Category> menuCategories = new ArrayList<Category>();
                             menuCategories.add(new Category("", "Home", "Home"));
-                            menuCategories.add(new Category("", "Enquiry", "enquiry"));
+                            if (getPackageName().equalsIgnoreCase("com.applop")) {
+                                menuCategories.add(new Category("", "Make App Now", "enquiry"));
+                            } else {
+                                menuCategories.add(new Category("", "Enquiry", "enquiry"));
+                            }
 
                             for (int i=0;i<jsonCategories.length();i++){
                                 menuCategories.add(new Category(jsonCategories.getJSONObject(i)));

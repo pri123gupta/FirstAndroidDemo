@@ -47,6 +47,7 @@ public class EnquiryMailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Enquiry");
+
         loadResources();
     }
 
@@ -125,7 +126,7 @@ public class EnquiryMailActivity extends AppCompatActivity {
         params.put("phoneNumber", number.getText().toString());
         params.put("packageName", getPackageName());
         params.put("photoLink", user.imageUrl);
-        User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, user.address, user.phoneNumber);
+        User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString());
         new VolleyData(this){
             @Override
             protected void VPreExecute() {

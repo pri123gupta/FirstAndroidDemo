@@ -102,6 +102,26 @@
                     android:textColorHint="#888888"
                     />
             </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:theme="@style/TextLabel"
+                android:textColorHint="#888888"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edit_text_quantity"
+                    android:textSize="16dp"
+                    android:inputType="number"
+                    android:textColor="#000000"
+                    android:hint="Enter quantity of products"
+                    android:textColorHint="#888888"
+                    />
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:layout_width="wrap_content"

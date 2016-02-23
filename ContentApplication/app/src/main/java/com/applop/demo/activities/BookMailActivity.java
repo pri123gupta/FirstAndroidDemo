@@ -25,7 +25,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class BookMailActivity extends AppCompatActivity {
-
+ //   EditText quantity;
     EditText number;
     EditText address;
     EditText message;
@@ -54,6 +54,7 @@ public class BookMailActivity extends AppCompatActivity {
 
     private void loadResources(){
         number = (EditText)findViewById(R.id.edit_text_phone_no);
+        //quantity= (EditText) findViewById(R.id.edit_text_quantity);
         address = (EditText)findViewById(R.id.edit_text_Address);
         message = (EditText) findViewById(R.id.edit_enquiry_message);
         name = (EditText) findViewById(R.id.edit_text_name);
@@ -64,6 +65,7 @@ public class BookMailActivity extends AppCompatActivity {
             number.setText(user.phoneNumber);
             name.setText(user.name);
             address.setText(user.address);
+
         }
         //item = getIntent().getExtras().getParcelable("item");
     }
@@ -98,6 +100,10 @@ public class BookMailActivity extends AppCompatActivity {
             Toast.makeText(this,"Please enter 10 digit phone number",Toast.LENGTH_LONG).show();
             return;
         }
+//        if (quantity.getText().toString().length()==10){
+//            Toast.makeText(this,"Please enter 10 digit phone number",Toast.LENGTH_LONG).show();
+//            return;
+//        }
         if (item==null){
             Toast.makeText(this,"Error Please Try Again",Toast.LENGTH_LONG).show();
             return;
@@ -109,6 +115,7 @@ public class BookMailActivity extends AppCompatActivity {
         Email.putExtra(Intent.EXTRA_TEXT, "Name : "+name.getText().toString()
                 +"\n\nAddress : "+address.getText().toString()
                 +"\n\nPhone no. : "+number.getText().toString()
+             //   +"\n\nQuantity of products : "+quantity.getText().toString()
                 +"\n\nMessage : "+message.getText().toString());
 
         final HashMap<String, String> params = new HashMap<String, String>();
@@ -121,8 +128,11 @@ public class BookMailActivity extends AppCompatActivity {
         params.put("name", user.name);
         params.put("address", address.getText().toString());
         params.put("phoneNumber", number.getText().toString());
+        //params.put("quantity",quantity.getText().toString());
         params.put("packageName", getPackageName());
         params.put("photoLink", user.imageUrl);
+        params.put("address",address.getText().toString());
+        params.put("phone",number.getText().toString());
         User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString());
         new VolleyData(this){
             @Override
@@ -139,12 +149,16 @@ public class BookMailActivity extends AppCompatActivity {
             protected void VError(VolleyError error, String tag) {
 
             }
-        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable.php", "post_user", params);
+        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable1.php", "post_user", params);
         final HashMap<String, String> paramsBooking = new HashMap<String, String>();
         paramsBooking.put("userEmail", user.email);
         paramsBooking.put("packageName", getPackageName());
         paramsBooking.put("storyId", item.postId);
+      //  paramsBooking.put("quantity",quantity.getText().toString());
         paramsBooking.put("msg",message.getText().toString());
+        paramsBooking.put("address", address.getText().toString());
+        paramsBooking.put("phone", number.getText().toString());
+
         new VolleyData(this){
             @Override
             protected void VPreExecute() {
@@ -165,12 +179,13 @@ public class BookMailActivity extends AppCompatActivity {
                 }
 
             }
-
             @Override
             protected void VError(VolleyError error, String tag) {
                 Toast.makeText(BookMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
             }
-        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitBooking.php", "post_user", paramsBooking);
+            //For testing:-
+      //  }.getPOSTJsonObject("http://applop.biz/merchant/api/submitBook.php", "post_user", paramsBooking);
+    }.getPOSTJsonObject("http://applop.biz/merchant/api/submitBooking.php", "post_user", paramsBooking);
         //startActivity(Intent.createChooser(Email, "Send Booking:"));
     }
     @Override
@@ -183,6 +198,7 @@ public class BookMailActivity extends AppCompatActivity {
                     name.setText(user.name);
                     address.setText(user.address);
                     number.setText(user.phoneNumber);
+                  //  quantity.setText(user.quantity);
                 }
             }
         }catch (Exception ex){

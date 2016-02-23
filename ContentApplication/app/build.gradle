@@ -36,6 +36,36 @@ android {
             storePassword "rahul123"
             keyPassword "rahul123"
         }
+        balajifur{
+            storeFile file("../keystore/newapplopkey.jks") //Path to the keystore file
+            keyAlias "applopcer"
+            storePassword "rahul123"
+            keyPassword "rahul123"
+        }
+        milky{
+            storeFile file("../keystore/newapplopkey.jks") //Path to the keystore file
+            keyAlias "applopcer"
+            storePassword "rahul123"
+            keyPassword "rahul123"
+        }
+        mumpycakebakes{
+            storeFile file("../keystore/applopkey1.jks") //Path to the keystore file
+            keyAlias "applopcer"
+            storePassword "rahul123"
+            keyPassword "rahul123"
+        }
+        paawanherbal{
+            storeFile file("../keystore/paawankey.jks") //Path to the keystore file
+            keyAlias "oiral-mobileapp"
+            storePassword "rahul123"
+            keyPassword "rahul123"
+        }
+        edumaster{
+            storeFile file("../keystore/applopkey.jks") //Path to the keystore file
+            keyAlias "applopcer"
+            storePassword "rahul123"
+            keyPassword "rahul123"
+        }
     }
     productFlavors {
         applop{
@@ -44,13 +74,13 @@ android {
             versionName "6.0"
         }
         demo{
-                    applicationId "com.applop.demo"
-                    versionCode 2016020117
+            applicationId "com.applop.demo"
+            versionCode 2016021415
             versionName "1.2"
         }
         oyt{
             applicationId "com.applop.oytfood"
-            versionCode 2016020609
+            versionCode 2016021111
             versionName "1.2"
         }
         uangteman{
@@ -65,28 +95,28 @@ android {
         }
         premdigitalstudio{
             applicationId "com.applop.premdigitalstudio"
-            versionCode 2016020512
+            versionCode 2016021112
             versionName "1.2"
         }
         saicomputers{
             applicationId "com.applop.saicomputers"
-            versionCode 2016020513
+            versionCode 2016021115
             versionName "1.2"
         }
         stylistawear{
             applicationId "com.applop.stylistawear"
-            versionCode 2016020514
+            versionCode 2016021117
             versionName "1.2"
         }
 
         sejal{
             applicationId "com.applop.sejal"
-            versionCode 2016020505
+            versionCode 2016021116
             versionName "1.2"
         }
         rrenterprises{
             applicationId "com.applop.rrenterprises"
-            versionCode 2016020516
+            versionCode 2016021114
             versionName "1.2"
         }
         venturemantra{
@@ -101,12 +131,12 @@ android {
         }
         govindanx{
             applicationId "com.applop.govindanx"
-            versionCode 2016020520
+            versionCode 2016020521
             versionName "1.2"
- }
+        }
         sangini{
             applicationId "com.applop.Sangini"
-            versionCode 2016020523
+            versionCode 2016021416
             versionName "1.2"
         }
         musicnagari{
@@ -116,34 +146,34 @@ android {
         }
         jayabookworld{
             applicationId "com.applop.jayabookworld"
-            versionCode 2016020813
+            versionCode 2016021113
             versionName "1.2"
         }
         relaxednow{
             applicationId "com.applop.relaxednow"
-            versionCode 2016020614
+            versionCode 2016021409
             versionName "1.2"
         }
         uniquepersonalisedgifts
                 {
                     applicationId "com.applop.uniquepersonalisedgifts"
-                    versionCode 2016020815
+                    versionCode 2016021715
                     versionName "1.2"
                 }
         sjcinstitute
                 {
                     applicationId "com.applop.sjcinstitute"
-                    versionCode 2016020616
+                    versionCode 2016021516
                     versionName "1.2"
                 }
         krishnacollection{
             applicationId "com.applop.krishnacollection"
-            versionCode 2016020909
+            versionCode 2016021109
             versionName "1.2"
         }
         rizharexiene{
             applicationId "com.applop.rizharexiene"
-            versionCode 2016020618
+            versionCode 2016021115
             versionName "1.2"
         }
         freshto{
@@ -152,11 +182,11 @@ android {
             versionName "1.2"
         }
         agrasenjayantisakticity
-        {
-            applicationId "com.applop.agrasenjayantisakticity"
-            versionCode 2016020901
-            versionName "1.2"
-        }
+                {
+                    applicationId "com.applop.agrasenjayantisakticity"
+                    versionCode 2016020901
+                    versionName "1.2"
+                }
         balajifurniture
                 {
                     applicationId "com.applop.balajifurniture"
@@ -168,8 +198,8 @@ android {
             versionCode 2016020903
             versionName "1.2"
         }
-        milkymilkymilk{
-            applicationId "com.applop.milkymilkymilk"
+        milkykorba{
+            applicationId "com.applop.milkykorba"
             versionCode 2016020904
             versionName "1.2"
         }
@@ -179,12 +209,12 @@ android {
             versionName "1.2"
         }
 
-        bansalclasses
-        {
-            applicationId "com.applop.bansalclasses"
-            versionCode 2016020907
-            versionName "1.2"
-        }
+        bansal
+                {
+                    applicationId"com.applop.bansal"
+                    versionCode 2016020907
+                    versionName "1.2"
+                }
         chasmaghar{
             applicationId "com.applop.chasmaghar"
             versionCode 2016020908
@@ -205,9 +235,9 @@ android {
             versionCode 2016020912
             versionName "1.2"
         }
-        hellohome{
-            applicationId "com.applop.hellohome"
-            versionCode 2016020913
+        hello{
+            applicationId "com.applop.hello"
+            versionCode 2016021417
             versionName "1.2"
         }
         hotelgreenparkkorba{
@@ -251,8 +281,8 @@ android {
             versionName "1.2"
         }
         paawanherbal{
-            applicationId "com.applop.paawanherbal"
-            versionCode 2016020922
+            applicationId "com.applop.paawan"
+            versionCode 2016021122
             versionName "1.2"
         }
         ramamagnetomall{
@@ -267,7 +297,7 @@ android {
         }
         shardatelecom{
             applicationId "com.applop.shardatelecom"
-            versionCode 2016021001
+            versionCode 2016021501
             versionName "1.2"
         }
         shringarsadan{
@@ -285,9 +315,51 @@ android {
             versionCode 2016021004
             versionName "1.2"
         }
-        yourapp{
-            applicationId "com.applop.yourapp"
-            versionCode 2016021005
+
+        vipinstore{
+            applicationId "com.applop.vipinstore"
+            versionCode 2016021412
+            versionName "1.2"
+        }
+        kushaltiffins{
+            applicationId "com.applop.kushaltiffins"
+            versionCode 2016021119
+            versionName "1.2"
+        }
+        deeprefrigeration{
+            applicationId "com.applop.deeprefrigeration"
+            versionCode 2016021713
+            versionName "1.2"
+        }
+        robotech{
+            applicationId "com.applop.robotech"
+            versionCode 2016021613
+            versionName "1.2"
+        }
+        forward{
+            applicationId "com.applop.forward"
+            versionCode 2016021614
+            versionName "1.2"
+        }
+        satyamtravel
+                {
+                    applicationId "com.applop.satyamtravel"
+                    versionCode 2016021615
+                    versionName "1.2"
+                }
+        motoraid{
+            applicationId "com.applop.motoraid"
+            versionCode 2016021716
+            versionName "1.2"
+        }
+        mytest{
+            applicationId "com.applop.mytest"
+            versionCode 2016021717
+            versionName "1.2"
+        }
+        robotech{
+            applicationId "com.applop.robotech"
+            versionCode 2016021718
             versionName "1.2"
         }
     }
@@ -322,28 +394,37 @@ android {
             productFlavors.rizharexiene.signingConfig signingConfigs.contentapplication
             productFlavors.freshto.signingConfig signingConfigs.contentapplication
             productFlavors.agrasenjayantisakticity.signingConfig signingConfigs.contentapplication
-            productFlavors.balajifurniture.signingConfig signingConfigs.contentapplication
-            productFlavors.edumaster.signingConfig signingConfigs.contentapplication
-            productFlavors.milkymilkymilk.signingConfig signingConfigs.contentapplication
+            productFlavors.balajifurniture.signingConfig signingConfigs.balajifur
+            productFlavors.edumaster.signingConfig signingConfigs.edumaster
+            productFlavors.milkykorba.signingConfig signingConfigs.milky
             productFlavors.applop.signingConfig signingConfigs.contentapplication
-            productFlavors.bansalclasses.signingConfig signingConfigs.contentapplication
+            productFlavors.bansal.signingConfig signingConfigs.contentapplication
             productFlavors.hanuman.signingConfig signingConfigs.contentapplication
-            productFlavors.hellohome.signingConfig signingConfigs.contentapplication
             productFlavors.hotelgreenparkkorba.signingConfig signingConfigs.contentapplication
             productFlavors.korbaudyogsangh.signingConfig signingConfigs.contentapplication
             productFlavors.minusuits.signingConfig signingConfigs.contentapplication
             productFlavors.mohanam.signingConfig signingConfigs.contentapplication
             productFlavors.mukundhonda.signingConfig signingConfigs.contentapplication
-            productFlavors.mumpyscakeandbakes.signingConfig signingConfigs.contentapplication
+            productFlavors.mumpyscakeandbakes.signingConfig signingConfigs.mumpycakebakes
             productFlavors.nasscomwarehousekolkata.signingConfig signingConfigs.contentapplication
-            productFlavors.paawanherbal.signingConfig signingConfigs.contentapplication
+            productFlavors.paawanherbal.signingConfig signingConfigs.paawanherbal
             productFlavors.ramamagnetomall.signingConfig signingConfigs.contentapplication
             productFlavors.rashmigroup.signingConfig signingConfigs.contentapplication
             productFlavors.shardatelecom.signingConfig signingConfigs.contentapplication
             productFlavors.shringarsadan.signingConfig signingConfigs.contentapplication
             productFlavors.smilebox.signingConfig signingConfigs.contentapplication
             productFlavors.vegoutrestaurant.signingConfig signingConfigs.contentapplication
-            productFlavors.yourapp.signingConfig signingConfigs.contentapplication
+            productFlavors.vipinstore.signingConfig signingConfigs.contentapplication
+            productFlavors.kushaltiffins.signingConfig signingConfigs.contentapplication
+            productFlavors.deeprefrigeration.signingConfig signingConfigs.contentapplication
+            productFlavors.robotech.signingConfig signingConfigs.contentapplication
+            productFlavors.forward.signingConfig signingConfigs.contentapplication
+            productFlavors.satyamtravel.signingConfig signingConfigs.contentapplication
+            productFlavors.motoraid.signingConfig signingConfigs.contentapplication
+            productFlavors.mytest.signingConfig signingConfigs.contentapplication
+            productFlavors.robotech.signingConfig signingConfigs.contentapplication
+
+
 
         }
     }

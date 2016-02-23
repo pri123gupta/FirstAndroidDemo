@@ -18,6 +18,7 @@ public  class User {
     public String loginType = "";
     public String phoneNumber = "";
     public String address = "";
+    public String quantity="";
     static User me;
 
     public User(){

@@ -35,12 +35,9 @@ import com.applop.demo.R;
 import com.applop.demo.adapters.StoryAdapter;
 import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.Story;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 Toolbar toolbar;
     Button btnShare,btnEnquiry;
@@ -65,19 +62,14 @@ Toolbar toolbar;
    static ArrayList<Story> stories=new ArrayList<Story>();
     DrawerMenuAdapter drawer1MenuAdapter;
     Category currentCategory;
-
     //recyclerview
-
     RecyclerView itemsRecyclerView;
     RecyclerView mDrawerList;
-
-
     private boolean isLoadingMoreData = false;
     private int visibleThreshold = 5; // The minimum amount of items to have below your current scroll position before loading more.
     int firstVisibleItem, visibleItemCount, totalItemCount;
     private int current_page = 1;
     LinearLayoutManager linearLayoutManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

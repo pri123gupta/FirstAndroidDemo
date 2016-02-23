@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Hello Home</string>
-    <string name="contact_us_p1">Hello Home,</string>
+    <string name="app_name">Hello</string>
+    <string name="contact_us_p1">Hello,</string>
     <string name="contact_us_p2">Jay Bhawani nagar,</string>
     <string name="contact_us_p3">Aurangabad.</string>
     <string name="contact_us_p4">Phone number : 9049208422</string>

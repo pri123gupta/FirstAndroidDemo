@@ -163,7 +163,7 @@ android {
         sjcinstitute
                 {
                     applicationId "com.applop.sjcinstitute"
-                    versionCode 2016021516
+                    versionCode 2016022316
                     versionName "1.2"
                 }
         krishnacollection{
@@ -349,7 +349,7 @@ android {
                 }
         motoraid{
             applicationId "com.applop.motoraid"
-            versionCode 2016021716
+            versionCode 2016022317
             versionName "1.2"
         }
         mytest{
@@ -360,6 +360,71 @@ android {
         robotech{
             applicationId "com.applop.robotech"
             versionCode 2016021718
+            versionName "1.2"
+        }
+        lovesolution{
+            applicationId "com.applop.lovesolution"
+            versionCode 2016022214
+            versionName "1.2"
+        }
+        ak{
+            applicationId "com.applop.ak"
+            versionCode 2016022215
+            versionName "1.2"
+        }
+        raka{
+            applicationId "com.applop.raka"
+            versionCode 2016022216
+            versionName "1.2"
+        }
+        laxmielectricls{
+            applicationId "com.applop.laxmielectricls"
+            versionCode 2016022217
+            versionName "1.2"
+        }
+        nishaktjanseva{
+            applicationId "com.applop.nishaktjanseva"
+            versionCode 2016022218
+            versionName "1.2"
+        }
+        delhicoaching{
+            applicationId "com.applop.delhicoaching"
+            versionCode 2016022119
+            versionName "1.2"
+        }
+        minu{
+            applicationId "com.applop.minu"
+            versionCode 2016022420
+            versionName "1.2"
+        }
+        rkaccounting{
+            applicationId "com.applop.rkaccounting"
+            versionCode 2016022421
+            versionName "1.2"
+        }
+        dumplingmomo{
+            applicationId "com.applop.dumplingmomo"
+            versionCode 2016022222
+            versionName "1.2"
+        }
+        ashokbar{
+            applicationId "com.applop.ashokbar"
+            versionCode 2016022223
+            versionName "1.2"
+        }
+        tejastutorials{
+            applicationId "com.applop.tejastutorials"
+            versionCode 2016022309
+            versionName "1.2"
+        }
+        bharatsurgicalco{
+            applicationId "com.applop.bharatsurgicalco"
+            versionCode 2016022310
+            versionName "1.2"
+        }
+        mitaannews{
+            applicationId "com.applop.mitaannews"
+            versionCode 2016022311
             versionName "1.2"
         }
     }
@@ -423,7 +488,19 @@ android {
             productFlavors.motoraid.signingConfig signingConfigs.contentapplication
             productFlavors.mytest.signingConfig signingConfigs.contentapplication
             productFlavors.robotech.signingConfig signingConfigs.contentapplication
-
+            productFlavors.lovesolution.signingConfig signingConfigs.contentapplication
+            productFlavors.ak.signingConfig signingConfigs.contentapplication
+            productFlavors.raka.signingConfig signingConfigs.contentapplication
+            productFlavors.laxmielectricls.signingConfig signingConfigs.contentapplication
+            productFlavors.nishaktjanseva.signingConfig signingConfigs.contentapplication
+            productFlavors.delhicoaching.signingConfig signingConfigs.contentapplication
+            productFlavors.minu.signingConfig signingConfigs.contentapplication
+            productFlavors.rkaccounting.signingConfig signingConfigs.contentapplication
+            productFlavors.dumplingmomo.signingConfig signingConfigs.contentapplication
+            productFlavors.ashokbar.signingConfig signingConfigs.contentapplication
+            productFlavors.tejastutorials.signingConfig signingConfigs.contentapplication
+            productFlavors.bharatsurgicalco.signingConfig signingConfigs.contentapplication
+            productFlavors.mitaannews.signingConfig signingConfigs.contentapplication
 
 
         }

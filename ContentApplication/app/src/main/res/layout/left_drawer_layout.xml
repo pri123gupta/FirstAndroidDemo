@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="280dp">
             <ImageView
+
                 android:layout_width="match_parent"
                 android:src="@drawable/splash_logo"
                 android:scaleType="centerCrop"

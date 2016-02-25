@@ -24,14 +24,14 @@ public static ApplicationClass ourApplication;
        // setContentView(R.layout.activity_my_first_running);
         super.onCreate();
         FacebookSdk.sdkInitialize(getApplicationContext());
-        Parse.initialize(this, AppConfiguration.getInstance(getApplicationContext()).parseClientID, AppConfiguration.getInstance(getApplicationContext()).parseApplicationKey);
+        /*Parse.initialize(this, AppConfiguration.getInstance(getApplicationContext()).parseClientID, AppConfiguration.getInstance(getApplicationContext()).parseApplicationKey);
         PushService.setDefaultPushCallback(this,SplashActivity.class);
         try{
             ParseInstallation.getCurrentInstallation().saveInBackground();
        //     Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_LONG).show();
         }catch (Exception e){
             Toast.makeText(getApplicationContext(),"no"+e,Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
     @Override
     public void onTerminate() {

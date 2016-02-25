@@ -1,5 +1,6 @@
 package com.applop.demo.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class BookMailActivity extends AppCompatActivity {
     EditText name;
     User user;
     static public Story item;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class BookMailActivity extends AppCompatActivity {
         }else{
             setTheme(R.style.AppThemeLight);
         }
+        context = this;
         setContentView(R.layout.activity_book_mail);
        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -142,7 +145,42 @@ public class BookMailActivity extends AppCompatActivity {
 
             @Override
             protected void VResponse(JSONObject response, String tag) {
+                final HashMap<String, String> paramsBooking = new HashMap<String, String>();
+                paramsBooking.put("userEmail", user.email);
+                paramsBooking.put("packageName", getPackageName());
+                paramsBooking.put("storyId", item.postId);
+                //paramsBooking.put("quantity",quantity.getText().toString());
+                paramsBooking.put("msg",message.getText().toString());
+                paramsBooking.put("address", address.getText().toString());
+                paramsBooking.put("phone", number.getText().toString());
 
+                new VolleyData(context){
+                    @Override
+                    protected void VPreExecute() {
+
+                    }
+
+                    @Override
+                    protected void VResponse(JSONObject response, String tag) {
+                        try {
+                            if (response.getBoolean("status")){
+                                Toast.makeText(BookMailActivity.this,"Booked Successfully",Toast.LENGTH_LONG).show();
+                                onBackPressed();
+                            }else {
+                                Toast.makeText(BookMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
+                            }
+                        }catch (Exception ex){
+                            Toast.makeText(BookMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                    @Override
+                    protected void VError(VolleyError error, String tag) {
+                        Toast.makeText(BookMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
+                    }
+                    //For testing:-
+                    //  }.getPOSTJsonObject("http://applop.biz/merchant/api/submitBook.php", "post_user", paramsBooking);
+                }.getPOSTJsonObject("http://applop.biz/merchant/api/submitBooking.php", "post_user", paramsBooking);
             }
 
             @Override
@@ -150,42 +188,6 @@ public class BookMailActivity extends AppCompatActivity {
 
             }
         }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable1.php", "post_user", params);
-        final HashMap<String, String> paramsBooking = new HashMap<String, String>();
-        paramsBooking.put("userEmail", user.email);
-        paramsBooking.put("packageName", getPackageName());
-        paramsBooking.put("storyId", item.postId);
-      //  paramsBooking.put("quantity",quantity.getText().toString());
-        paramsBooking.put("msg",message.getText().toString());
-        paramsBooking.put("address", address.getText().toString());
-        paramsBooking.put("phone", number.getText().toString());
-
-        new VolleyData(this){
-            @Override
-            protected void VPreExecute() {
-
-            }
-
-            @Override
-            protected void VResponse(JSONObject response, String tag) {
-                try {
-                    if (response.getBoolean("status")){
-                        Toast.makeText(BookMailActivity.this,"Booked Successfully",Toast.LENGTH_LONG).show();
-                        onBackPressed();
-                    }else {
-                        Toast.makeText(BookMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
-                    }
-                }catch (Exception ex){
-                    Toast.makeText(BookMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
-                }
-
-            }
-            @Override
-            protected void VError(VolleyError error, String tag) {
-                Toast.makeText(BookMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
-            }
-            //For testing:-
-      //  }.getPOSTJsonObject("http://applop.biz/merchant/api/submitBook.php", "post_user", paramsBooking);
-    }.getPOSTJsonObject("http://applop.biz/merchant/api/submitBooking.php", "post_user", paramsBooking);
         //startActivity(Intent.createChooser(Email, "Send Booking:"));
     }
     @Override

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.applop.demo.gcm.RegistrationIntentService;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.adapters.DrawerMenuAdapter;
 import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
@@ -35,8 +37,12 @@ import com.applop.demo.R;
 import com.applop.demo.adapters.StoryAdapter;
 import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.Story;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 Toolbar toolbar;
@@ -92,7 +98,6 @@ Toolbar toolbar;
         if (alertMessage!=null)
             if (!alertMessage.equalsIgnoreCase(""))
                 Helper.showAlertFeedNotification(this,alertMessage);
-
         return;
     }
     private void loadResources() {
@@ -436,4 +441,6 @@ Toolbar toolbar;
 
         }
     }
+
+
 }

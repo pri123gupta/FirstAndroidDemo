@@ -71,9 +71,9 @@ OnItemClickListener mItemClickListener;
     public void onBindViewHolder(ViewHolder holder, int position) {
     int viewType=getItemViewType(position);
         final Story item=data.get(position);
-      holder.introduction.setText(item.excerpt);
+      holder.introduction.setText(Html.fromHtml(item.excerpt).toString());
         holder.homeFeedPostTime.setText(Html.fromHtml(item.categoryNameAndTime));
-        holder.titleName.setText(item.title);
+        holder.titleName.setText(Html.fromHtml(item.title).toString());
         //
         holder.itemView.setTag(holder);
        // holder.titleName.setTag(data.get(position));
@@ -86,8 +86,8 @@ OnItemClickListener mItemClickListener;
         if (!AppConfiguration.getInstance(context).isShareEnable){
             holder.share_tv.setVisibility(View.GONE);
         }
-        holder.titleName.setText(data.get(position).title);
-        holder.homeFeedPostTime.setText(Html.fromHtml(item.categoryNameAndTime));
+        //holder.titleName.setText(data.get(position).title);
+        //holder.homeFeedPostTime.setText(Html.fromHtml(item.categoryNameAndTime));
         holder.share_image_view.setImageDrawable(shareIcon);
         holder.enquiry_image_view.setImageDrawable(enquiryIcon);
         holder.book_image_view.setImageDrawable(bookIcon);
@@ -124,9 +124,11 @@ OnItemClickListener mItemClickListener;
         });
     //   holder.introduction.setText(data.get(position).body);
         if(item.fullImage.equalsIgnoreCase("")) {
+            holder.coverImageView.setVisibility(View.GONE);
             //Toast.makeText(context,"no image",Toast.LENGTH_LONG).show();
         }else{
-            Picasso.with(context).load(item.fullImage).placeholder(R.drawable.newplaceholder).into(holder.coverImageView);
+            holder.coverImageView.setVisibility(View.VISIBLE);
+            Picasso.with(context).load(item.fullImage).into(holder.coverImageView);
         }
     }
 

@@ -125,7 +125,8 @@ public void setData() {
 //    toolbar.setTitle(story.title);
 
   //  toolbar.setTitle(story.);
-        Picasso.with(getActivity()).load(story.fullImage).placeholder(R.drawable.newplaceholder).into(coverImage);
+    if (!story.fullImage.equalsIgnoreCase(""))
+        Picasso.with(getActivity()).load(story.fullImage).into(coverImage);
     webView.loadDataWithBaseURL("file:///android_asset/", getHtmlStringData(story.body), "text/html", "UTF-8", null);
     time.setText(story.timeAgo);
     storyTitle.setText(story.title);

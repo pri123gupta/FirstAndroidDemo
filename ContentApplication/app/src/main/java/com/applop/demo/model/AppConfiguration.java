@@ -23,7 +23,7 @@ public class AppConfiguration {
     public boolean isEnquryEnable=true;
     public boolean isBookingEnable=true;
     public String appContactLine4="";
-    public String bgcolor="";
+    public String bgcolor="#000000";
     public String websiteKey="";
     public String iconTheme="";
     public String parseApplicationKey="";

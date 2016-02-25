@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +13,16 @@ import android.os.Bundle;
 
 import com.android.volley.VolleyError;
 import com.applop.demo.R;
+import com.applop.demo.gcm.RegistrationIntentService;
 import com.applop.demo.helperClasses.NetworkHelper.MyRequestQueue;
 import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
 import com.applop.demo.model.AppConfiguration;
 import com.applop.demo.model.NameConstant;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -31,6 +36,47 @@ public class SplashActivity extends AppCompatActivity {
         context = this;
         setContentView(R.layout.activity_splash);
         startLoadingApplication();
+        registerInBackground();
+    }
+
+    private void registerInBackground() {
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                String msg = "";
+                try {
+
+
+                    String regid = GoogleCloudMessaging.getInstance(context).register(getResources().getString(R.string.gcm_default_sender_id));
+                    msg = "Device registered, registration ID=" + regid;
+                    Intent intent = new Intent(context, RegistrationIntentService.class);
+                    startService(intent);
+                    // You should send the registration ID to your server over HTTP,
+                    // so it can use GCM/HTTP or CCS to send messages to your app.
+                    // The request to your server should be authenticated if your app
+                    // is using accounts.
+
+
+                    // For this demo: we don't need to send it because the device
+                    // will send upstream messages to a server that echo back the
+                    // message using the 'from' address in the message.
+
+                    // Persist the registration ID - no need to register again.
+                    //storeRegistrationId(context, regid);
+                } catch (IOException ex) {
+                    msg = "Error :" + ex.getMessage();
+                    // If there is an error, don't just keep trying to register.
+                    // Require the user to click a button again, or perform
+                    // exponential back-off.
+                }
+                return msg;
+            }
+
+
+        }.execute(null, null, null);
+
     }
 
     private void startLoadingApplication(){

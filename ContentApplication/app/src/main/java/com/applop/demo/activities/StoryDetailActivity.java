@@ -79,12 +79,13 @@ static ViewPager viewPager;
             @Override
             public void onPageScrolled(int p, float positionOffset, int positionOffsetPixels) {
             }
+
             @Override
             public void onPageSelected(int p) {
-                position=p;
+                position = p;
                 toGetNextPageNo();
                 // toolbar.setTitle("wwww");
-                Tab1Fragment c= (Tab1Fragment) adapter.getItem(p);
+                Tab1Fragment c = (Tab1Fragment) adapter.getItem(p);
             }
 
             @Override
@@ -97,19 +98,20 @@ static ViewPager viewPager;
 
     }
     public void getBundleData(){
-       //set toolbar title
-        try
-        {
-//            position=getIntent().getExtras().getInt("position", 0);
-          //  toolbar.setTitle(String.valueOf(Integer.parseInt((positionStr)+1+"/"+String.valueOf(stories.size()))));
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        //take data from other activity
        try{
-           for(int i=0;i<storiesArray.size();i++){
-               stories.add(new Story(this,new JSONObject(storiesArray.get(i).storyJSONString)));
+           if (getIntent().getExtras().getBoolean("notification",false)){
+               Story story = (Story) getIntent().getExtras().get("story");
+               stories.clear();
+               if (story != null) {
+                   stories.add(story);
+               } else {
+                   onBackPressed();
+                   return;
+               }
+           }else {
+               for (int i = 0; i < storiesArray.size(); i++) {
+                   stories.add(new Story(this, new JSONObject(storiesArray.get(i).storyJSONString)));
+               }
            }
 
        }catch (Exception e){

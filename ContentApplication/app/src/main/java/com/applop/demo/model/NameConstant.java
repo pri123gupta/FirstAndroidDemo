@@ -10,6 +10,7 @@ public class NameConstant {
     public static final String BASE_API_URL_V1 = "http://applop.biz/merchant/api/";
     public static final String HTTP_CLIENT_CACHE_DATABASE = "URL_CACHE";
     public static final String ICON_THEME_LIGHT = "light";
+    public static final String ALERT_NOTIFICATION_INTENT_EXTRA_NAME = "alert_message";
     public static final String ICON_THEME_DARK = "dark";
     public static final String LOGIN_TYPE_FACEBOOK = "facebook";
     public static final String LOGIN_TYPE_GMAIL = "gmail";

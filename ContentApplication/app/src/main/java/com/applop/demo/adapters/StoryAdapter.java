@@ -73,7 +73,7 @@ OnItemClickListener mItemClickListener;
         final Story item=data.get(position);
       holder.introduction.setText(Html.fromHtml(item.excerpt).toString());
         holder.homeFeedPostTime.setText(Html.fromHtml(item.categoryNameAndTime));
-        holder.titleName.setText(Html.fromHtml(item.title).toString());
+        holder.titleName.setText(item.title);
         //
         holder.itemView.setTag(holder);
        // holder.titleName.setTag(data.get(position));

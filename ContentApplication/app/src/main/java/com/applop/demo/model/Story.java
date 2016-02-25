@@ -3,6 +3,7 @@ package com.applop.demo.model;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.Html;
 import android.text.format.DateUtils;
 
 import org.json.JSONArray;
@@ -58,17 +59,12 @@ public class Story implements Parcelable {
                 this.postId = "";
             }
             try {
-                this.title = storyObj.getString("title");
-
-                byte ptext[] = title.getBytes(ISO_8859_1);
-                title = new String(ptext, UTF_8);
+                this.title = Html.fromHtml(storyObj.getString("title")).toString();
             }catch (Exception ex){
                 this.title = "";
             }
             try {
-                this.body = storyObj.getString("body");
-                byte ptext[] = body.getBytes(ISO_8859_1);
-                body = new String(ptext, UTF_8);
+                this.body = Html.fromHtml(storyObj.getString("body")).toString();
             }catch (Exception ex){
                 this.body = "";
             }
@@ -103,9 +99,7 @@ public class Story implements Parcelable {
 
             this.categoryNameAndTime = "";
             try {
-                this.excerpt = storyObj.getString("description");
-                byte ptext[] = excerpt.getBytes(ISO_8859_1);
-                excerpt = new String(ptext, UTF_8);
+                this.excerpt = Html.fromHtml(storyObj.getString("description")).toString();
             }catch (Exception ex){
                 this.excerpt = "";
             }

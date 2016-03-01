@@ -187,7 +187,7 @@ public class BookMailActivity extends AppCompatActivity {
             protected void VError(VolleyError error, String tag) {
 
             }
-        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable1.php", "post_user", params);
+        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable.php", "post_user", params);
         //startActivity(Intent.createChooser(Email, "Send Booking:"));
     }
     @Override

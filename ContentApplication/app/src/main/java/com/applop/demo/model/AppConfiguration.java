@@ -15,13 +15,16 @@ import org.json.JSONObject;
 public class AppConfiguration {
     public String appName="";
     public String email="";
+    public String currencyName="";
+    public String currencySymbol="";
     public String appDescription="";
     public String appContactLine1="";
     public String appContactLine2="";
     public String appContactLine3="";
     public boolean isShareEnable=true;
     public boolean isEnquryEnable=true;
-    public boolean isBookingEnable=true;
+    public boolean isBookingEnable=false;
+    public boolean isCartEnable=false;
     public String appContactLine4="";
     public String bgcolor="#000000";
     public String websiteKey="";
@@ -143,14 +146,21 @@ public class AppConfiguration {
             }
             catch (Exception ex)
             {
-                isBookingEnable = true;
+                isBookingEnable = false;
+            }
+            try{
+                isCartEnable = data.getBoolean("isCartEnable");
+            }
+            catch (Exception ex)
+            {
+                isCartEnable = false;
             }
             try{
                 isEnquryEnable = data.getBoolean("isEnquiryEnable");
             }
             catch (Exception ex)
             {
-                isEnquryEnable = true;
+                isEnquryEnable = false;
             }
             try{
                 iconTheme = data.getString("iconTheme");
@@ -158,6 +168,20 @@ public class AppConfiguration {
             catch (Exception ex)
             {
                 iconTheme = "light";
+            }
+            try{
+                currencyName = data.getString("currencyName");
+            }
+            catch (Exception ex)
+            {
+                currencyName = "Indian";
+            }
+            try{
+                currencySymbol = data.getString("currencySymbols");
+            }
+            catch (Exception ex)
+            {
+                currencySymbol = "INR";
             }
             try{
                 email = data.getString("email");

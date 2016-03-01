@@ -38,6 +38,8 @@ import com.applop.demo.adapters.StoryAdapter;
 import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.Story;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.joanzapata.android.iconify.IconDrawable;
+import com.joanzapata.android.iconify.Iconify;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -131,7 +133,7 @@ Toolbar toolbar;
         //for second drawer with id itemsRecyclerView
         itemsRecyclerView = (RecyclerView) findViewById(R.id.itemsRecyclerView);
         linearLayoutManager = new LinearLayoutManager(this);
-        itemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        itemsRecyclerView.setLayoutManager(linearLayoutManager);
         itemsRecyclerView.setAdapter(storyAdapter);
         itemsRecyclerView.setVisibility(View.VISIBLE);
         itemsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -155,11 +157,10 @@ Toolbar toolbar;
                     if ((totalItemCount - visibleItemCount)
                             <= (firstVisibleItem + 1) && totalItemCount > 0) {
                         // End has been reached
-
                         // Do something
-                        startLoadMore();
-                        current_page++;
-                        loadCategory(currentCategory, current_page, false, true);
+                        //startLoadMore();
+                        //current_page++;
+                        //loadCategory(currentCategory, current_page, false, true);
                         //loading = true;
                     }
                 }
@@ -210,8 +211,13 @@ Toolbar toolbar;
     }
     public void menuItemClicked(Category category){
             if (category.type.equalsIgnoreCase("enquiry")){
-                Intent intent = new Intent(this,OverAllEnquiryMailActivity.class);
-                startActivity(intent);
+                if (getPackageName().equalsIgnoreCase("com.applop")){
+                    Intent intent = new Intent(this, MakeAppActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(this, OverAllEnquiryMailActivity.class);
+                    startActivity(intent);
+                }
                 return;
             }
             loadCategory(category, 1, false, false);
@@ -279,7 +285,7 @@ Toolbar toolbar;
                                 menuCategories.add(new Category(jsonCategories.getJSONObject(i)));
                             }
                             //for getting story on home page.........only first line
-                            loadCategory(menuCategories.get(0),1,false,false);
+                            loadCategory(menuCategories.get(0), 1, false, false);
                             drawer1MenuAdapter.insertCategories(menuCategories);
                         }
                         catch (Exception e){
@@ -298,24 +304,27 @@ Toolbar toolbar;
         }.getJsonObject(url, true, "menu",this);;
     }
     //for loading page on click of button in navigation drawer list
-    public void loadCategory(Category category, final int page,boolean isRefreshing,boolean isLoadingMore){
+    public void loadCategory(Category category, final int page,boolean isRefreshing, final boolean isLoadingMore){
         if (category==null){
             itemsRecyclerView.setVisibility(View.INVISIBLE);
             return;
         }
         myTitle.setText(category.name);
         currentCategory = category;
+        current_page = page;
         final Context context=this;
-        String URL = getCategoryStoryURL(category,1);//1
+        String URL = getCategoryStoryURL(category,page);//1
         MyRequestQueue.Instance(this).cancelPendingRequests("stories");
         new VolleyData(this) {
 
             @Override
             protected void VPreExecute() {
-                progressBar.setVisibility(View.VISIBLE);
-                itemsRecyclerView.setVisibility(View.GONE);
-                storyAdapter.clear();
-                storyAdapter.notifyDataSetChanged();
+                if (!isLoadingMore) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    itemsRecyclerView.setVisibility(View.GONE);
+                    storyAdapter.clear();
+                    storyAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -379,6 +388,22 @@ Toolbar toolbar;
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
+
+        if (AppConfiguration.getInstance(this).iconTheme.equalsIgnoreCase(NameConstant.ICON_THEME_LIGHT)){
+            IconDrawable bookIcon = new IconDrawable(context, Iconify.IconValue.fa_shopping_cart )
+                    .colorRes(R.color.white)
+                    .actionBarSize();
+            menu.findItem(R.id.action_cart).setIcon(bookIcon);
+        }else {
+            IconDrawable bookIcon = new IconDrawable(context, Iconify.IconValue.fa_shopping_cart )
+                    .colorRes(R.color.black)
+                    .actionBarSize();
+            menu.findItem(R.id.action_cart).setIcon(bookIcon);
+        }
+        if (!AppConfiguration.getInstance(this).isCartEnable)
+        {
+            menu.findItem(R.id.action_cart).setVisible(false);
+        }
         return true;
     }
 
@@ -424,6 +449,10 @@ Toolbar toolbar;
                 sendintent.setType("text/plain");
                 startActivity(sendintent);
                 break;
+            case R.id.action_cart:
+                Intent intent = new Intent(this, CartActivity.class);
+                startActivityForResult(intent, NameConstant.REQUEST_CODE_ORDER_PLACED);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -436,6 +465,9 @@ Toolbar toolbar;
                 if (resultCode==RESULT_OK){
                     Helper.setDetailsInDrawerlayout(mDrawerRelativelayout,this);
                 }
+            }
+            if (requestCode==NameConstant.REQUEST_CODE_ORDER_PLACED){
+               storyAdapter.notifyDataSetChanged();
             }
         }catch (Exception ex){
 

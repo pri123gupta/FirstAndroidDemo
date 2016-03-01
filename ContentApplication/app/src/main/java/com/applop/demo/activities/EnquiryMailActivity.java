@@ -1,5 +1,6 @@
 package com.applop.demo.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class EnquiryMailActivity extends AppCompatActivity {
     EditText message;
     EditText name;
     static public Story item;
+    Context context;
     User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class EnquiryMailActivity extends AppCompatActivity {
         }else{
             setTheme(R.style.AppThemeLight);
         }
+        context=this;
         setContentView(R.layout.activity_enquiry_mail);
        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -135,7 +138,37 @@ public class EnquiryMailActivity extends AppCompatActivity {
 
             @Override
             protected void VResponse(JSONObject response, String tag) {
+                final HashMap<String, String> paramsBooking = new HashMap<String, String>();
+                paramsBooking.put("userEmail", user.email);
+                paramsBooking.put("packageName", getPackageName());
+                paramsBooking.put("storyId", item.postId);
+                paramsBooking.put("msg",message.getText().toString());
+                new VolleyData(context){
+                    @Override
+                    protected void VPreExecute() {
 
+                    }
+
+                    @Override
+                    protected void VResponse(JSONObject response, String tag) {
+                        try {
+                            if (response.getBoolean("status")){
+                                Toast.makeText(EnquiryMailActivity.this,"Enquired Successfully",Toast.LENGTH_LONG).show();
+                                onBackPressed();
+                            }else {
+                                Toast.makeText(EnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
+                            }
+                        }catch (Exception ex){
+                            Toast.makeText(EnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    protected void VError(VolleyError error, String tag) {
+                        Toast.makeText(EnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
+                    }
+                }.getPOSTJsonObject("http://applop.biz/merchant/api/submitEnquiry.php", "post_user", paramsBooking);
             }
 
             @Override
@@ -143,37 +176,7 @@ public class EnquiryMailActivity extends AppCompatActivity {
 
             }
         }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable.php", "post_user", params);
-        final HashMap<String, String> paramsBooking = new HashMap<String, String>();
-        paramsBooking.put("userEmail", user.email);
-        paramsBooking.put("packageName", getPackageName());
-        paramsBooking.put("storyId", item.postId);
-        paramsBooking.put("msg",message.getText().toString());
-        new VolleyData(this){
-            @Override
-            protected void VPreExecute() {
 
-            }
-
-            @Override
-            protected void VResponse(JSONObject response, String tag) {
-                try {
-                    if (response.getBoolean("status")){
-                        Toast.makeText(EnquiryMailActivity.this,"Enquired Successfully",Toast.LENGTH_LONG).show();
-                        onBackPressed();
-                    }else {
-                        Toast.makeText(EnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
-                    }
-                }catch (Exception ex){
-                    Toast.makeText(EnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
-                }
-
-            }
-
-            @Override
-            protected void VError(VolleyError error, String tag) {
-                Toast.makeText(EnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
-            }
-        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitEnquiry.php", "post_user", paramsBooking);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

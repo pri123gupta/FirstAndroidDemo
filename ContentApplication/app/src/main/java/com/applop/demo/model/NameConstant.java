@@ -15,4 +15,5 @@ public class NameConstant {
     public static final String LOGIN_TYPE_FACEBOOK = "facebook";
     public static final String LOGIN_TYPE_GMAIL = "gmail";
     public static final int REQUEST_CODE_BACK_FROM_SIGN_IN = 2;
+    public static final int REQUEST_CODE_ORDER_PLACED = 3;
 }

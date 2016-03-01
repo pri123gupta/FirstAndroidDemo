@@ -26,11 +26,13 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase database;
     public DatabaseHelper(Context context) {
 
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 3);
 
     }
     @Override
     public void onCreate(SQLiteDatabase database) {
+        query = "CREATE TABLE IF NOT EXISTS Bookmarked(postId TEXT,storyJSONString TEXT,date TEXT)";
+        database.execSQL(query);
         query = "CREATE TABLE IF NOT EXISTS user(loginType TEXT,name TEXT,email TEXT,bitmap BLOB,imageUrl TEXT,address TEXT,phoneNo TEXT)";
         database.execSQL(query);
     }
@@ -54,7 +56,7 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
         values.put("bitmap",getBytes(bitmap));
         values.put("imageUrl",imageUrl);
         values.put("address",address);
-        values.put("phoneNo",phoneNo);
+        values.put("phoneNo", phoneNo);
         database.insert("user", null, values);
         database.close();
     }
@@ -120,5 +122,41 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
         return bookmarkedStories;
     }
 
+
+    public void removeFromBookmarked(String postId) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String deleteQuery = "DELETE FROM  Bookmarked where postId='"+ postId +"'";
+        database.execSQL(deleteQuery);
+    }
+
+    public void removeFromBookmarked() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String deleteQuery = "DELETE FROM  Bookmarked";
+        database.execSQL(deleteQuery);
+    }
+
+    public Boolean checkIfBookmarked(String postId) {
+        String selectQuery = "SELECT  * FROM Bookmarked where postId='"+ postId +"'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                return true;
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return false;
+    }
+
+    public void addToBookmarked(Story story) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("postId",story.postId);
+        values.put("date",story.dateString);
+        values.put("storyJSONString",story.storyJSONString);
+        database.insert("Bookmarked", null, values);
+        database.close();
+    }
 
 }

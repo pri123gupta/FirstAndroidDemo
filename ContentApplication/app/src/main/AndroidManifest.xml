@@ -89,8 +89,11 @@
             android:name="com.applop.demo.gcm.RegistrationIntentService"
             android:exported="false" />
         <activity android:name=".activities.EnquiryMailActivity"></activity>
+        <activity android:name=".activities.MakeAppActivity"></activity>
         <activity android:name=".activities.OverAllEnquiryMailActivity"></activity>
         <activity android:name=".activities.ContactUsActivity"></activity>
+        <activity android:name=".activities.CartActivity"></activity>
+        <activity android:name=".activities.CheckOutActivity"></activity>
     </application>
 
 </manifest>

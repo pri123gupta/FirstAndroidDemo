@@ -26,5 +26,10 @@
         android:id="@+id/action_feedback"
         app:showAsAction="never"
         ></item>
+    <item
+        android:title="Cart"
+        android:id="@+id/action_cart"
+        app:showAsAction="always"
+        ></item>
 
 </menu>

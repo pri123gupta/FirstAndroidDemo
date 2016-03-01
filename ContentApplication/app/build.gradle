@@ -16,7 +16,6 @@ android {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/MANIFEST.MF'
     }
-
     signingConfigs {
         contentapplication{
             storeFile file("../keystore/applopkey.jks") //Path to the keystore file
@@ -70,8 +69,8 @@ android {
     productFlavors {
         applop{
             applicationId "com.applop"
-            versionCode 2016021015
-            versionName "6.0"
+            versionCode 2016022615
+            versionName "6.2"
         }
         demo{
             applicationId "com.applop.demo"
@@ -501,8 +500,6 @@ android {
             productFlavors.tejastutorials.signingConfig signingConfigs.contentapplication
             productFlavors.bharatsurgicalco.signingConfig signingConfigs.contentapplication
             productFlavors.mitaannews.signingConfig signingConfigs.contentapplication
-
-
         }
     }
     dependencies {

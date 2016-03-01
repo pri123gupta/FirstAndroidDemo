@@ -17,6 +17,9 @@ import java.util.Date;
 
 public class Story implements Parcelable {
     public String postId;
+    public String cartId;
+    public boolean statusCheckedOut;
+    public int quantity;
     String BASE_URL="http://healthxp.net/expert-tutor/";
     public String title;
     public String body;
@@ -27,6 +30,7 @@ public class Story implements Parcelable {
     public String dateString;
     public String categoryId;
     public String excerpt;
+    public String price;
     public String timeAgo;
     public String categoryNameAndTime;
     public String storyJSONString;
@@ -39,6 +43,7 @@ public class Story implements Parcelable {
         this.excerpt = "";
         categoryNameAndTime = "";
         storyJSONString = "";
+        price = "";
         timeAgo = "";
     }
     public Story(Context context, JSONObject storyObj){
@@ -51,12 +56,47 @@ public class Story implements Parcelable {
             this.dateString = "";
             this.postId = "";
             this.excerpt = "";
+            price = "";
             categoryNameAndTime = "";
             timeAgo = "";
             try {
                 this.postId = storyObj.getString("id");
             }catch (Exception ex){
-                this.postId = "";
+                try {
+                    this.postId = storyObj.getString("storyId");
+                }catch (Exception e){
+                    this.postId = "";
+                }
+            }
+            try {
+                this.price = storyObj.getString("price");
+            }catch (Exception ex){
+                this.price = "";
+            }
+            try {
+                this.cartId = storyObj.getString("cartId");
+            }catch (Exception ex){
+                this.cartId = "";
+            }
+            try {
+                this.cartId = storyObj.getString("cartId");
+            }catch (Exception ex){
+                this.cartId = "";
+            }
+            try {
+                String status = storyObj.getString("status");
+                if (status.equalsIgnoreCase("0")){
+                    this.statusCheckedOut = false;
+                }else {
+                    this.statusCheckedOut = true;
+                }
+            }catch (Exception ex){
+                this.statusCheckedOut = false;
+            }
+            try {
+                this.quantity = Integer.parseInt(storyObj.getString("quantity"));
+            }catch (Exception ex){
+                this.quantity = 0;
             }
             try {
                 this.title = Html.fromHtml(storyObj.getString("title")).toString();

@@ -36,32 +36,44 @@ android {
             storePassword "rahul123"
             keyPassword "rahul123"
         }
+        shringarsadan{
+            storeFile file("../keystore/shringarsadankey.jks") //Path to the keystore file
+            keyAlias "shringarsadancer"
+            storePassword "rahul123"
+            keyPassword "rahul123"
+        }
         balajifur{
-            storeFile file("../keystore/newapplopkey.jks") //Path to the keystore file
+            storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
         milky{
-            storeFile file("../keystore/newapplopkey.jks") //Path to the keystore file
+            storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
         mumpycakebakes{
-            storeFile file("../keystore/applopkey1.jks") //Path to the keystore file
+            storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
         paawanherbal{
-            storeFile file("../keystore/paawankey.jks") //Path to the keystore file
-            keyAlias "oiral-mobileapp"
+            storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
+            keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
         edumaster{
-            storeFile file("../keystore/applopkey.jks") //Path to the keystore file
+            storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
+            keyAlias "applopcer"
+            storePassword "rahul123"
+            keyPassword "rahul123"
+        }
+        bansalclasses{
+            storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
@@ -80,7 +92,7 @@ android {
         }
         oyt{
             applicationId "com.applop.oytfood"
-            versionCode 2016021111
+            versionCode 2016022311
             versionName "1.2"
         }
         uangteman{
@@ -157,13 +169,13 @@ android {
         uniquepersonalisedgifts
                 {
                     applicationId "com.applop.uniquepersonalisedgifts"
-                    versionCode 2016021715
+                    versionCode 2016022315
                     versionName "1.2"
                 }
         sjcinstitute
                 {
                     applicationId "com.applop.sjcinstitute"
-                    versionCode 2016022316
+                    versionCode 2016022801
                     versionName "1.2"
                 }
         krishnacollection{
@@ -178,7 +190,7 @@ android {
         }
         freshto{
             applicationId "com.applop.freshto"
-            versionCode 2016020816
+            versionCode 2016022706
             versionName "1.2"
         }
         agrasenjayantisakticity
@@ -212,7 +224,7 @@ android {
         bansal
                 {
                     applicationId"com.applop.bansal"
-                    versionCode 2016020907
+                    versionCode 2016022909
                     versionName "1.2"
                 }
         chasmaghar{
@@ -266,8 +278,8 @@ android {
             versionName "1.2"
         }
         mumpyscakeandbakes{
-            applicationId "com.applop.mumpyscakeandbakes"
-            versionCode 2016020919
+            applicationId "com.applop.mumpys"
+            versionCode 2016022919
             versionName "1.2"
         }
         nasscomwarehousekolkata{
@@ -298,11 +310,6 @@ android {
         shardatelecom{
             applicationId "com.applop.shardatelecom"
             versionCode 2016021501
-            versionName "1.2"
-        }
-        shringarsadan{
-            applicationId "com.applop.shringarsadan"
-            versionCode 2016021002
             versionName "1.2"
         }
         smilebox{
@@ -338,7 +345,7 @@ android {
         }
         forward{
             applicationId "com.applop.forward"
-            versionCode 2016021614
+            versionCode 2016022314
             versionName "1.2"
         }
         satyamtravel
@@ -349,7 +356,7 @@ android {
                 }
         motoraid{
             applicationId "com.applop.motoraid"
-            versionCode 2016022317
+            versionCode 2016022708
             versionName "1.2"
         }
         mytest{
@@ -419,12 +426,92 @@ android {
         }
         bharatsurgicalco{
             applicationId "com.applop.bharatsurgicalco"
-            versionCode 2016022310
+            versionCode 2016022320
             versionName "1.2"
         }
-        mitaannews{
-            applicationId "com.applop.mitaannews"
-            versionCode 2016022311
+        mitaankorba{
+            applicationId "com.applop.mitaankorba"
+            versionCode 2016022611
+            versionName "1.2"
+        }
+        onebowldiet{
+            applicationId "com.applop.onebowldiet"
+            versionCode 2016022313
+            versionName "1.2"
+        }
+        healthypariwar{
+            applicationId "com.applop.healthypariwar"
+            versionCode 2016022318
+            versionName "1.2"
+        }
+        youthgarments{
+            applicationId "com.applop.youthgarments"
+            versionCode 2016022319
+            versionName "1.2"
+        }
+        saimotors{
+            applicationId "com.applop.saimotors"
+            versionCode 2016022807
+            versionName "1.2"
+        }
+        chiraggeneralstore {
+            applicationId "com.applop.chiraggeneralstore"
+            versionCode 2016022404
+            versionName "1.2"
+        }
+        starterdemo{
+                applicationId "com.applop.starterdemo"
+            versionCode 2016022405
+            versionName "1.2"
+        }
+        easydemo{
+            applicationId "com.applop.easydemo"
+            versionCode 2016022406
+            versionName "1.2"
+        }
+        prodemo{
+            applicationId "com.applop.prodemo"
+            versionCode 2016022407
+            versionName "1.2"
+        }
+      advancedemo{
+            applicationId "com.applop.advancedemo"
+            versionCode 2016022408
+            versionName "1.2"
+        }
+        sugarcrown{
+            applicationId "com.applop.sugarcrown"
+            versionCode 2016022409
+            versionName "1.2"
+        }
+        digitalcomputer{
+            applicationId "com.applop.digitalcomputer"
+            versionCode 2016022412
+            versionName "1.2"
+        }
+        vidhrra{
+            applicationId "com.applop.vidhrra"
+            versionCode 2016022702
+            versionName "1.2"
+        }
+        ipmall{
+            applicationId "com.applop.ipmall"
+            versionCode 2016022703
+            versionName "1.2"
+        }
+        shringarsadan{
+            applicationId "com.applop.shringarsadan"
+            versionCode 2016022704
+            versionName "1.2"
+        }
+        apexcomputers{
+            applicationId "com.applop.apexcomputers"
+            versionCode 2016022705
+            versionName "1.2"
+        }
+        bodybuildingtipsandsupplements{
+            applicationId "com.applop.bodybuildingtipsandsupplements"
+            versionCode 2016022901
             versionName "1.2"
         }
     }
@@ -463,7 +550,7 @@ android {
             productFlavors.edumaster.signingConfig signingConfigs.edumaster
             productFlavors.milkykorba.signingConfig signingConfigs.milky
             productFlavors.applop.signingConfig signingConfigs.contentapplication
-            productFlavors.bansal.signingConfig signingConfigs.contentapplication
+            productFlavors.bansal.signingConfig signingConfigs.bansalclasses
             productFlavors.hanuman.signingConfig signingConfigs.contentapplication
             productFlavors.hotelgreenparkkorba.signingConfig signingConfigs.contentapplication
             productFlavors.korbaudyogsangh.signingConfig signingConfigs.contentapplication
@@ -476,7 +563,6 @@ android {
             productFlavors.ramamagnetomall.signingConfig signingConfigs.contentapplication
             productFlavors.rashmigroup.signingConfig signingConfigs.contentapplication
             productFlavors.shardatelecom.signingConfig signingConfigs.contentapplication
-            productFlavors.shringarsadan.signingConfig signingConfigs.contentapplication
             productFlavors.smilebox.signingConfig signingConfigs.contentapplication
             productFlavors.vegoutrestaurant.signingConfig signingConfigs.contentapplication
             productFlavors.vipinstore.signingConfig signingConfigs.contentapplication
@@ -500,7 +586,23 @@ android {
             productFlavors.ashokbar.signingConfig signingConfigs.contentapplication
             productFlavors.tejastutorials.signingConfig signingConfigs.contentapplication
             productFlavors.bharatsurgicalco.signingConfig signingConfigs.contentapplication
-            productFlavors.mitaannews.signingConfig signingConfigs.contentapplication
+            productFlavors.mitaankorba.signingConfig signingConfigs.contentapplication
+            productFlavors.onebowldiet.signingConfig signingConfigs.contentapplication
+            productFlavors.healthypariwar.signingConfig signingConfigs.contentapplication
+            productFlavors.youthgarments.signingConfig signingConfigs.contentapplication
+            productFlavors.saimotors.signingConfig signingConfigs.contentapplication
+            productFlavors.chiraggeneralstore.signingConfig signingConfigs.contentapplication
+            productFlavors.starterdemo.signingConfig signingConfigs.contentapplication
+            productFlavors.easydemo.signingConfig signingConfigs.contentapplication
+            productFlavors.prodemo.signingConfig signingConfigs.contentapplication
+            productFlavors.advancedemo.signingConfig signingConfigs.contentapplication
+            productFlavors.sugarcrown.signingConfig signingConfigs.contentapplication
+            productFlavors.digitalcomputer.signingConfig signingConfigs.contentapplication
+            productFlavors.vidhrra.signingConfig signingConfigs.contentapplication
+            productFlavors.ipmall.signingConfig signingConfigs.contentapplication
+            productFlavors.shringarsadan.signingConfig signingConfigs.shringarsadan
+            productFlavors.apexcomputers.signingConfig signingConfigs.shringarsadan
+            productFlavors.bodybuildingtipsandsupplements.signingConfig signingConfigs.shringarsadan
 
 
         }

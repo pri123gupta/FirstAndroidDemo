@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#0B8043</color>
     <color name="grey">#888888</color>
-    <color name="splash_background">#CC0002</color>
-    <color name="splash_text_color">#2E3192</color>
+    <color name="splash_background">#ffffff</color>
+    <color name="splash_text_color">#FE0000</color>
 </resources>

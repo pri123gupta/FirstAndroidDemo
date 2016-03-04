@@ -18,12 +18,12 @@ import java.util.Date;
 public class Story implements Parcelable {
     public String postId;
     public String cartId;
-    public boolean statusCheckedOut;
     public int quantity;
     String BASE_URL="http://healthxp.net/expert-tutor/";
     public String title;
     public String body;
     public String fullImage;
+    public String totalPrice;
     final Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
     final Charset UTF_8 = Charset.forName("UTF-8");
     //public String shareUrl;
@@ -74,9 +74,9 @@ public class Story implements Parcelable {
                 this.price = "";
             }
             try {
-                this.cartId = storyObj.getString("cartId");
+                this.totalPrice = storyObj.getString("totalRs");
             }catch (Exception ex){
-                this.cartId = "";
+                this.totalPrice = "0";
             }
             try {
                 this.cartId = storyObj.getString("cartId");
@@ -84,14 +84,9 @@ public class Story implements Parcelable {
                 this.cartId = "";
             }
             try {
-                String status = storyObj.getString("status");
-                if (status.equalsIgnoreCase("0")){
-                    this.statusCheckedOut = false;
-                }else {
-                    this.statusCheckedOut = true;
-                }
+                this.cartId = storyObj.getString("cartId");
             }catch (Exception ex){
-                this.statusCheckedOut = false;
+                this.cartId = "";
             }
             try {
                 this.quantity = Integer.parseInt(storyObj.getString("quantity"));

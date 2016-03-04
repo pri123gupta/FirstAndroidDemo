@@ -74,7 +74,7 @@ public class AppConfiguration {
             }
             else
             {
-
+                appConfig.refreshConfig();
             }
             return appConfig;
         }
@@ -89,6 +89,7 @@ public class AppConfiguration {
         String url= NameConstant.BASE_API_URL_V1+"getConfigByPackageName.php?packageName="+context.getPackageName();
         System.out.println(url);
         //MyRequestQueue.Instance(context).cancelPendingRequests("appconfig");
+        MyRequestQueue.Instance(context).getRequestQueue().getCache().remove(url);
         MyRequestQueue.Instance(context).cancelPendingRequests("config");
         new VolleyData(context){
             @Override
@@ -100,15 +101,13 @@ public class AppConfiguration {
             protected void VResponse(JSONObject response, String tag) {
                 try {
                     JSONObject json = response;
-                    Boolean statusValue = json.getBoolean("status");
-                    if (statusValue) {
-                        JSONObject data = json.getJSONObject("data");
+                    JSONObject data = json.getJSONObject("data");
                         //Toast.makeText(context, "app Config Updated", Toast.LENGTH_LONG).show();
                         setAppConfigurationData(data.toString());
                         SharedPreferences.Editor editor = context.getSharedPreferences(NameConstant.APP_CACHE_CONFIG_TABLE_NAME,context.MODE_PRIVATE).edit();
                         editor.putString(NameConstant.APP_CACHE_CONFIG_TABLE_NAME, data.toString());
                         editor.commit();
-                    }
+
                 } catch (Exception e) {
 
                 }

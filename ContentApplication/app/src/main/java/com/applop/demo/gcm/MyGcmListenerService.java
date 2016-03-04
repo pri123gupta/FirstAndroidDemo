@@ -27,6 +27,7 @@ package com.applop.demo.gcm;
         import android.net.Uri;
         import android.os.Bundle;
         import android.support.v4.app.NotificationCompat;
+        import android.text.Html;
         import android.util.Log;
 
         import com.applop.demo.R;
@@ -62,16 +63,10 @@ public class MyGcmListenerService extends GcmListenerService {
         try {
 
             _id = (int) (long) System.currentTimeMillis();
-            if (dataJSON.getString("notification_type").equalsIgnoreCase("new_comment")){
-                _title = ((String) dataJSON.getString("comment_title")).trim();
-            }else {
-                _title = ((String) dataJSON.getString("title")).trim();
-            }
+            _title = ((String) dataJSON.getString("title")).trim();
+            _title = Html.fromHtml(_title).toString();
             _message = ((String) dataJSON.getString("alert")).trim();
-            final Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
-            final Charset UTF_8 = Charset.forName("UTF-8");
-            byte ptext[] = _message.getBytes(ISO_8859_1);
-            _message = new String(ptext, UTF_8);
+            _message = Html.fromHtml(_message).toString();
             handleNofificationNavigation(this,dataJSON);
         } catch (Exception e) {
 

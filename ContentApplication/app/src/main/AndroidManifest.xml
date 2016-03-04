@@ -20,7 +20,6 @@
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="23" />
-
     <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
 
     <application
@@ -50,15 +49,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.AboutUsActivity" />
-
         <activity android:name=".activities.BookMailActivity" />
         <activity android:name=".activities.SignInActivity" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         //GCM
-
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
@@ -72,28 +69,30 @@
         </receiver>
 
         <service
-            android:name="com.applop.demo.gcm.MyGcmListenerService"
+            android:name=".gcm.MyGcmListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
         <service
-            android:name="com.applop.demo.gcm.MyInstanceIDListenerService"
+            android:name=".gcm.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
         <service
-            android:name="com.applop.demo.gcm.RegistrationIntentService"
+            android:name=".gcm.RegistrationIntentService"
             android:exported="false" />
-        <activity android:name=".activities.EnquiryMailActivity"></activity>
-        <activity android:name=".activities.MakeAppActivity"></activity>
-        <activity android:name=".activities.OverAllEnquiryMailActivity"></activity>
-        <activity android:name=".activities.ContactUsActivity"></activity>
-        <activity android:name=".activities.CartActivity"></activity>
-        <activity android:name=".activities.CheckOutActivity"></activity>
+
+        <activity android:name=".activities.EnquiryMailActivity" />
+        <activity android:name=".activities.MakeAppActivity" />
+        <activity android:name=".activities.OverAllEnquiryMailActivity" />
+        <activity android:name=".activities.ContactUsActivity" />
+        <activity android:name=".activities.CartActivity" />
+        <activity android:name=".activities.CheckOutActivity" />
+        <activity android:name=".activities.YourOrderActivity"></activity>
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class CartActivity extends AppCompatActivity {
     ArrayList<Story> stories = new ArrayList<Story>();
     User user;
     TextView totalPriceTV;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class CartActivity extends AppCompatActivity {
             setTheme(R.style.AppThemeLight);
         }
         setContentView(R.layout.activity_cart);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         user = User.getInstance(this);
         totalPriceTV = (TextView) findViewById(R.id.totalPrice);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
@@ -94,11 +97,12 @@ public class CartActivity extends AppCompatActivity {
 
                 storyAdapter.clear();
                 storyAdapter.notifyDataSetChanged();
-
+                progressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
             protected void VResponse(JSONObject response, String tag) {
+                progressBar.setVisibility(View.GONE);
                 JSONObject json = response;
                 try {
                     if (json != null) {
@@ -127,7 +131,7 @@ public class CartActivity extends AppCompatActivity {
 
             @Override
             protected void VError(VolleyError error, String tag) {
-
+                progressBar.setVisibility(View.GONE);
             }
 
         }.getPOSTJsonObject(URL, "post_user", params);

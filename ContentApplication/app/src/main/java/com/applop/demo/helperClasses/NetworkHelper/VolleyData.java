@@ -2,6 +2,7 @@ package com.applop.demo.helperClasses.NetworkHelper;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
@@ -11,16 +12,28 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.applop.demo.helperClasses.Helper;
+
+
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.CacheRequest;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.applop.demo.helperClasses.Helper;
+import com.applop.demo.helperClasses.NetworkHelper.CustomVolleyRequest;
+import com.applop.demo.helperClasses.NetworkHelper.MyRequestQueue;
+import com.applop.demo.helperClasses.NetworkHelper.NetworkHelper;
+
 
 /**
  * Created by ram on 5/5/15.
  */
-public abstract class VolleyData {
+public abstract class VolleyData  {
     private static final int MY_SOCKET_TIMEOUT_MS = 7*24 * 60 * 60 * 1000;
     private Context _activity;
 
@@ -35,19 +48,18 @@ public abstract class VolleyData {
     }
 
     public void getJsonObject(final String _url, final Boolean _cache_response, final String  _tag, final Context context) {
-        String response = Helper.getCachedDataForUrl(_url, context);
         if(!NetworkHelper.isNetworkAvailable(_activity)) {
-                try {
-                    Log.v("chache", "returned cache data");
-                    VResponse(new JSONObject(response), _tag);
-                    return;
-                } catch (JSONException e) {
-                    Log.v("chache", "error in cache data");
-                    VError(new VolleyError(), _tag);
-                    e.printStackTrace();
-                }
+            try {
+                String response = Helper.getCachedDataForUrl(_url, context);
+                Log.v("chache", "returned cache data");
+                VResponse(new JSONObject(response), _tag);
+                return;
+            } catch (JSONException e) {
+                Log.v("chache", "error in cache data");
+                VError(new VolleyError(), _tag);
+                e.printStackTrace();
+            }
         } else {
-            MyRequestQueue.Instance(context).getRequestQueue().getCache().remove(_url);
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                     _url, (String) null,
                     new Response.Listener<JSONObject>() {
@@ -68,15 +80,15 @@ public abstract class VolleyData {
                             // VolleyLog.d(_tag, "Error: " + error.getMessage());
                             String response = Helper.getCachedDataForUrl(_url, context);
 
-                                try {
-                                    Log.v("chache", "returned cache data");
-                                    VResponse(new JSONObject(response), _tag);
-                                    return;
-                                } catch (JSONException e) {
-                                    Log.v("chache", "error in cache data");
-                                    VError(error, _tag);
-                                    e.printStackTrace();
-                                }
+                            try {
+                                Log.v("chache", "returned cache data");
+                                VResponse(new JSONObject(response), _tag);
+                                return;
+                            } catch (JSONException e) {
+                                Log.v("chache", "error in cache data");
+                                VError(error, _tag);
+                                e.printStackTrace();
+                            }
 
                         }
                     }
@@ -106,17 +118,14 @@ public abstract class VolleyData {
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                     _url, (String) null,
                     new Response.Listener<JSONObject>() {
-
                         @Override
                         public void onResponse(JSONObject response) {
-
                             //MyLog.d(_tag, " volley response Response.Listener >>" + response);
                             VResponse(response, _tag);
 
                         }
                     },
                     new Response.ErrorListener() {
-
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             VError(error, _tag);
@@ -188,33 +197,33 @@ public abstract class VolleyData {
                     }
                 })
 
-            {
-                @Override
-                public Map<String, String> getParams() {
-                    return params;
-                }
+        {
+            @Override
+            public Map<String, String> getParams() {
+                return params;
+            }
 
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap<String, String> headers = new HashMap<String, String>();
-                    headers.put("Authorization", "key=ce2f2fa3-2edd-11e5-9bc9-002590f371ee");
-                    headers.put("Content-Type","application/x-www-form-urlencoded; charset=utf-8");
-                    return headers;
-                }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "key=ce2f2fa3-2edd-11e5-9bc9-002590f371ee");
+                headers.put("Content-Type","application/x-www-form-urlencoded; charset=utf-8");
+                return headers;
+            }
 
-                @Override
-                public String getBodyContentType() {
-                    return "application/x-www-form-urlencoded";
-                }
-            };
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded";
+            }
+        };
 
 
-            jsonObjReq.setShouldCache(false);
-            jsonObjReq.setTag(_tag);
-            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
-                    MY_SOCKET_TIMEOUT_MS,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        jsonObjReq.setShouldCache(false);
+        jsonObjReq.setTag(_tag);
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                MY_SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MyRequestQueue.Instance(_activity).addToRequestQueue(jsonObjReq, _url);
     }
 

@@ -415,6 +415,10 @@ Toolbar toolbar;
                 Intent aboutUs=new Intent(this,AboutUsActivity.class);
                 startActivity(aboutUs);
                 break;
+            case R.id.action_your_order:
+                Intent yourorder=new Intent(this,YourOrderActivity.class);
+                startActivity(yourorder);
+                break;
             case R.id.action_contactUs:
                 Intent contactUs=new Intent(this,ContactUsActivity.class);
                 startActivity(contactUs);

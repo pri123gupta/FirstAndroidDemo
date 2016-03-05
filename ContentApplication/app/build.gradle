@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.applop.demo"
         minSdkVersion 15
-       targetSdkVersion 23
+        targetSdkVersion 23
         versionCode 6
         versionName "1.6"
         multiDexEnabled true
@@ -17,61 +17,61 @@ android {
         exclude 'META-INF/MANIFEST.MF'
     }
     signingConfigs {
-        contentapplication{
+        contentapplication {
             storeFile file("../keystore/applopkey.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
-        demo{
+        demo {
             storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
-        govindanx{
+        govindanx {
             storeFile file("../keystore/govindanxkey.jks") //Path to the keystore file
             keyAlias "govindanxcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
-        shringarsadan{
+        shringarsadan {
             storeFile file("../keystore/shringarsadankey.jks") //Path to the keystore file
             keyAlias "shringarsadancer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
-        balajifur{
+        balajifur {
             storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
-        milky{
+        milky {
             storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
-        mumpycakebakes{
+        mumpycakebakes {
             storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
-        paawanherbal{
+        paawanherbal {
             storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
-        edumaster{
+        edumaster {
             storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
             keyPassword "rahul123"
         }
-        bansalclasses{
+        bansalclasses {
             storeFile file("../keystore/applopkeydemo.jks") //Path to the keystore file
             keyAlias "applopcer"
             storePassword "rahul123"
@@ -79,88 +79,88 @@ android {
         }
     }
     productFlavors {
-        applop{
+        applop {
             applicationId "com.applop"
             versionCode 2016022615
             versionName "6.2"
         }
-        demo{
+        demo {
             applicationId "com.applop.demo"
             versionCode 2016021415
             versionName "1.2"
         }
-        oyt{
+        oyt {
             applicationId "com.applop.oytfood"
             versionCode 2016022311
             versionName "1.2"
         }
-        uangteman{
+        uangteman {
             applicationId "com.applop.uangteman"
             versionCode 2016020510
             versionName "1.2"
         }
-        hello{
+        hello {
             applicationId "com.applop.hello"
             versionCode 2016020511
             versionName "1.2"
         }
-        premdigitalstudio{
+        premdigitalstudio {
             applicationId "com.applop.premdigitalstudio"
             versionCode 2016021112
             versionName "1.2"
         }
-        saicomputers{
+        saicomputers {
             applicationId "com.applop.saicomputers"
             versionCode 2016021115
             versionName "1.2"
         }
-        stylistawear{
+        stylistawear {
             applicationId "com.applop.stylistawear"
             versionCode 2016021117
             versionName "1.2"
         }
 
-        sejal{
+        sejal {
             applicationId "com.applop.sejal"
             versionCode 2016021116
             versionName "1.2"
         }
-        rrenterprises{
+        rrenterprises {
             applicationId "com.applop.rrenterprises"
             versionCode 2016021114
             versionName "1.2"
         }
-        venturemantra{
+        venturemantra {
             applicationId "com.applop.venturemantra"
             versionCode 2016020517
             versionName "1.2"
         }
-        omworld{
+        omworld {
             applicationId "com.applop.omworld"
             versionCode 2016020609
             versionName "1.2"
         }
-        govindanx{
+        govindanx {
             applicationId "com.applop.govindanx"
             versionCode 2016020521
             versionName "1.2"
         }
-        sangini{
+        sangini {
             applicationId "com.applop.Sangini"
             versionCode 2016021416
             versionName "1.2"
         }
-        musicnagari{
+        musicnagari {
             applicationId "com.applop.musicnagari"
             versionCode 2016020813
             versionName "1.3"
         }
-        jayabookworld{
+        jayabookworld {
             applicationId "com.applop.jayabookworld"
             versionCode 2016021113
             versionName "1.2"
         }
-        relaxednow{
+        relaxednow {
             applicationId "com.applop.relaxednow"
             versionCode 2016021409
             versionName "1.2"
@@ -177,17 +177,17 @@ android {
                     versionCode 2016022801
                     versionName "1.2"
                 }
-        krishnacollection{
+        krishnacollection {
             applicationId "com.applop.krishnacollection"
             versionCode 2016021109
             versionName "1.2"
         }
-        rizharexiene{
+        rizharexiene {
             applicationId "com.applop.rizharexiene"
             versionCode 2016021115
             versionName "1.2"
         }
-        freshto{
+        freshto {
             applicationId "com.applop.freshto"
             versionCode 2016022706
             versionName "1.2"
@@ -209,12 +209,12 @@ android {
             versionCode 2016020903
             versionName "1.2"
         }
-        milkykorba{
+        milkykorba {
             applicationId "com.applop.milkykorba"
             versionCode 2016020904
             versionName "1.2"
         }
-        anamikamobiles{
+        anamikamobiles {
             applicationId "com.applop.anamikamobiles"
             versionCode 2016020905
             versionName "1.2"
@@ -222,127 +222,127 @@ android {
 
         bansal
                 {
-                    applicationId"com.applop.bansal"
+                    applicationId "com.applop.bansal"
                     versionCode 2016022909
                     versionName "1.2"
                 }
-        chasmaghar{
+        chasmaghar {
             applicationId "com.applop.chasmaghar"
             versionCode 2016020908
             versionName "1.2"
         }
-        craftsmart{
+        craftsmart {
             applicationId "com.applop.craftsmart"
             versionCode 2016020910
             versionName "1.2"
         }
-        ghvacclerator{
+        ghvacclerator {
             applicationId "com.applop.ghvacclerator"
             versionCode 2016020911
             versionName "1.2"
         }
-        hanuman{
+        hanuman {
             applicationId "com.applop.hanuman"
             versionCode 2016020912
             versionName "1.2"
         }
-        hello{
+        hello {
             applicationId "com.applop.hello"
             versionCode 2016021417
             versionName "1.2"
         }
-        hotelgreenparkkorba{
+        hotelgreenparkkorba {
             applicationId "com.applop.hotelgreenparkkorba"
             versionCode 2016020914
             versionName "1.2"
         }
-        korbaudyogsangh{
+        korbaudyogsangh {
             applicationId "com.applop.korbaudyogsangh"
             versionCode 2016020915
             versionName "1.2"
         }
-        minusuits{
+        minusuits {
             applicationId "com.applop.minusuits"
             versionCode 2016020916
             versionName "1.2"
         }
-        mohanam{
+        mohanam {
             applicationId "com.applop.mohanam"
             versionCode 2016020917
             versionName "1.2"
         }
-        mukundhonda{
+        mukundhonda {
             applicationId "com.applop.mukundhonda"
             versionCode 2016020918
             versionName "1.2"
         }
-        mumpyscakeandbakes{
+        mumpyscakeandbakes {
             applicationId "com.applop.mumpys"
             versionCode 2016022919
             versionName "1.2"
         }
-        nasscomwarehousekolkata{
+        nasscomwarehousekolkata {
             applicationId "com.applop.nasscomwarehousekolkata"
             versionCode 2016020920
             versionName "1.2"
         }
-        npc2015{
+        npc2015 {
             applicationId "com.applop.npc2015"
             versionCode 2016020921
             versionName "1.2"
         }
-        paawanherbal{
+        paawanherbal {
             applicationId "com.applop.paawan"
             versionCode 2016021122
             versionName "1.2"
         }
-        ramamagnetomall{
+        ramamagnetomall {
             applicationId "com.applop.ramamagnetomall"
             versionCode 2016020923
             versionName "1.2"
         }
-        rashmigroup{
+        rashmigroup {
             applicationId "com.applop.rashmigroup"
             versionCode 2016021000
             versionName "1.2"
         }
-        shardatelecom{
+        shardatelecom {
             applicationId "com.applop.shardatelecom"
             versionCode 2016021501
             versionName "1.2"
         }
-        smilebox{
+        smilebox {
             applicationId "com.applop.smilebox"
             versionCode 2016021003
             versionName "1.2"
         }
-        vegoutrestaurant{
+        vegoutrestaurant {
             applicationId "com.applop.vegoutrestaurant"
             versionCode 2016021004
             versionName "1.2"
         }
 
-        vipinstore{
+        vipinstore {
             applicationId "com.applop.vipinstore"
             versionCode 2016021412
             versionName "1.2"
         }
-        kushaltiffins{
+        kushaltiffins {
             applicationId "com.applop.kushaltiffins"
             versionCode 2016021119
             versionName "1.2"
         }
-        deeprefrigeration{
+        deeprefrigeration {
             applicationId "com.applop.deeprefrigeration"
             versionCode 2016021713
             versionName "1.2"
         }
-        robotech{
+        robotech {
             applicationId "com.applop.robotech"
             versionCode 2016021613
             versionName "1.2"
         }
-        forward{
+        forward {
             applicationId "com.applop.forward"
             versionCode 2016022314
             versionName "1.2"
@@ -353,102 +353,102 @@ android {
                     versionCode 2016021615
                     versionName "1.2"
                 }
-        motoraid{
+        motoraid {
             applicationId "com.applop.motoraid"
             versionCode 2016022708
             versionName "1.2"
         }
-        mytest{
+        mytest {
             applicationId "com.applop.mytest"
             versionCode 2016021717
             versionName "1.2"
         }
-        robotech{
+        robotech {
             applicationId "com.applop.robotech"
             versionCode 2016021718
             versionName "1.2"
         }
-        lovesolution{
+        lovesolution {
             applicationId "com.applop.lovesolution"
             versionCode 2016022214
             versionName "1.2"
         }
-        ak{
+        ak {
             applicationId "com.applop.ak"
             versionCode 2016022215
             versionName "1.2"
         }
-        raka{
+        raka {
             applicationId "com.applop.raka"
             versionCode 2016022216
             versionName "1.2"
         }
-        laxmielectricls{
+        laxmielectricls {
             applicationId "com.applop.laxmielectricls"
             versionCode 2016022217
             versionName "1.2"
         }
-        nishaktjanseva{
+        nishaktjanseva {
             applicationId "com.applop.nishaktjanseva"
             versionCode 2016022218
             versionName "1.2"
         }
-        delhicoaching{
+        delhicoaching {
             applicationId "com.applop.delhicoaching"
             versionCode 2016022119
             versionName "1.2"
         }
-        minu{
+        minu {
             applicationId "com.applop.minu"
             versionCode 2016022420
             versionName "1.2"
         }
-        rkaccounting{
+        rkaccounting {
             applicationId "com.applop.rkaccounting"
             versionCode 2016022421
             versionName "1.2"
         }
-        dumplingmomo{
+        dumplingmomo {
             applicationId "com.applop.dumplingmomo"
             versionCode 2016022222
             versionName "1.2"
         }
-        ashokbar{
+        ashokbar {
             applicationId "com.applop.ashokbar"
             versionCode 2016022223
             versionName "1.2"
         }
-        tejastutorials{
+        tejastutorials {
             applicationId "com.applop.tejastutorials"
             versionCode 2016022309
             versionName "1.2"
         }
-        bharatsurgicalco{
+        bharatsurgicalco {
             applicationId "com.applop.bharatsurgicalco"
             versionCode 2016022320
             versionName "1.2"
         }
-        mitaankorba{
+        mitaankorba {
             applicationId "com.applop.mitaankorba"
             versionCode 2016022611
             versionName "1.2"
         }
-        onebowldiet{
+        onebowldiet {
             applicationId "com.applop.onebowldiet"
             versionCode 2016022313
             versionName "1.2"
         }
-        healthypariwar{
+        healthypariwar {
             applicationId "com.applop.healthypariwar"
             versionCode 2016022318
             versionName "1.2"
         }
-        youthgarments{
+        youthgarments {
             applicationId "com.applop.youthgarments"
             versionCode 2016022319
             versionName "1.2"
         }
-        saimotors{
+        saimotors {
             applicationId "com.applop.saimotors"
             versionCode 2016022807
             versionName "1.2"
@@ -458,57 +458,57 @@ android {
             versionCode 2016022404
             versionName "1.2"
         }
-        starterdemo{
-                applicationId "com.applop.starterdemo"
+        starterdemo {
+            applicationId "com.applop.starterdemo"
             versionCode 2016022405
             versionName "1.2"
         }
-        easydemo{
+        easydemo {
             applicationId "com.applop.easydemo"
             versionCode 2016022406
             versionName "1.2"
         }
-        prodemo{
+        prodemo {
             applicationId "com.applop.prodemo"
             versionCode 2016022407
             versionName "1.2"
         }
-      advancedemo{
+        advancedemo {
             applicationId "com.applop.advancedemo"
             versionCode 2016022408
             versionName "1.2"
         }
-        sugarcrown{
+        sugarcrown {
             applicationId "com.applop.sugarcrown"
             versionCode 2016022409
             versionName "1.2"
         }
-        digitalcomputer{
+        digitalcomputer {
             applicationId "com.applop.digitalcomputer"
             versionCode 2016022412
             versionName "1.2"
         }
-        vidhrra{
+        vidhrra {
             applicationId "com.applop.vidhrra"
             versionCode 2016022702
             versionName "1.2"
         }
-        ipmall{
+        ipmall {
             applicationId "com.applop.ipmall"
             versionCode 2016022703
             versionName "1.2"
         }
-        shringarsadan{
+        shringarsadan {
             applicationId "com.applop.shringarsadan"
             versionCode 2016022704
             versionName "1.2"
         }
-        apexcomputers{
+        apexcomputers {
             applicationId "com.applop.apexcomputers"
             versionCode 2016022705
             versionName "1.2"
         }
-        bodybuildingtipsandsupplements{
+        bodybuildingtipsandsupplements {
             applicationId "com.applop.bodybuildingtipsandsupplements"
             versionCode 2016022901
             versionName "1.2"
@@ -623,4 +623,7 @@ android {
         compile 'com.parse.bolts:bolts-android:1.1.4'
         compile 'com.android.support:multidex:1.0.1'
     }
+}
+dependencies {
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
 }

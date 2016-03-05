@@ -14,6 +14,7 @@ public class Category implements Parcelable{
     public	String categoryId;
     public String name;
     public String type;
+    public String link;
     public ArrayList<Category> subCategories = new ArrayList<Category>();
     protected Category(Parcel in) {
         categoryId = in.readString();
@@ -40,9 +41,10 @@ public class Category implements Parcelable{
             categoryId="";
             name="";
             type="";
-        this.categoryId=jsonObject.getString("id");
+            this.categoryId=jsonObject.getString("id");
             this.name=jsonObject.getString("name");
-            this.type="current affair";
+            this.type=jsonObject.getString("type");
+            this.link=jsonObject.getString("link");
         }
         catch (Exception e){
             e.printStackTrace();

@@ -210,13 +210,42 @@ Toolbar toolbar;
             startActivityForResult(intent, 1);
     }
     public void menuItemClicked(Category category){
-            if (category.type.equalsIgnoreCase("enquiry")){
-                if (getPackageName().equalsIgnoreCase("com.applop")){
+            if (category.type.equalsIgnoreCase("enquiry")) {
+                if (getPackageName().equalsIgnoreCase("com.applop")) {
                     Intent intent = new Intent(this, MakeAppActivity.class);
                     startActivity(intent);
-                }else {
+                } else {
                     Intent intent = new Intent(this, OverAllEnquiryMailActivity.class);
                     startActivity(intent);
+                }
+                return;
+            }else if (category.type.equalsIgnoreCase("App link")){
+                int startIndex = category.link.indexOf("details?id=")+11;
+                try {
+                    String packageName = category.link.substring(startIndex, category.link.length());
+                    //Toast.makeText(this,packageName,Toast.LENGTH_LONG).show();
+                    Uri uri = Uri.parse("market://details?id=" + packageName);
+                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                    goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                            Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET |
+                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                    try {
+                        startActivity(goToMarket);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)));
+                    }
+                    return;
+                }catch (Exception ex){
+
+                }
+            }else if (category.type.equalsIgnoreCase("Web link")){
+                try {
+
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(category.link)));
+
+                    return;
+                }catch (Exception ex){
+
                 }
                 return;
             }

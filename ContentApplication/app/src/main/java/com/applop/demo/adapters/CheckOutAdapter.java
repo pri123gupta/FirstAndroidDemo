@@ -78,6 +78,13 @@ public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHo
             holder.totalPrice.setText("Total Price : "+AppConfiguration.getInstance(context).currencySymbol+" "+item.totalPrice);
             LayoutInflater inflater = (LayoutInflater)   context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             holder.items_ll.removeAllViews();
+            if (item.status.equalsIgnoreCase("0")){
+                holder.status.setText("Booked");
+            }else if (item.status.equalsIgnoreCase("1")){
+                holder.status.setText("Delivered");
+            }else {
+                holder.status.setText("Confirmed");
+            }
             for (int i=0;i<item.items.size();i++) {
                 View view = inflater.inflate(R.layout.checkout_cart_item, null);
                 ((TextView)view.findViewById(R.id.title)).setText(item.items.get(i).title);
@@ -99,11 +106,12 @@ public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.ViewHo
 
 
    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-TextView orderId,totalPrice,totalItems;
+TextView orderId,totalPrice,totalItems,status;
        LinearLayout items_ll;
         public ViewHolder(View itemView,int viewType) {
             super(itemView);
             if (viewType==0) {
+                status = (TextView) itemView.findViewById(R.id.status);
                 items_ll = (LinearLayout) itemView.findViewById(R.id.orderedItems);
                 orderId = (TextView) itemView.findViewById(R.id.orderId);
                 totalPrice = (TextView) itemView.findViewById(R.id.totalPrice);

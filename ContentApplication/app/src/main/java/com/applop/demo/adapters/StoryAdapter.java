@@ -1,5 +1,6 @@
 package com.applop.demo.adapters;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +26,10 @@ import com.applop.demo.helperClasses.DatabaseHelper;
 import com.applop.demo.helperClasses.NetworkHelper.MyRequestQueue;
 import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
 import com.applop.demo.model.AppConfiguration;
+import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.Story;
 import com.applop.demo.model.User;
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
 import com.squareup.picasso.Picasso;
@@ -45,7 +48,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
     ArrayList<Story> data=new ArrayList<Story>();
-    Context context;
+    Activity context;
     View.OnClickListener titleListener;
 OnItemClickListener mItemClickListener;
     private boolean isLoadingMoreData =false ;
@@ -55,7 +58,7 @@ OnItemClickListener mItemClickListener;
     DatabaseHelper databaseHelper;
     IconDrawable enquiryIcon;
     boolean isCart = false;
-    public StoryAdapter(ArrayList<Story> data, final Context context){
+    public StoryAdapter(ArrayList<Story> data, final Activity context){
         this.data=data;
         this.context=context;
         databaseHelper = new DatabaseHelper(context);
@@ -226,6 +229,25 @@ OnItemClickListener mItemClickListener;
                 holder.coverImageView.setVisibility(View.VISIBLE);
                 Picasso.with(context).load(item.fullImage).into(holder.coverImageView);
             }
+            if (!item.youtubeURL.equalsIgnoreCase("")){
+                holder.playIcon.setVisibility(View.VISIBLE);
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String VIDEO = item.youtubeURL;
+                        int startIndex = VIDEO.indexOf("?v=") + 3;
+                        try {
+                            String videoID = VIDEO.substring(startIndex, startIndex + 11);
+                            Intent intent = YouTubeStandalonePlayer.createVideoIntent(context, NameConstant.DEVELOPER_KEY, videoID, 0, true, false);
+                            context.startActivity(intent);
+                        } catch (Exception ex) {
+                            Toast.makeText(context, "Unable to play video", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }else {
+                holder.playIcon.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -395,6 +417,7 @@ TextView titleName,homeFeedPostTime,introduction;
        LinearLayout cart_ll;
        RelativeLayout priceAndQuantity;
        TextView cart_text_view;
+       ImageView playIcon;
        TextView quantityTV;
        CircleImageView positiveImage;
        CircleImageView negativeImage;
@@ -406,6 +429,7 @@ TextView titleName,homeFeedPostTime,introduction;
             super(itemView);
             if (viewType==0) {
                 share_tv = (LinearLayout) itemView.findViewById(R.id.share_ll);
+                playIcon = (ImageView) itemView.findViewById(R.id.playIcon);
                 quantityTV = (TextView) itemView.findViewById(R.id.quantityTV);
                 positiveImage = (CircleImageView) itemView.findViewById(R.id.positiveImage);
                 negativeImage = (CircleImageView) itemView.findViewById(R.id.negativeImage);

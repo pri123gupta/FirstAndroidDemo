@@ -29,6 +29,7 @@ public class Story implements Parcelable {
     //public String shareUrl;
     public String dateString;
     public String categoryId;
+    public String youtubeURL;
     public String excerpt;
     public String price;
     public String timeAgo;
@@ -55,6 +56,7 @@ public class Story implements Parcelable {
             //this.shareUrl = "";
             this.dateString = "";
             this.postId = "";
+            this.youtubeURL = "";
             this.excerpt = "";
             price = "";
             categoryNameAndTime = "";
@@ -150,6 +152,14 @@ public class Story implements Parcelable {
             catch (Exception thumbEx)
             {
                 this.fullImage = "";
+            }
+            try {
+                this.youtubeURL = Html.fromHtml(storyObj.getString("videoUrl")).toString();
+                int startIndex = this.youtubeURL.indexOf("?v=") + 3;
+                String videoID = this.youtubeURL.substring(startIndex, startIndex + 11);
+                this.fullImage="http://img.youtube.com/vi/"+videoID+"/0.jpg";
+            }catch (Exception ex){
+                this.youtubeURL = "";
             }
         }catch (Exception ex){
             ex.printStackTrace();

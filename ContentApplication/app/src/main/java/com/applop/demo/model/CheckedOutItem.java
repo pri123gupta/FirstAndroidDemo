@@ -22,6 +22,7 @@ public class CheckedOutItem implements Parcelable {
     public String phoneNumber;
     public String address;
     public String timeAgo;
+    public String status;
     public ArrayList<Story> items = new ArrayList<>();
 
     public CheckedOutItem(Context context, JSONObject storyObj){
@@ -30,6 +31,11 @@ public class CheckedOutItem implements Parcelable {
                 orderId = storyObj.getString("orderId");
             }catch (Exception ex){
                 orderId = "";
+            }
+            try {
+                status = storyObj.getString("status");
+            }catch (Exception ex){
+                status = "0";
             }
             try {
                 totalPrice = storyObj.getString("TotalPrize");

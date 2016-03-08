@@ -25,6 +25,7 @@ public class AppConfiguration {
     public boolean isEnquryEnable=true;
     public boolean isBookingEnable=false;
     public boolean isCartEnable=false;
+    public boolean isImageEnableInGeneralEnquiry=false;
     public String appContactLine4="";
     public String bgcolor="#000000";
     public String websiteKey="";
@@ -153,6 +154,13 @@ public class AppConfiguration {
             catch (Exception ex)
             {
                 isCartEnable = false;
+            }
+            try{
+                isImageEnableInGeneralEnquiry = data.getBoolean("isImageEnableInGeneralEnquiry");
+            }
+            catch (Exception ex)
+            {
+                isImageEnableInGeneralEnquiry = false;
             }
             try{
                 isEnquryEnable = data.getBoolean("isEnquiryEnable");

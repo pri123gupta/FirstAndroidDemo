@@ -1,12 +1,22 @@
 package com.applop.demo.activities;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -20,6 +30,8 @@ import com.applop.demo.model.User;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class OverAllEnquiryMailActivity extends AppCompatActivity {
@@ -27,6 +39,10 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
     EditText address;
     EditText message;
     EditText name;
+    ImageView browseImage;
+    Bitmap bitmap;
+    String ext;
+    Context context;
     User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +52,8 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
         }else{
             setTheme(R.style.AppThemeLight);
         }
-        setContentView(R.layout.activity_enquiry_mail);
+        setContentView(R.layout.activity_overall_enquiry_mail);
+        context = this;
        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Helper.setToolbarColor(this);
@@ -49,11 +66,39 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
         }
         loadResources();
     }
+
+    public void chooseImage(View v) {
+        Intent intent = new Intent();
+        intent.setType("image");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), NameConstant.PICK_IMAGE_REQUEST);
+        /*// Create intent to Open Image applications like Gallery, Google Photos
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // Start the Intent
+        startActivityForResult(galleryIntent, NameConstant.PICK_IMAGE_REQUEST);*/
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, 0);
+        return encodedImage;
+    }
+
     private void loadResources(){
         number = (EditText)findViewById(R.id.edit_text_phone_no);
         address = (EditText)findViewById(R.id.edit_text_Address);
         message = (EditText) findViewById(R.id.edit_enquiry_message);
         name = (EditText) findViewById(R.id.edit_text_name);
+        browseImage = (ImageView) findViewById(R.id.browseImage);
+        LinearLayout imageLayout = (LinearLayout) findViewById(R.id.imageLayout);
+        if (AppConfiguration.getInstance(context).isImageEnableInGeneralEnquiry){
+            imageLayout.setVisibility(View.VISIBLE);
+        }else {
+            imageLayout.setVisibility(View.GONE);
+        }
         if (user.loginType.equalsIgnoreCase("")){
             Intent intent = new Intent(this, SignInActivity.class);
             startActivityForResult(intent, NameConstant.REQUEST_CODE_BACK_FROM_SIGN_IN);
@@ -123,56 +168,64 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
         params.put("packageName", getPackageName());
         params.put("photoLink", user.imageUrl);
         User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString());
+        final ProgressDialog progressDialog = new ProgressDialog(context);
         new VolleyData(this){
             @Override
             protected void VPreExecute() {
-
+                progressDialog.setTitle("Sending");
+                progressDialog.show();
             }
 
             @Override
             protected void VResponse(JSONObject response, String tag) {
+                final HashMap<String, String> paramsBooking = new HashMap<String, String>();
+                paramsBooking.put("userEmail", user.email);
+                paramsBooking.put("packageName", getPackageName());
+                if (bitmap!=null) {
+                    paramsBooking.put("image", getStringImage(bitmap));
+                    paramsBooking.put("ext", ext);
+                }
+                paramsBooking.put("msg",message.getText().toString());
+                new VolleyData(context){
+                    @Override
+                    protected void VPreExecute() {
 
-            }
+                    }
 
-            @Override
-            protected void VError(VolleyError error, String tag) {
-
-            }
-        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable.php", "post_user", params);
-        final HashMap<String, String> paramsBooking = new HashMap<String, String>();
-        paramsBooking.put("userEmail", user.email);
-        paramsBooking.put("packageName", getPackageName());
-        paramsBooking.put("msg",message.getText().toString());
-        new VolleyData(this){
-            @Override
-            protected void VPreExecute() {
-
-            }
-
-            @Override
-            protected void VResponse(JSONObject response, String tag) {
-                try {
-                    if (response.getBoolean("status")){
-                        if (getPackageName().equalsIgnoreCase("com.applop")){
-                            Toast.makeText(OverAllEnquiryMailActivity.this, "Successfully Created Will contact you soon", Toast.LENGTH_LONG).show();
-                        }else {
-                            Toast.makeText(OverAllEnquiryMailActivity.this, "Enquired Successfully", Toast.LENGTH_LONG).show();
+                    @Override
+                    protected void VResponse(JSONObject response, String tag) {
+                        progressDialog.hide();
+                        try {
+                            if (response.getBoolean("status")){
+                                if (getPackageName().equalsIgnoreCase("com.applop")){
+                                    Toast.makeText(OverAllEnquiryMailActivity.this, "Successfully Created Will contact you soon", Toast.LENGTH_LONG).show();
+                                }else {
+                                    Toast.makeText(OverAllEnquiryMailActivity.this, "Enquired Successfully", Toast.LENGTH_LONG).show();
+                                }
+                                onBackPressed();
+                            }else {
+                                Toast.makeText(OverAllEnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
+                            }
+                        }catch (Exception ex){
+                            Toast.makeText(OverAllEnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
                         }
-                        onBackPressed();
-                    }else {
+
+                    }
+
+                    @Override
+                    protected void VError(VolleyError error, String tag) {
+                        progressDialog.hide();
                         Toast.makeText(OverAllEnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
                     }
-                }catch (Exception ex){
-                    Toast.makeText(OverAllEnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
-                }
-
+                }.getPOSTJsonObject("http://applop.biz/merchant/api/submitGeneralEnquiry.php", "GeneralEnquiry", paramsBooking);
             }
 
             @Override
             protected void VError(VolleyError error, String tag) {
-                Toast.makeText(OverAllEnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
+                progressDialog.hide();
             }
-        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitGeneralEnquiry.php", "post_user", paramsBooking);
+        }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable.php", "post_user", params);
+
     }
 
     @Override
@@ -187,6 +240,25 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
                         address.setText(user.address);
                     }
                     number.setText(user.phoneNumber);
+                }
+            }else {
+                if (requestCode == NameConstant.PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = { MediaStore.Images.Media.DATA};
+                    Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    cursor.moveToFirst();
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String picturePath = cursor.getString(columnIndex);
+                    cursor.close();
+                    String fileNameSegments[] = picturePath.split("/");
+                    String fileName = fileNameSegments[fileNameSegments.length - 1];
+                    ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+                    //Toast.makeText(context,ext,Toast.LENGTH_LONG).show();
+                    //bitmap = BitmapFactory.decodeFile(picturePath);
+                    //Getting the Bitmap from Gallery
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+
+                    browseImage.setImageBitmap(bitmap);
                 }
             }
         }catch (Exception ex){

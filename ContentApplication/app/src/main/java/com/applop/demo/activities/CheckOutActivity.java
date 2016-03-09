@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.applop.demo.R;
+import com.applop.demo.helperClasses.AnalyticsHelper;
 import com.applop.demo.helperClasses.DatabaseHelper;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.helperClasses.NetworkHelper.MyRequestQueue;
@@ -96,6 +97,14 @@ public class CheckOutActivity extends AppCompatActivity {
     }
 
     public void placeOrderClick(View v){
+        try {
+            String categoryName = "Cart";
+            String label = "Checkout";
+            String action = "Order Placed";
+            AnalyticsHelper.trackEvent(categoryName, action, label, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (name.getText().toString().equalsIgnoreCase("")){
             Toast.makeText(this,"Please enter your name",Toast.LENGTH_LONG).show();
             return;
@@ -175,6 +184,14 @@ public class CheckOutActivity extends AppCompatActivity {
                         Toast.makeText(context,"Order Placed Successfully",Toast.LENGTH_LONG).show();
                         (new DatabaseHelper(context)).removeFromBookmarked();
                         setResult(RESULT_OK);
+                        try {
+                            String categoryName = "Cart";
+                            String label = "Checkout";
+                            String action = "Order Placed";
+                            AnalyticsHelper.trackEvent(categoryName, action, label, CheckOutActivity.this);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         finish();
                     }else {
                         Toast.makeText(context,"Error : Please try again",Toast.LENGTH_LONG).show();

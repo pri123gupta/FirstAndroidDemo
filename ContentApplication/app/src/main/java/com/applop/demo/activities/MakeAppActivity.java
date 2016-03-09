@@ -11,6 +11,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.applop.demo.R;
+import com.applop.demo.helperClasses.AnalyticsHelper;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.model.AppConfiguration;
 import com.applop.demo.model.NameConstant;
@@ -43,6 +44,14 @@ public class MakeAppActivity extends AppCompatActivity {
             }
         });
         webView.loadUrl("http://applop.com/MakeAppForApp/");
+        try {
+            String categoryName = "Application";
+            String label = "Make App";
+            String action = "Opened";
+            AnalyticsHelper.trackEvent(categoryName, action, label, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

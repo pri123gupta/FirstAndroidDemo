@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.applop.demo.R;
 import com.applop.demo.adapters.CheckOutAdapter;
 import com.applop.demo.adapters.StoryAdapter;
+import com.applop.demo.helperClasses.AnalyticsHelper;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.helperClasses.NetworkHelper.MyRequestQueue;
 import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
@@ -66,6 +67,14 @@ public class YourOrderActivity extends AppCompatActivity {
             finish();
         }else{
             loadCheckOutList();
+        }
+        try {
+            String categoryName = "Application";
+            String label = "Your Orders";
+            String action = "Opened";
+            AnalyticsHelper.trackEvent(categoryName, action, label, this);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

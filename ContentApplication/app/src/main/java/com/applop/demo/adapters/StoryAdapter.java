@@ -21,7 +21,9 @@ import com.applop.demo.R;
 import com.applop.demo.activities.BookMailActivity;
 import com.applop.demo.activities.CartActivity;
 import com.applop.demo.activities.EnquiryMailActivity;
+import com.applop.demo.activities.MainActivity;
 import com.applop.demo.activities.SignInActivity;
+import com.applop.demo.helperClasses.AnalyticsHelper;
 import com.applop.demo.helperClasses.DatabaseHelper;
 import com.applop.demo.helperClasses.NetworkHelper.MyRequestQueue;
 import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
@@ -238,6 +240,14 @@ OnItemClickListener mItemClickListener;
                         int startIndex = VIDEO.indexOf("?v=") + 3;
                         try {
                             String videoID = VIDEO.substring(startIndex, startIndex + 11);
+                            try {
+                                String categoryName = "Product";
+                                String action = "/Product ("+item.postId+")"+": " + item.title;
+                                String label = "Video Played";
+                                AnalyticsHelper.trackEvent(categoryName, action, label, context);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             Intent intent = YouTubeStandalonePlayer.createVideoIntent(context, NameConstant.DEVELOPER_KEY, videoID, 0, true, false);
                             context.startActivity(intent);
                         } catch (Exception ex) {

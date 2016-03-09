@@ -21,7 +21,10 @@ public class AppConfiguration {
     public String appContactLine1="";
     public String appContactLine2="";
     public String appContactLine3="";
+    public String analyticsId="";
+    public String adMobId="";
     public boolean isShareEnable=true;
+    public boolean isAdEnable=true;
     public boolean isEnquryEnable=true;
     public boolean isBookingEnable=false;
     public boolean isCartEnable=false;
@@ -170,6 +173,13 @@ public class AppConfiguration {
                 isEnquryEnable = false;
             }
             try{
+                isAdEnable = data.getBoolean("isAdEnable");
+            }
+            catch (Exception ex)
+            {
+                isAdEnable = false;
+            }
+            try{
                 iconTheme = data.getString("iconTheme");
             }
             catch (Exception ex)
@@ -177,11 +187,25 @@ public class AppConfiguration {
                 iconTheme = "light";
             }
             try{
+                adMobId = data.getString("adMobId");
+            }
+            catch (Exception ex)
+            {
+                adMobId = "";
+            }
+            try{
                 currencyName = data.getString("currencyName");
             }
             catch (Exception ex)
             {
                 currencyName = "Indian";
+            }
+            try{
+                analyticsId = data.getString("analyticsId");
+            }
+            catch (Exception ex)
+            {
+                analyticsId = "";
             }
             try{
                 currencySymbol = data.getString("currencySymbols");

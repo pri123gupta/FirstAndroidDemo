@@ -34,6 +34,7 @@ package com.applop.demo.gcm;
         import com.applop.demo.activities.MainActivity;
         import com.applop.demo.activities.SplashActivity;
         import com.applop.demo.activities.StoryDetailActivity;
+        import com.applop.demo.helperClasses.AnalyticsHelper;
         import com.applop.demo.helperClasses.Helper;
         import com.applop.demo.model.NameConstant;
         import com.applop.demo.model.Story;
@@ -146,7 +147,6 @@ public class MyGcmListenerService extends GcmListenerService {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent contentIntent = PendingIntent.getActivity(context, _id,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
         push(context, contentIntent);
     }
 

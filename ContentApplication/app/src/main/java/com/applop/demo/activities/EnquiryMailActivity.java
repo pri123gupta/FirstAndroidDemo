@@ -1,5 +1,6 @@
 package com.applop.demo.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.applop.demo.R;
+import com.applop.demo.helperClasses.AnalyticsHelper;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
 import com.applop.demo.model.AppConfiguration;
@@ -88,6 +90,14 @@ public class EnquiryMailActivity extends AppCompatActivity {
     }
 
     public void sendMail(View v){
+        try {
+            String categoryName = "Product";
+            String action = "/Product ("+item.postId+")"+": " + item.title;
+            String label = "Enquired";
+            AnalyticsHelper.trackEvent(categoryName, action, label, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (name.getText().toString().equalsIgnoreCase("")){
             Toast.makeText(this,"Please enter your name",Toast.LENGTH_LONG).show();
             return;
@@ -130,10 +140,12 @@ public class EnquiryMailActivity extends AppCompatActivity {
         params.put("packageName", getPackageName());
         params.put("photoLink", user.imageUrl);
         User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString());
+        final ProgressDialog progressDialog = new ProgressDialog(context);
         new VolleyData(this){
             @Override
             protected void VPreExecute() {
-
+                progressDialog.setTitle("Sending");
+                progressDialog.show();
             }
 
             @Override
@@ -151,6 +163,7 @@ public class EnquiryMailActivity extends AppCompatActivity {
 
                     @Override
                     protected void VResponse(JSONObject response, String tag) {
+                        progressDialog.hide();
                         try {
                             if (response.getBoolean("status")){
                                 Toast.makeText(EnquiryMailActivity.this,"Enquired Successfully",Toast.LENGTH_LONG).show();
@@ -166,6 +179,7 @@ public class EnquiryMailActivity extends AppCompatActivity {
 
                     @Override
                     protected void VError(VolleyError error, String tag) {
+                        progressDialog.hide();
                         Toast.makeText(EnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
                     }
                 }.getPOSTJsonObject("http://applop.biz/merchant/api/submitEnquiry.php", "post_user", paramsBooking);
@@ -173,6 +187,7 @@ public class EnquiryMailActivity extends AppCompatActivity {
 
             @Override
             protected void VError(VolleyError error, String tag) {
+                progressDialog.hide();
 
             }
         }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable.php", "post_user", params);

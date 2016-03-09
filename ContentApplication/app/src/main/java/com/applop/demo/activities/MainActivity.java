@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.applop.demo.gcm.RegistrationIntentService;
+import com.applop.demo.helperClasses.AnalyticsHelper;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.adapters.DrawerMenuAdapter;
 import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
@@ -37,6 +39,7 @@ import com.applop.demo.R;
 import com.applop.demo.adapters.StoryAdapter;
 import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.Story;
+import com.applop.demo.myads.AdClass;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
@@ -95,6 +98,21 @@ Toolbar toolbar;
         storyAdapter=new StoryAdapter(stories,this);
         loadResources();
         setSideDrawer();
+        try {
+            String categoryName = "Application";
+            String label = "Opened";
+            String action = "Opened";
+            AnalyticsHelper.trackEvent(categoryName, action, label, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            String pageviews = "Home Page";
+            AnalyticsHelper.trackPageView(pageviews, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        setads();
         // show alert if exist
         String alertMessage = getIntent().getStringExtra("alert_message");
         if (alertMessage!=null)
@@ -330,13 +348,33 @@ Toolbar toolbar;
                 progressBar.setVisibility(View.GONE);
                 itemsRecyclerView.setVisibility(View.VISIBLE);
             }
-        }.getJsonObject(url, true, "menu",this);;
+        }.getJsonObject(url, true, "menu", this);;
+    }
+
+    private void setads() {
+        LinearLayout layout = (LinearLayout)(findViewById(R.id.adrelativeLayout)).findViewById(R.id.linearLayout);
+        layout.removeAllViews();
+        new AdClass(layout,this);
     }
     //for loading page on click of button in navigation drawer list
     public void loadCategory(Category category, final int page,boolean isRefreshing, final boolean isLoadingMore){
         if (category==null){
             itemsRecyclerView.setVisibility(View.INVISIBLE);
             return;
+        }
+        try {
+            String pageviews = "Category Page with Category("+category.categoryId+") : "+category.name;
+            AnalyticsHelper.trackPageView(pageviews, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            String categoryName = "Category";
+            String label = "Opened";
+            String action = "Category("+category.categoryId+") : "+category.name;
+            AnalyticsHelper.trackEvent(categoryName, action, label, this);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         myTitle.setText(category.name);
         currentCategory = category;

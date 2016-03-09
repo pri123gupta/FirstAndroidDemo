@@ -1,5 +1,6 @@
 package com.applop.demo.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
@@ -13,15 +14,19 @@ import android.util.LruCache;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.applop.demo.fragments.Tab1Fragment;
 import com.applop.demo.R;
+import com.applop.demo.helperClasses.AnalyticsHelper;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.model.AppConfiguration;
 import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.Story;
+import com.applop.demo.myads.AdClass;
+import com.applop.demo.myads.MyInterstitialAd;
 
 import org.json.JSONObject;
 
@@ -40,7 +45,11 @@ static ViewPager viewPager;
     public ArrayList<Story> stories=new ArrayList<Story>();
     public static ArrayList <Story > storiesArray=new ArrayList<Story>();
     ViewPagerAdapter adapter;
+    Context context;
     private static final int NUM_PAGES = 3;
+    MyInterstitialAd interstitialAd;
+    int pageSwipeCount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +59,20 @@ static ViewPager viewPager;
             setTheme(R.style.AppThemeLight);
         }
         setContentView(R.layout.activity_view_pager1);
+        context = this;
         loadResources();
         getBundleData();
         setViewPager();
         toGetNextPageNo();
-
+        setads();
     }
+
+    private void setads() {
+        LinearLayout layout = (LinearLayout)(findViewById(R.id.adrelativeLayout)).findViewById(R.id.linearLayout);
+        layout.removeAllViews();
+        new AdClass(layout,this);
+    }
+
     public void loadResources(){
         progressBar= (ProgressBar) findViewById(R.id.progress_bar);
         currentPageNo= (TextView) findViewById(R.id.current_page_no);
@@ -69,12 +86,28 @@ static ViewPager viewPager;
         Helper.setToolbarColor(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        try {
+            String categoryName = "Application";
+            String label = "Detailed Page";
+            String action = "Opened";
+            AnalyticsHelper.trackEvent(categoryName, action, label, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void setViewPager(){
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(position);
+        try {
+            String categoryName = "Product";
+            String action = "/Product ("+stories.get(position).postId+")"+": " + stories.get(position).title;
+            String label = "Viewed";
+            AnalyticsHelper.trackEvent(categoryName, action, label, StoryDetailActivity.this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int p, float positionOffset, int positionOffsetPixels) {
@@ -82,10 +115,22 @@ static ViewPager viewPager;
 
             @Override
             public void onPageSelected(int p) {
+                try {
+                    String categoryName = "Product";
+                    String label = "/Product ("+stories.get(p).postId+")"+": " + stories.get(p).title;
+                    String action = "Viewed";
+                    AnalyticsHelper.trackEvent(categoryName, action, label, StoryDetailActivity.this);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 position = p;
                 toGetNextPageNo();
                 // toolbar.setTitle("wwww");
                 Tab1Fragment c = (Tab1Fragment) adapter.getItem(p);
+                pageSwipeCount++;
+                if (pageSwipeCount == 5) {
+                    interstitialAd = new MyInterstitialAd(context, false);
+                }
             }
 
             @Override
@@ -100,6 +145,7 @@ static ViewPager viewPager;
     public void getBundleData(){
        try{
            if (getIntent().getExtras().getBoolean("notification",false)){
+
                Story story = (Story) getIntent().getExtras().get("story");
                stories.clear();
                if (story != null) {
@@ -107,6 +153,14 @@ static ViewPager viewPager;
                } else {
                    onBackPressed();
                    return;
+               }
+               try {
+                   String categoryName = "Product";
+                   String action = "/Product ("+stories.get(0).postId+")"+": " + stories.get(0).title;
+                   String label = "Notification Opened";
+                   AnalyticsHelper.trackEvent(categoryName, action, label, StoryDetailActivity.this);
+               } catch (Exception e) {
+                   e.printStackTrace();
                }
            }else {
                for (int i = 0; i < storiesArray.size(); i++) {

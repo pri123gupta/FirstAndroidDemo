@@ -1,5 +1,6 @@
 package com.applop.demo.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.applop.demo.R;
+import com.applop.demo.helperClasses.AnalyticsHelper;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
 import com.applop.demo.model.AppConfiguration;
@@ -91,6 +93,18 @@ public class BookMailActivity extends AppCompatActivity {
     }
 
     public void sendMail(View v){
+        if (item==null){
+            Toast.makeText(this,"Error Please Try Again",Toast.LENGTH_LONG).show();
+            return;
+        }
+        try {
+            String categoryName = "Product";
+            String action = "/Product ("+item.postId+")"+": " + item.title;
+            String label = "Booked";
+            AnalyticsHelper.trackEvent(categoryName, action, label, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (name.getText().toString().equalsIgnoreCase("")){
             Toast.makeText(this,"Please enter your name",Toast.LENGTH_LONG).show();
             return;
@@ -107,10 +121,7 @@ public class BookMailActivity extends AppCompatActivity {
 //            Toast.makeText(this,"Please enter 10 digit phone number",Toast.LENGTH_LONG).show();
 //            return;
 //        }
-        if (item==null){
-            Toast.makeText(this,"Error Please Try Again",Toast.LENGTH_LONG).show();
-            return;
-        }
+
         final Intent Email = new Intent(Intent.ACTION_SEND);
         Email.setType("text/email");
         Email.putExtra(Intent.EXTRA_EMAIL, new String[]{AppConfiguration.getInstance(this).email});
@@ -137,10 +148,12 @@ public class BookMailActivity extends AppCompatActivity {
         params.put("address",address.getText().toString());
         params.put("phone",number.getText().toString());
         User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString());
+        final ProgressDialog progressDialog = new ProgressDialog(context);
         new VolleyData(this){
             @Override
             protected void VPreExecute() {
-
+                progressDialog.setTitle("Sending");
+                progressDialog.show();
             }
 
             @Override
@@ -161,9 +174,9 @@ public class BookMailActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    protected void VResponse(JSONObject response, String tag) {
-                        try {
-                            if (response.getBoolean("status")){
+                    protected void VResponse(JSONObject response, String tag) {try {
+                        progressDialog.hide();
+                           if (response.getBoolean("status")){
                                 Toast.makeText(BookMailActivity.this,"Booked Successfully",Toast.LENGTH_LONG).show();
                                 onBackPressed();
                             }else {
@@ -176,6 +189,7 @@ public class BookMailActivity extends AppCompatActivity {
                     }
                     @Override
                     protected void VError(VolleyError error, String tag) {
+                        progressDialog.hide();
                         Toast.makeText(BookMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
                     }
                     //For testing:-
@@ -185,7 +199,7 @@ public class BookMailActivity extends AppCompatActivity {
 
             @Override
             protected void VError(VolleyError error, String tag) {
-
+                progressDialog.hide();
             }
         }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable.php", "post_user", params);
         //startActivity(Intent.createChooser(Email, "Send Booking:"));

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.applop.demo.R;
+import com.applop.demo.helperClasses.AnalyticsHelper;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
 import com.applop.demo.model.AppConfiguration;
@@ -63,6 +64,14 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Enquiry");
         if (getPackageName().equalsIgnoreCase("com.applop")){
             getSupportActionBar().setTitle("Make App Now");
+        }
+        try {
+            String categoryName = "Application";
+            String label = "General Enquiry";
+            String action = "Enquired";
+            AnalyticsHelper.trackEvent(categoryName, action, label, this);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         loadResources();
     }

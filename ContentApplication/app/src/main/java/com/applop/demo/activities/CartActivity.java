@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.applop.demo.R;
 import com.applop.demo.adapters.StoryAdapter;
+import com.applop.demo.helperClasses.AnalyticsHelper;
 import com.applop.demo.helperClasses.DatabaseHelper;
 import com.applop.demo.helperClasses.Helper;
 import com.applop.demo.helperClasses.NetworkHelper.MyRequestQueue;
@@ -81,6 +82,14 @@ public class CartActivity extends AppCompatActivity {
         }else{
             loadCart();
         }
+        try {
+            String categoryName = "Cart";
+            String label = "Opened";
+            String action = "Opened";
+            AnalyticsHelper.trackEvent(categoryName, action, label, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadCart(){
@@ -143,6 +152,14 @@ public class CartActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CheckOutActivity.class);
             intent.putExtra("totalPrice", totalPriceTV.getText().toString());
             startActivityForResult(intent, NameConstant.REQUEST_CODE_ORDER_PLACED);
+            try {
+                String categoryName = "Cart";
+                String label = "CheckOut";
+                String action = "Clicked";
+                AnalyticsHelper.trackEvent(categoryName, action, label, this);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }else {
             Toast.makeText(this,"No Item to Check Out",Toast.LENGTH_SHORT).show();
         }

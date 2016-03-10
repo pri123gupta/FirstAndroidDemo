@@ -470,6 +470,7 @@ Toolbar toolbar;
         if (!AppConfiguration.getInstance(this).isCartEnable)
         {
             menu.findItem(R.id.action_cart).setVisible(false);
+            menu.findItem(R.id.action_your_order).setVisible(false);
         }
         return true;
     }

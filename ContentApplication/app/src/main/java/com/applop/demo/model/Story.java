@@ -101,7 +101,7 @@ public class Story implements Parcelable {
                 this.title = "";
             }
             try {
-                this.body = Html.fromHtml(storyObj.getString("body")).toString();
+                this.body = storyObj.getString("body");
             }catch (Exception ex){
                 this.body = "";
             }

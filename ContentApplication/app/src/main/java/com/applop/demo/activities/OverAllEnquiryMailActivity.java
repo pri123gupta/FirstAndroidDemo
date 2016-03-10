@@ -218,7 +218,6 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
                         }catch (Exception ex){
                             Toast.makeText(OverAllEnquiryMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
                         }
-
                     }
 
                     @Override
@@ -230,7 +229,8 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void VError(VolleyError error, String tag) {
+            protected void VError(VolleyError error, String tag)
+            {
                 progressDialog.hide();
             }
         }.getPOSTJsonObject("http://applop.biz/merchant/api/submitUserTable.php", "post_user", params);

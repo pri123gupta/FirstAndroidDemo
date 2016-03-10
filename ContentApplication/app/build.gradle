@@ -619,6 +619,7 @@ android {
         compile 'com.joanzapata.android:android-iconify:1.0.9'
         compile 'com.android.support:cardview-v7:23.1.1'
         compile 'com.android.support:support-v4:23.1.1'
+        compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
         //for parse push notification
         compile 'com.parse.bolts:bolts-android:1.1.4'
         compile 'com.android.support:multidex:1.0.1'

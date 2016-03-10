@@ -154,7 +154,7 @@ public void setData() {
                "</style>" +
                "<html><head></head><body>" +
                "<div style='margin:0 5;' >";
-       htmlStr = htmlStr+"<div id=multicolumn style='color:#4f4f4f;font-size:"+fontSize+"; font-family:'Desc-Font' line-height:1.5;'>"+body+"</div>" + "</div></body></html>";
+       htmlStr = htmlStr+"<div id=multicolumn style='color:#4f4f4f;font-size:"+fontSize+"; font-family:'Desc-Font' line-height:1.5;'><p>"+body+"</p></div>" + "</div></body></html>";
        return htmlStr;
    }
 

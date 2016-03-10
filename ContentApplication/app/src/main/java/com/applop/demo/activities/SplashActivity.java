@@ -92,7 +92,7 @@ public class SplashActivity extends AppCompatActivity {
            /* if (!getPackageName().equalsIgnoreCase("com.dc.dcapp.view")){
                 findViewById(R.id.background).setBackgroundColor(Color.parseColor(AppConfiguration.getInstance(context).bgcolor));
             }*/
-                mHandler.postDelayed(new LoadActivitiesThread(), 2000);
+                mHandler.postDelayed(new LoadActivitiesThread(), 5000);
 
         }
     }
@@ -125,13 +125,12 @@ public class SplashActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = context.getSharedPreferences(NameConstant.APP_CACHE_CONFIG_TABLE_NAME, context.MODE_PRIVATE).edit();
                         editor.putString(NameConstant.APP_CACHE_CONFIG_TABLE_NAME, data.toString());
                         editor.commit();
-                        try {
-                            findViewById(R.id.background).setBackgroundColor(Color.parseColor(AppConfiguration.getInstance(context).bgcolor));
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
+
                         //initializeParse();
-                        mHandler.postDelayed(new LoadActivitiesThread(), 2000);
+                    if (getPackageName().equalsIgnoreCase("com.applop"))
+                        mHandler.postDelayed(new LoadActivitiesThread(), 5000);
+                    else
+                        mHandler.postDelayed(new LoadActivitiesThread(), 200);
 
                 } catch (Exception e) {
                     //Toast.makeText(AppConfigSplashScreen.this,"Problem occurred in connecting to server.",Toast.LENGTH_SHORT).show();

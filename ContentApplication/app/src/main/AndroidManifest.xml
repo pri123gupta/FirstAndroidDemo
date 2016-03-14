@@ -92,7 +92,8 @@
         <activity android:name=".activities.ContactUsActivity" />
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".activities.CheckOutActivity" />
-        <activity android:name=".activities.YourOrderActivity"></activity>
+        <activity android:name=".activities.YourOrderActivity" />
+        <activity android:name=".activities.ApplopPagerActivity"></activity>
     </application>
 
 </manifest>

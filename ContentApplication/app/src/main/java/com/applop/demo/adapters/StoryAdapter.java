@@ -55,25 +55,15 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 OnItemClickListener mItemClickListener;
     private boolean isLoadingMoreData =false ;
     RequestQueue requestQueue;
-    IconDrawable shareIcon;
-    IconDrawable bookIcon;
+
     DatabaseHelper databaseHelper;
-    IconDrawable enquiryIcon;
+
     boolean isCart = false;
     public StoryAdapter(ArrayList<Story> data, final Activity context){
         this.data=data;
         this.context=context;
         databaseHelper = new DatabaseHelper(context);
         this.requestQueue= Volley.newRequestQueue(context);
-        shareIcon = new IconDrawable(context, Iconify.IconValue.fa_share )
-                .colorRes(R.color.grey)
-                .actionBarSize();
-        enquiryIcon = new IconDrawable(context, Iconify.IconValue.fa_question )
-                .colorRes(R.color.grey)
-                .actionBarSize();
-        bookIcon = new IconDrawable(context, Iconify.IconValue.fa_shopping_cart )
-                .colorRes(R.color.grey)
-                .actionBarSize();
     }
     @Override
     public StoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -139,10 +129,6 @@ OnItemClickListener mItemClickListener;
             holder.homeFeedPostTime.setText(AppConfiguration.getInstance(context).currencySymbol + " " + item.price);
             //holder.titleName.setText(data.get(position).title);
             //holder.homeFeedPostTime.setText(Html.fromHtml(item.categoryNameAndTime));
-            holder.share_image_view.setImageDrawable(shareIcon);
-            holder.enquiry_image_view.setImageDrawable(enquiryIcon);
-            holder.book_image_view.setImageDrawable(bookIcon);
-            holder.cart_image_view.setImageDrawable(bookIcon);
             holder.share_tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

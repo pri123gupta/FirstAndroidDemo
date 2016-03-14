@@ -2,6 +2,7 @@ package com.applop.demo.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.Html;
 
 import org.json.JSONObject;
 
@@ -42,7 +43,7 @@ public class Category implements Parcelable{
             name="";
             type="";
             this.categoryId=jsonObject.getString("id");
-            this.name=jsonObject.getString("name");
+            this.name= Html.fromHtml(jsonObject.getString("name")).toString();
             this.type=jsonObject.getString("type");
             this.link=jsonObject.getString("link");
         }

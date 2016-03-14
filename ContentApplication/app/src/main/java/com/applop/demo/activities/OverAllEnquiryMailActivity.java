@@ -163,7 +163,7 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
                 +"\n\nAddress : "+address.getText().toString()
                 +"\n\nPhone no. : "+number.getText().toString()
                 +"\n\nMessage : "+message.getText().toString());
-        //startActivity(Intent.createChooser(Email, "Send Enquiry:"));
+        //startActivity(Intent.createChooser(Email, "Send enquiry_icon:"));
         final HashMap<String, String> params = new HashMap<String, String>();
         if (user.loginType.equalsIgnoreCase("")){
             Intent intent = new Intent(this, SignInActivity.class);

@@ -321,11 +321,16 @@ Toolbar toolbar;
                             JSONArray jsonCategories = json.getJSONArray("categories");
                             drawer1MenuAdapter.clear();
                             ArrayList<Category> menuCategories = new ArrayList<Category>();
-                            menuCategories.add(new Category("", "Home", "Home"));
+                            if (getPackageName().equalsIgnoreCase("com.applop.vidhrra")){
+                                menuCategories.add(new Category("", "Pune", "home"));
+                            }else {
+                                menuCategories.add(new Category("", "Home", "home"));
+                            }
+
                             if (getPackageName().equalsIgnoreCase("com.applop")) {
                                 menuCategories.add(new Category("", "Make App Now", "enquiry"));
                             } else {
-                                menuCategories.add(new Category("", "Enquiry", "enquiry"));
+                                menuCategories.add(new Category("", "enquiry", "enquiry"));
                             }
 
                             for (int i=0;i<jsonCategories.length();i++){

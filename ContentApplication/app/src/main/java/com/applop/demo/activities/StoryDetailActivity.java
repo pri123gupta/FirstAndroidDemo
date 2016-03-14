@@ -73,6 +73,7 @@ static ViewPager viewPager;
         new AdClass(layout,this);
     }
 
+
     public void loadResources(){
         progressBar= (ProgressBar) findViewById(R.id.progress_bar);
         currentPageNo= (TextView) findViewById(R.id.current_page_no);

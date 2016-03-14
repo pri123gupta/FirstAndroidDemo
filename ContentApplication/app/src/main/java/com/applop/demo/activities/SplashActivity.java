@@ -13,6 +13,7 @@ import android.os.Bundle;
 
 import com.android.volley.VolleyError;
 import com.applop.demo.R;
+import com.applop.demo.fragments.ApplopPagerFragment;
 import com.applop.demo.gcm.RegistrationIntentService;
 import com.applop.demo.helperClasses.NetworkHelper.MyRequestQueue;
 import com.applop.demo.helperClasses.NetworkHelper.VolleyData;
@@ -82,7 +83,6 @@ public class SplashActivity extends AppCompatActivity {
     private void startLoadingApplication(){
         AppConfiguration.setMe(null);
         appConfiguration = AppConfiguration.getInstance(this);
-
         if(appConfiguration.websiteKey=="")
         {
             loadConfiguration();
@@ -100,8 +100,13 @@ public class SplashActivity extends AppCompatActivity {
     public class LoadActivitiesThread implements Runnable {
         public void run()
         {
-            Intent intent = new Intent(context,MainActivity.class);
-            startActivity(intent);
+            if (getPackageName().equalsIgnoreCase("com.applop")){
+                Intent intent = new Intent(context,ApplopPagerActivity.class);
+                startActivity(intent);
+            }else {
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.applop.demo.model.Category;
@@ -43,10 +44,20 @@ public class DrawerMenuAdapter extends   RecyclerView.Adapter<DrawerMenuAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-    int viewType= getItemViewType(position);
+        int viewType= getItemViewType(position);
         holder.itemView.setTag(holder);
         holder.itemName.setTag(data.get(position));
         holder.itemName.setText(data.get(position).name);
+        if (context.getPackageName().equalsIgnoreCase("com.applop")){
+            holder.icon.setVisibility(View.VISIBLE);
+            if (data.get(position).type.equalsIgnoreCase("home")){
+                holder.icon.setImageResource(R.drawable.home_icon);
+            }else if (data.get(position).type.equalsIgnoreCase("enquiry")){
+                holder.icon.setImageResource(R.drawable.make_your_app_icon);
+            }else {
+                holder.icon.setImageResource(R.drawable.default_icon);
+            }
+        }
     }
 
     @Override
@@ -57,8 +68,10 @@ public class DrawerMenuAdapter extends   RecyclerView.Adapter<DrawerMenuAdapter.
 
     public  class  ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
         public TextView itemName;
+        ImageView icon;
         public ViewHolder(View itemView,int viewType) {
             super(itemView);
+            icon = (ImageView) itemView.findViewById(R.id.icon);
             itemName= (TextView) itemView.findViewById(R.id.child_name);
             itemView.setOnClickListener(this);
         }

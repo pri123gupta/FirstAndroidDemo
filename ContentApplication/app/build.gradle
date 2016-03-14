@@ -81,8 +81,8 @@ android {
     productFlavors {
         applop {
             applicationId "com.applop"
-            versionCode 2016022615
-            versionName "6.2"
+            versionCode 2016031115
+            versionName "7.0"
         }
         demo {
             applicationId "com.applop.demo"

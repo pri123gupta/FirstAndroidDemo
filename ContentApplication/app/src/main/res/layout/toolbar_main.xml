@@ -30,8 +30,8 @@
             android:padding="10dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_launcher"
-            android:layout_width="80dp"
             android:id="@+id/icon"
+            android:layout_width="80dp"
             android:layout_height="wrap_content" />
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

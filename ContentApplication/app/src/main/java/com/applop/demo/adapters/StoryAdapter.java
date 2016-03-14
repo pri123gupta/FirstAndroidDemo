@@ -237,7 +237,7 @@ OnItemClickListener mItemClickListener;
                             Intent intent = YouTubeStandalonePlayer.createVideoIntent(context, NameConstant.DEVELOPER_KEY, videoID, 0, true, false);
                             context.startActivity(intent);
                         } catch (Exception ex) {
-                            Toast.makeText(context, "Unable to play video", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Error please check your youtube application", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

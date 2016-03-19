@@ -77,15 +77,17 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
     }
 
     public void chooseImage(View v) {
-        Intent intent = new Intent();
+        /*Intent intent = new Intent();
         intent.setType("image");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), NameConstant.PICK_IMAGE_REQUEST);
-        /*// Create intent to Open Image applications like Gallery, Google Photos
+        /*
+        // Create intent to Open Image applications like Gallery, Google Photos
+         */
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         // Start the Intent
-        startActivityForResult(galleryIntent, NameConstant.PICK_IMAGE_REQUEST);*/
+        startActivityForResult(galleryIntent, NameConstant.PICK_IMAGE_REQUEST);
     }
 
     public String getStringImage(Bitmap bmp){
@@ -120,11 +122,13 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
         }
         //item = getIntent().getExtras().getParcelable("item");
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.enquiry, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

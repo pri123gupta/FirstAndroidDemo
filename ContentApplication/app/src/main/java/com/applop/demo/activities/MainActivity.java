@@ -67,7 +67,7 @@ Toolbar toolbar;
     private android.os.Handler mHandler = new android.os.Handler();
     static  int position;
     DrawerLayout mDrawerLayout;
-    RelativeLayout mDrawerRealativeLayout;
+
     ActionBarDrawerToggle actionBarDrawerToggle;
     ArrayList<Category> jsoncategories= new ArrayList<Category>();
    static ArrayList<Story> stories=new ArrayList<Story>();
@@ -140,13 +140,13 @@ Toolbar toolbar;
         });
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer1MenuAdapter = new DrawerMenuAdapter(jsoncategories, context);
-        mDrawerRelativelayout = (RelativeLayout) findViewById(R.id.relative_left_drawer);
+        //mDrawerRelativelayout = (RelativeLayout) findViewById(R.id.relative_left_drawer);
        // NetworkHelper.setDetailsInDrawerlayout(mDrawerRelativelayout, this);
-        mDrawerRealativeLayout = (RelativeLayout) findViewById(R.id.relative_left_drawer);
+        mDrawerRelativelayout = (RelativeLayout) findViewById(R.id.relative_left_drawer);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer_list);
         mDrawerList.setLayoutManager(new LinearLayoutManager(context));
         mDrawerList.setAdapter(drawer1MenuAdapter);
-        Helper.setDetailsInDrawerlayout(mDrawerRealativeLayout, context);
+        Helper.setDetailsInDrawerlayout(mDrawerRelativelayout, context);
         ((RelativeLayout) findViewById(R.id.upperBar)).setBackgroundColor(Color.parseColor(AppConfiguration.getInstance(this).bgcolor));
         //for second drawer with id itemsRecyclerView
         itemsRecyclerView = (RecyclerView) findViewById(R.id.itemsRecyclerView);

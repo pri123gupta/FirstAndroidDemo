@@ -589,6 +589,11 @@ android {
             applicationId "com.applop.digitalshadi"
             versionCode 2016031103
         }
+        hotelpolotowers {
+            applicationId "com.applop.hotelpolotowers"
+            versionCode 2016031115
+            versionName "1.0"
+        }
     }
     buildTypes {
         release {
@@ -598,6 +603,7 @@ android {
             productFlavors.oyt.signingConfig signingConfigs.contentapplication
             productFlavors.applop.signingConfig signingConfigs.contentapplication
             productFlavors.uangteman.signingConfig signingConfigs.contentapplication
+            productFlavors.hotelpolotowers.signingConfig signingConfigs.contentapplication
             productFlavors.hello.signingConfig signingConfigs.contentapplication
             productFlavors.saicomputers.signingConfig signingConfigs.contentapplication
             productFlavors.premdigitalstudio.signingConfig signingConfigs.contentapplication

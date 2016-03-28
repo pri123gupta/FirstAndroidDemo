@@ -217,6 +217,8 @@ static ViewPager viewPager;
         }
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

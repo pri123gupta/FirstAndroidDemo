@@ -70,7 +70,8 @@ public class Helper {
             ((TextView) drawerlayout.findViewById(R.id.userName)).setText(user.name);
             ((TextView)drawerlayout.findViewById(R.id.signIn_tv)).setText("Sign Out");
             CircleImageView circleImageView = (CircleImageView) drawerlayout.findViewById(R.id.profile_image);
-            circleImageView.setImageBitmap(user.bitmap);
+            if (!user.imageUrl.equalsIgnoreCase(""))
+                circleImageView.setImageBitmap(user.bitmap);
 
         }else {
             ((TextView) drawerlayout.findViewById(R.id.userName)).setText("Your Name");

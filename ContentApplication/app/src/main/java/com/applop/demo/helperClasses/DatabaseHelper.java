@@ -26,19 +26,23 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase database;
     public DatabaseHelper(Context context) {
 
-        super(context, DATABASE_NAME, null, 3);
+        super(context, DATABASE_NAME, null, 4);
 
     }
     @Override
     public void onCreate(SQLiteDatabase database) {
         query = "CREATE TABLE IF NOT EXISTS Bookmarked(postId TEXT,storyJSONString TEXT,date TEXT)";
         database.execSQL(query);
-        query = "CREATE TABLE IF NOT EXISTS user(loginType TEXT,name TEXT,email TEXT,bitmap BLOB,imageUrl TEXT,address TEXT,phoneNo TEXT)";
+        query = "CREATE TABLE IF NOT EXISTS user(loginType TEXT,name TEXT,email TEXT,bitmap BLOB,imageUrl TEXT,address TEXT,phoneNo TEXT,city TEXT,country TEXT)";
         database.execSQL(query);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+        query = "ALTER TABLE user ADD city TEXT";
+        database.execSQL(query);
+        query = "ALTER TABLE user ADD country TEXT";
+        database.execSQL(query);
         onCreate(database);
     }public void removeUser() {
         SQLiteDatabase database = this.getWritableDatabase();
@@ -46,7 +50,7 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
         database.execSQL(deleteQuery);
     }
 
-    public void insertUser(String loginType,String name,String email,Bitmap bitmap,String imageUrl,String address, String phoneNo){
+    public void insertUser(String loginType,String name,String email,Bitmap bitmap,String imageUrl,String address, String phoneNo,String city,String country){
         removeUser();
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -57,6 +61,8 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
         values.put("imageUrl",imageUrl);
         values.put("address",address);
         values.put("phoneNo", phoneNo);
+        values.put("city", city);
+        values.put("country", country);
         database.insert("user", null, values);
         database.close();
     }
@@ -76,6 +82,8 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
             user.imageUrl = cursor.getString(4);
             user.address = cursor.getString(5);
             user.phoneNumber = cursor.getString(6);
+            user.city = cursor.getString(7);
+            user.country = cursor.getString(8);
             return user;
         }catch (Exception ex){
             return new User();
@@ -84,6 +92,9 @@ public  class DatabaseHelper extends SQLiteOpenHelper {
 
     // convert from bitmap to byte array
     public static byte[] getBytes(Bitmap bitmap) {
+        if (bitmap==null){
+            return new byte[0];
+        }
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         return stream.toByteArray();

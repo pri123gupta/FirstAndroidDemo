@@ -23,6 +23,9 @@ public class AppConfiguration {
     public String appContactLine3="";
     public String analyticsId="";
     public String adMobId="";
+    public String payUMerchantKey="";
+    public String payUSaltKey="";
+    public boolean isPaymentEnable=true;
     public boolean isShareEnable=true;
     public boolean isAdEnable=true;
     public boolean isEnquryEnable=true;
@@ -144,6 +147,28 @@ public class AppConfiguration {
             {
                 isShareEnable = true;
             }
+            try{
+                payUMerchantKey = data.getString("payuMerchantKey");
+            }
+            catch (Exception ex)
+            {
+                payUMerchantKey = "";//test key
+            }
+            try{
+                payUSaltKey = data.getString("payuSaltKey");
+            }
+            catch (Exception ex)
+            {
+                payUSaltKey = "";//test key
+            }
+            try{
+                isPaymentEnable = data.getBoolean("isPaymentGetwayEnable");
+            }
+            catch (Exception ex)
+            {
+                isPaymentEnable = false;
+            }
+
             try{
                 isBookingEnable = data.getBoolean("isBookingEnable");
             }

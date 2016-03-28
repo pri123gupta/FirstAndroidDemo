@@ -90,6 +90,7 @@ Toolbar toolbar;
             setTheme(R.style.AppThemeLight);
         }
         setContentView(R.layout.activity_drawer);
+        
         context = this;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -202,6 +203,10 @@ Toolbar toolbar;
 
 
         });
+    }
+
+    public void noClick(View v){
+
     }
 
     private void startLoadMore() {
@@ -472,11 +477,20 @@ Toolbar toolbar;
                     .actionBarSize();
             menu.findItem(R.id.action_cart).setIcon(bookIcon);
         }
-        if (!AppConfiguration.getInstance(this).isCartEnable)
+        if (AppConfiguration.getInstance(this).isCartEnable)
         {
+            menu.findItem(R.id.action_cart).setVisible(true);
+            menu.findItem(R.id.action_your_order).setVisible(true);
+        }else {
             menu.findItem(R.id.action_cart).setVisible(false);
             menu.findItem(R.id.action_your_order).setVisible(false);
+            if (AppConfiguration.getInstance(this).isBookingEnable){
+                menu.findItem(R.id.action_your_booking).setVisible(true);
+            }else {
+                menu.findItem(R.id.action_your_booking).setVisible(false);
+            }
         }
+
         return true;
     }
 
@@ -491,6 +505,10 @@ Toolbar toolbar;
             case R.id.action_your_order:
                 Intent yourorder=new Intent(this,YourOrderActivity.class);
                 startActivity(yourorder);
+                break;
+            case R.id.action_your_booking:
+                Intent yourbooking=new Intent(this,YourBookingActivity.class);
+                startActivity(yourbooking);
                 break;
             case R.id.action_contactUs:
                 Intent contactUs=new Intent(this,ContactUsActivity.class);

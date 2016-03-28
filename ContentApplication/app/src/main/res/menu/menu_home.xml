@@ -6,6 +6,11 @@
         android:id="@+id/action_your_order"
         app:showAsAction="never"
         ></item>
+    <item
+        android:title="Your Bookings"
+        android:id="@+id/action_your_booking"
+        app:showAsAction="never"
+        ></item>
 
     <item
         android:title="About Us"

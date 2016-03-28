@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">#222222</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorAccent">#ffffff</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="AppThemeLight" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
@@ -15,7 +15,7 @@
         <item name="colorPrimaryDark">#222222</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorAccent">#ffffff</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 

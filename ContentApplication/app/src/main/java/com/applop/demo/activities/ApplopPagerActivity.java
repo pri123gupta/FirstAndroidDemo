@@ -47,7 +47,7 @@ public class ApplopPagerActivity extends AppCompatActivity {
                 finish();
             }else {
                 viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
-                mHandler.postDelayed(new LoadNextPage(),1000);
+                mHandler.postDelayed(new LoadNextPage(),5000);
             }
         }
 

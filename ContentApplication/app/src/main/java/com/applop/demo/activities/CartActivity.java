@@ -43,6 +43,7 @@ public class CartActivity extends AppCompatActivity {
     User user;
     TextView totalPriceTV;
     ProgressBar progressBar;
+    int totalPrice=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +151,7 @@ public class CartActivity extends AppCompatActivity {
     public void checkOutClick(View v){
         if (stories.size()>0) {
             Intent intent = new Intent(this, CheckOutActivity.class);
-            intent.putExtra("totalPrice", totalPriceTV.getText().toString());
+            intent.putExtra("totalPrice", totalPrice);
             startActivityForResult(intent, NameConstant.REQUEST_CODE_ORDER_PLACED);
             try {
                 String categoryName = "Cart";
@@ -189,7 +190,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void setTotalPrice(){
-        int totalPrice = 0;
+        totalPrice = 0;
         for (int i = 0; i < stories.size(); i++) {
             totalPrice = totalPrice+(Integer.parseInt(stories.get(i).price)*stories.get(i).quantity);
         }

@@ -46,6 +46,11 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+import com.truecaller.android.sdk.ITrueCallback;
+import com.truecaller.android.sdk.TrueButton;
+import com.truecaller.android.sdk.TrueClient;
+import com.truecaller.android.sdk.TrueError;
+import com.truecaller.android.sdk.TrueProfile;
 
 
 import org.json.JSONArray;
@@ -56,7 +61,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity implements ITrueCallback {
     private CallbackManager callbackManager;
     Context context;
     public String name;
@@ -75,8 +80,9 @@ public class SignInActivity extends AppCompatActivity {
     /* Client used to interact with Google APIs. */
     private GoogleApiClient mGoogleApiClient;
     // private ConnectionResult mConnectionResult;
-
+    private TrueClient mTrueClient;
     Button signIn;
+    Button loginButton;
     String phoneNumber="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,11 +100,27 @@ public class SignInActivity extends AppCompatActivity {
         if (token != null) {
             Toast.makeText(this, token.getToken(), Toast.LENGTH_LONG).show();
         }
+        TrueButton trueButton = (TrueButton) findViewById(R.id.com_truecaller_android_sdk_truebutton);
+        boolean usable = trueButton.isUsable();
+        loginButton = (Button) findViewById(R.id.login_button);
+        signIn = (Button)findViewById(R.id.sign_in_button);
+        if (usable) {
+            if (getPackageName().equalsIgnoreCase("com.applop")){
+                mTrueClient = new TrueClient(this, this);
+                trueButton.setTrueClient(mTrueClient);
+                loginButton.setVisibility(View.GONE);
+                signIn.setVisibility(View.GONE);
+            }else {
+                trueButton.setVisibility(View.GONE);
+            }
+        } else {
+            trueButton.setVisibility(View.GONE);
+        }
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Sign In");
         Helper.setToolbarColor(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Button loginButton = (Button) findViewById(R.id.login_button);
+
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -118,7 +140,7 @@ public class SignInActivity extends AppCompatActivity {
                                 try {
                                     name = object.getString("name");
                                     email = object.getString("email");
-                                    new VolleyData(context){
+                                    new VolleyData(context) {
                                         @Override
                                         protected void VPreExecute() {
 
@@ -128,15 +150,15 @@ public class SignInActivity extends AppCompatActivity {
                                         protected void VResponse(JSONObject response, String tag) {
                                             try {
                                                 JSONArray userInfo = response.getJSONArray("UserInfo");
-                                                if (userInfo.length()==0){
+                                                if (userInfo.length() == 0) {
                                                     final HashMap<String, String> params = new HashMap<String, String>();
                                                     params.put("email", email);
                                                     params.put("name", name);
                                                     params.put("address", "");
                                                     params.put("phoneNumber", phoneNumber);
-                                                    params.put("packageName",getPackageName());
-                                                    params.put("photoLink",ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString());
-                                                    new VolleyData(context){
+                                                    params.put("packageName", getPackageName());
+                                                    params.put("photoLink", ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString());
+                                                    new VolleyData(context) {
                                                         @Override
                                                         protected void VPreExecute() {
 
@@ -153,7 +175,7 @@ public class SignInActivity extends AppCompatActivity {
                                                                         Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
                                                                         try {
                                                                             progressDialog.hide();
-                                                                            User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString(), "", "");
+                                                                            User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString(), "", "", "", "");
                                                                             setResult(RESULT_OK);
                                                                             finish();
                                                                         } catch (Exception ex) {
@@ -163,19 +185,19 @@ public class SignInActivity extends AppCompatActivity {
                                                                     }
                                                                 }).build();
                                                                 ImageDownloader.downloadAsync(request);
-                                                            }catch (Exception ex){
-                                                                Toast.makeText(context,1+ex.getMessage(),Toast.LENGTH_LONG).show();
+                                                            } catch (Exception ex) {
+                                                                Toast.makeText(context, 1 + ex.getMessage(), Toast.LENGTH_LONG).show();
                                                                 progressDialog.hide();
                                                             }
                                                         }
 
                                                         @Override
                                                         protected void VError(VolleyError error, String tag) {
-                                                            Toast.makeText(context,1+error.getMessage(),Toast.LENGTH_LONG).show();
+                                                            Toast.makeText(context, 1 + error.getMessage(), Toast.LENGTH_LONG).show();
                                                             progressDialog.hide();
                                                         }
-                                                    }.getPOSTJsonObject(submitUserDetailURL,"post_user",params);
-                                                }else {
+                                                    }.getPOSTJsonObject(submitUserDetailURL, "post_user", params);
+                                                } else {
                                                     progressDialog.hide();
                                                     final String address = userInfo.getJSONObject(0).getString("address");
                                                     final String phoneNumber = userInfo.getJSONObject(0).getString("phoneNumber");
@@ -186,7 +208,7 @@ public class SignInActivity extends AppCompatActivity {
                                                             Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
                                                             try {
                                                                 progressDialog.hide();
-                                                                User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString(), address, phoneNumber);
+                                                                User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString(), address, phoneNumber, "", "");
                                                                 setResult(RESULT_OK);
                                                                 finish();
                                                             } catch (Exception ex) {
@@ -197,8 +219,8 @@ public class SignInActivity extends AppCompatActivity {
                                                     }).build();
                                                     ImageDownloader.downloadAsync(request);
                                                 }
-                                            }catch (Exception ex){
-                                                Toast.makeText(context,"2"+ex.getMessage(),Toast.LENGTH_SHORT).show();
+                                            } catch (Exception ex) {
+                                                Toast.makeText(context, "2" + ex.getMessage(), Toast.LENGTH_SHORT).show();
                                                 progressDialog.hide();
                                                 ex.printStackTrace();
                                             }
@@ -215,7 +237,7 @@ public class SignInActivity extends AppCompatActivity {
                                                         Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
                                                         try {
                                                             progressDialog.hide();
-                                                            User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString(), "", "");
+                                                            User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, ImageRequest.getProfilePictureUri(object.getString("id"), 100, 100).toString(), "", "", "", "");
                                                             setResult(RESULT_OK);
                                                             finish();
                                                         } catch (Exception ex) {
@@ -225,16 +247,16 @@ public class SignInActivity extends AppCompatActivity {
                                                     }
                                                 }).build();
                                                 ImageDownloader.downloadAsync(request);
-                                            }catch (Exception ex){
-                                                Toast.makeText(context," :1"+ex.getMessage(),Toast.LENGTH_LONG).show();
+                                            } catch (Exception ex) {
+                                                Toast.makeText(context, " :1" + ex.getMessage(), Toast.LENGTH_LONG).show();
                                                 ex.printStackTrace();
                                             }
                                         }
-                                    }.getJsonObject(userDetailURL + email+"&packageName="+getPackageName(), true, "userDetail", context);
+                                    }.getJsonObject(userDetailURL + email + "&packageName=" + getPackageName(), true, "userDetail", context);
 
                                 } catch (Exception ex) {
                                     progressDialog.hide();
-                                    Toast.makeText(context,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
                                     ex.printStackTrace();
                                 }
                                 Log.v("LoginActivity", response.toString());
@@ -267,7 +289,7 @@ public class SignInActivity extends AppCompatActivity {
         String firstName = profile.getFirstName();
         String photoURL = String.valueOf(profile.getProfilePictureUri(20, 20));*/
 
-        signIn = (Button)findViewById(R.id.sign_in_button);
+
         mGoogleApiClient = new GoogleApiClient.Builder(context)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
@@ -375,7 +397,7 @@ public class SignInActivity extends AppCompatActivity {
                                             Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
                                             try {
                                                 progressDialog.hide();
-                                                User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, uri.toString(), "", "");
+                                                User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, uri.toString(), "", "","","");
                                                 setResult(RESULT_OK);
                                                 finish();
                                             } catch (Exception ex) {
@@ -408,7 +430,7 @@ public class SignInActivity extends AppCompatActivity {
                                 Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
                                 try {
                                     progressDialog.hide();
-                                    User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, uri.toString(), address, phoneNumber);
+                                    User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, uri.toString(), address, phoneNumber,"","");
                                     setResult(RESULT_OK);
                                     finish();
                                 } catch (Exception ex) {
@@ -437,7 +459,7 @@ public class SignInActivity extends AppCompatActivity {
                             Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
                             try {
                                 progressDialog.hide();
-                                User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, uri.toString(), "", "");
+                                User.setUser(context, email, name, NameConstant.LOGIN_TYPE_FACEBOOK, bitmap, uri.toString(), "", "","","");
                                 setResult(RESULT_OK);
                                 finish();
                             } catch (Exception ex) {
@@ -492,6 +514,9 @@ public class SignInActivity extends AppCompatActivity {
             }
         }else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
+            if (null != mTrueClient && mTrueClient.onActivityResult(requestCode, resultCode, data)) {
+                return;
+            }
         }
     }
 
@@ -508,7 +533,45 @@ public class SignInActivity extends AppCompatActivity {
                 }
                 break;
             default:
+
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    @Override
+    public void onSuccesProfileShared(final TrueProfile trueProfile) {
+        final String fullName = trueProfile.firstName + " " + trueProfile.lastName;
+
+        if (trueProfile.avatarUrl==null){
+            Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
+            User.setUser(context, trueProfile.email, fullName, NameConstant.LOGIN_TYPE_TRUE_CALLER, null, "", "", trueProfile.phoneNumber, trueProfile.city, trueProfile.countryCode);
+            setResult(RESULT_OK);
+            finish();
+            return;
+        }
+        ImageRequest.Builder requestBuilder = new ImageRequest.Builder(context, Uri.parse(trueProfile.avatarUrl));
+        ImageRequest request = requestBuilder.setAllowCachedRedirects(true).setCallerTag(this).setCallback(new ImageRequest.Callback() {
+            public void onCompleted(ImageResponse response) {
+                bitmap = response.getBitmap();
+                Toast.makeText(context, "Signed In", Toast.LENGTH_LONG).show();
+                try {
+                    //progressDialog.hide();
+                    User.setUser(context, trueProfile.email, fullName, NameConstant.LOGIN_TYPE_TRUE_CALLER, bitmap, trueProfile.avatarUrl, "", trueProfile.phoneNumber,trueProfile.city,trueProfile.countryCode);
+                    setResult(RESULT_OK);
+                    finish();
+                } catch (Exception ex) {
+                    //progressDialog.hide();
+                    Toast.makeText(context,ex.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
+        }).build();
+        ImageDownloader.downloadAsync(request);
+    }
+
+    @Override
+    public void onFailureProfileShared(TrueError trueError) {
+        Toast.makeText(this, "Please Check Your Account in True Caller", Toast.LENGTH_LONG).show();
+        loginButton.setVisibility(View.VISIBLE);
+        signIn.setVisibility(View.VISIBLE);
     }
 }

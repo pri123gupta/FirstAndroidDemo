@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
+    xmlns:truesdk="http://schemas.android.com/apk/res-auto"
     tools:context="com.experttutor.CommonActivities.SignInActivity">
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,8 +30,15 @@
             android:id="@+id/sign_in_button"
             android:layout_width="match_parent"
             android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/signin_gplus"
             android:layout_marginLeft="30dp"
             android:layout_height="55dp" />
+        <com.truecaller.android.sdk.TrueButton
+            android:layout_width="wrap_content"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:layout_height="wrap_content"
+            truesdk:truebutton_text="signUp"/>
     </LinearLayout>
 </RelativeLayout>

@@ -1,7 +1,9 @@
 package com.applop.demo.activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +40,10 @@ public class CheckOutActivity extends AppCompatActivity {
     TextView totalPriceTV;
     User user;
     Context context;
+    String[] paymentTypes = new String[2];
+    int totalPrice;
+    int selectedPaymentIndex=0;
+    TextView paymentMethodTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +54,22 @@ public class CheckOutActivity extends AppCompatActivity {
             setTheme(R.style.AppThemeLight);
         }
         context = this;
+
         setContentView(R.layout.activity_check_out);
+        paymentMethodTV = (TextView) findViewById(R.id.paymentMethod_tv);
+        if (AppConfiguration.getInstance(this).isPaymentEnable&&!AppConfiguration.getInstance(this).payUSaltKey.equalsIgnoreCase("")&&!AppConfiguration.getInstance(this).payUMerchantKey.equalsIgnoreCase(""))
+        {
+            paymentTypes[0] = "PayU Payment";
+            paymentTypes[1] = "Cash On Delivery";
+        }else {
+            paymentTypes[0] = "Cash On Delivery";
+        }
+        paymentMethodTV.setText("Payment : " + paymentTypes[0] + " (Click to change)");
+
         totalPriceTV = (TextView) findViewById(R.id.totalPrice);
-        totalPriceTV.setText(getIntent().getExtras().getString("totalPrice",""));
+
+        totalPrice = getIntent().getExtras().getInt("totalPrice",0);
+        totalPriceTV.setText(AppConfiguration.getInstance(this).currencySymbol+" "+totalPrice);
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Helper.setToolbarColor(this);
@@ -59,6 +78,20 @@ public class CheckOutActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Check Out");
         loadResources();
+    }
+
+    public void showCountrySelection()
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Country");
+        builder.setSingleChoiceItems(paymentTypes, selectedPaymentIndex, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                selectedPaymentIndex = which;
+                paymentMethodTV.setText("Payment : " + paymentTypes[selectedPaymentIndex]+" (Click to change)");
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 
     private void loadResources(){
@@ -138,7 +171,7 @@ public class CheckOutActivity extends AppCompatActivity {
         //params.put("quantity",quantity.getText().toString());
         params.put("packageName", getPackageName());
         params.put("photoLink", user.imageUrl);
-        User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString());
+        User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString(),"","");
         new VolleyData(this){
             @Override
             protected void VPreExecute() {
@@ -158,56 +191,96 @@ public class CheckOutActivity extends AppCompatActivity {
         //startActivity(Intent.createChooser(Email, "Send Booking:"));
     }
 
+    public void paymentChangeClick(View v){
+        showCountrySelection();
+    }
+
     public void checkOutProcess(){
-        final Context context=this;
-        String URL = "http://applop.biz/merchant/api/checkOutItemsFromCart.php";//1
-        MyRequestQueue.Instance(this).cancelPendingRequests("checkOutItemsFromCart");
-        final HashMap<String, String> params = new HashMap<String, String>();
-        params.put("userEmail", user.email);
-        params.put("packageName", getPackageName());
-        final ProgressDialog progressDialog = new ProgressDialog(context);
-        new VolleyData(this) {
+        if (paymentTypes[selectedPaymentIndex].equalsIgnoreCase("PayU Payment")){
+            String url = "http://applop.biz/merchant/api/getNextCheckOutId.php";
+            new VolleyData(this){
+                @Override
+                protected void VPreExecute() {
 
-            @Override
-            protected void VPreExecute() {
+                }
 
-                progressDialog.setTitle("Checking Out");
-                progressDialog.show();
-
-            }
-
-            @Override
-            protected void VResponse(JSONObject response, String tag) {
-                progressDialog.hide();
-                try {
-                    if (response.getBoolean("status")){
-                        Toast.makeText(context,"Order Placed Successfully",Toast.LENGTH_LONG).show();
-                        (new DatabaseHelper(context)).removeFromBookmarked();
-                        setResult(RESULT_OK);
-                        try {
-                            String categoryName = "Cart";
-                            String label = "Checkout";
-                            String action = "Order Placed";
-                            AnalyticsHelper.trackEvent(categoryName, action, label, CheckOutActivity.this);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                @Override
+                protected void VResponse(JSONObject response, String tag) {
+                    try {
+                        if (!response.getString("id").equalsIgnoreCase("")) {
+                            Intent intent = new Intent(context, PayUMoneyActivity.class);
+                            intent.putExtra("name", name.getText().toString());
+                            intent.putExtra("email", user.email);
+                            intent.putExtra("amount", totalPrice);
+                            intent.putExtra("phone", number.getText().toString());
+                            intent.putExtra("id", Integer.parseInt(response.getString("id")));
+                            startActivityForResult(intent, NameConstant.REQUEST_PAYMENT);
                         }
-                        finish();
-                    }else {
+                    }catch (Exception ex){
+
+                    }
+
+                }
+
+                @Override
+                protected void VError(VolleyError error, String tag) {
+                    Toast.makeText(context,"Error: Please Try Again",Toast.LENGTH_SHORT).show();
+                }
+            }.getJsonObject(url, false, "id", this);
+        }else {
+            final Context context=this;
+            String URL = "http://applop.biz/merchant/api/checkOutItemsFromCart.php";//1
+            MyRequestQueue.Instance(this).cancelPendingRequests("checkOutItemsFromCart");
+            final HashMap<String, String> params = new HashMap<String, String>();
+            params.put("userEmail", User.getInstance(this).email);
+            params.put("packageName", getPackageName());
+            final ProgressDialog progressDialog = new ProgressDialog(context);
+            new VolleyData(this) {
+
+                @Override
+                protected void VPreExecute() {
+
+                    progressDialog.setTitle("Checking Out");
+                    progressDialog.show();
+
+                }
+
+                @Override
+                protected void VResponse(JSONObject response, String tag) {
+                    progressDialog.hide();
+                    try {
+                        if (response.getBoolean("status")){
+                            Toast.makeText(context,"Order Placed Successfully",Toast.LENGTH_LONG).show();
+                            (new DatabaseHelper(context)).removeFromBookmarked();
+                            setResult(RESULT_OK);
+                            try {
+                                String categoryName = "Cart";
+                                String label = "Checkout";
+                                String action = "Order Placed";
+                                AnalyticsHelper.trackEvent(categoryName, action, label, CheckOutActivity.this);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            finish();
+                        }else {
+                            Toast.makeText(context,"Error : Please try again",Toast.LENGTH_LONG).show();
+                        }
+                    }catch (Exception ex){
                         Toast.makeText(context,"Error : Please try again",Toast.LENGTH_LONG).show();
                     }
-                }catch (Exception ex){
+
+                }
+                @Override
+                protected void VError(VolleyError error, String tag) {
+                    progressDialog.hide();
                     Toast.makeText(context,"Error : Please try again",Toast.LENGTH_LONG).show();
                 }
 
-            }
-            @Override
-            protected void VError(VolleyError error, String tag) {
-                progressDialog.hide();
-                Toast.makeText(context,"Error : Please try again",Toast.LENGTH_LONG).show();
-            }
+            }.getPOSTJsonObject(URL, "checkOut", params);
+        }
 
-        }.getPOSTJsonObject(URL, "checkOut", params);
+
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -220,6 +293,30 @@ public class CheckOutActivity extends AppCompatActivity {
                     address.setText(user.address);
                     number.setText(user.phoneNumber);
                   //  quantity.setText(user.quantity);
+                }
+            }
+            if (requestCode==NameConstant.REQUEST_PAYMENT){
+                if (resultCode==RESULT_OK){
+                    user = User.getInstance(this);
+                    name.setText(user.name);
+                    address.setText(user.address);
+                    number.setText(user.phoneNumber);
+                    Toast.makeText(context,"Order Placed Successfully",Toast.LENGTH_LONG).show();
+                    (new DatabaseHelper(context)).removeFromBookmarked();
+                    try {
+                        String categoryName = "Cart";
+                        String label = "Checkout";
+                        String action = "Order Placed";
+                        AnalyticsHelper.trackEvent(categoryName, action, label, CheckOutActivity.this);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    setResult(RESULT_OK);
+                    Intent intent = new Intent(context,YourOrderActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Toast.makeText(context,"Please try again",Toast.LENGTH_LONG).show();
                 }
             }
         }catch (Exception ex){

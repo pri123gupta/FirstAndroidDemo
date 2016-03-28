@@ -159,6 +159,12 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
             Toast.makeText(this,"Please enter your message",Toast.LENGTH_LONG).show();
             return;
         }
+
+        if (address.getText().toString().equalsIgnoreCase("")){
+            Toast.makeText(this,"Please enter your address",Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Intent Email = new Intent(Intent.ACTION_SEND);
         Email.setType("text/email");
         Email.putExtra(Intent.EXTRA_EMAIL, new String[]{AppConfiguration.getInstance(this).email});
@@ -180,7 +186,7 @@ public class OverAllEnquiryMailActivity extends AppCompatActivity {
         params.put("phoneNumber", number.getText().toString());
         params.put("packageName", getPackageName());
         params.put("photoLink", user.imageUrl);
-        User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString());
+        User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString(),"","");
         final ProgressDialog progressDialog = new ProgressDialog(context);
         new VolleyData(this){
             @Override

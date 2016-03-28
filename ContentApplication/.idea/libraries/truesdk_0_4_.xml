@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="truesdk-0.4-">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/truesdk-0.4/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/truesdk-0.4/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/truesdk-0.4/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

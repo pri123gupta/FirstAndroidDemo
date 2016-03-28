@@ -147,7 +147,7 @@ public class BookMailActivity extends AppCompatActivity {
         params.put("photoLink", user.imageUrl);
         params.put("address",address.getText().toString());
         params.put("phone",number.getText().toString());
-        User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString());
+        User.setUser(this, user.email, user.name, user.loginType, user.bitmap, user.imageUrl, address.getText().toString(), number.getText().toString(),"","");
         final ProgressDialog progressDialog = new ProgressDialog(context);
         new VolleyData(this){
             @Override
@@ -178,7 +178,9 @@ public class BookMailActivity extends AppCompatActivity {
                         progressDialog.hide();
                            if (response.getBoolean("status")){
                                 Toast.makeText(BookMailActivity.this,"Booked Successfully",Toast.LENGTH_LONG).show();
-                                onBackPressed();
+                               Intent intent = new Intent(context,YourBookingActivity.class);
+                               startActivity(intent);
+                               finish();
                             }else {
                                 Toast.makeText(BookMailActivity.this,"Error : Please try again",Toast.LENGTH_LONG).show();
                             }

@@ -92,7 +92,12 @@
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".activities.CheckOutActivity" />
         <activity android:name=".activities.YourOrderActivity" />
+        <activity android:name=".activities.YourBookingActivity" />
+        <activity android:name=".activities.ApplopDashBoard" />
+        <activity android:name=".activities.EnterOTPActivity" />
         <activity android:name=".activities.ApplopPagerActivity"></activity>
+        <activity android:name=".activities.PayUMoneyActivity"></activity>
+        <meta-data android:name="com.truecaller.android.sdk.PartnerKey" android:value="@string/partnerKey"/>
     </application>
 
 </manifest>

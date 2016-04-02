@@ -39,6 +39,7 @@ import com.applop.demo.R;
 import com.applop.demo.adapters.StoryAdapter;
 import com.applop.demo.model.NameConstant;
 import com.applop.demo.model.Story;
+import com.applop.demo.model.User;
 import com.applop.demo.myads.AdClass;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.joanzapata.android.iconify.IconDrawable;
@@ -90,11 +91,16 @@ Toolbar toolbar;
             setTheme(R.style.AppThemeLight);
         }
         setContentView(R.layout.activity_drawer);
-        
+
         context = this;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        if (getPackageName().equalsIgnoreCase("com.applop")) {
+            if (User.getInstance(this).loginType.equalsIgnoreCase("")) {
+                Intent intent = new Intent(context, SignInActivity.class);
+                startActivityForResult(intent, NameConstant.REQUEST_CODE_BACK_FROM_SIGN_IN);
+            }
+        }
         Helper.setToolbarColor(this);
         storyAdapter=new StoryAdapter(stories,this);
         loadResources();
@@ -335,7 +341,8 @@ Toolbar toolbar;
                             if (getPackageName().equalsIgnoreCase("com.applop")) {
                                 menuCategories.add(new Category("", "Make App Now", "enquiry"));
                             } else {
-                                menuCategories.add(new Category("", "enquiry", "enquiry"));
+                                if (!getPackageName().equalsIgnoreCase("com.applop.meeaagiapp"))
+                                    menuCategories.add(new Category("", "enquiry", "enquiry"));
                             }
 
                             for (int i=0;i<jsonCategories.length();i++){
@@ -481,6 +488,7 @@ Toolbar toolbar;
         {
             menu.findItem(R.id.action_cart).setVisible(true);
             menu.findItem(R.id.action_your_order).setVisible(true);
+            menu.findItem(R.id.action_your_booking).setVisible(false);
         }else {
             menu.findItem(R.id.action_cart).setVisible(false);
             menu.findItem(R.id.action_your_order).setVisible(false);

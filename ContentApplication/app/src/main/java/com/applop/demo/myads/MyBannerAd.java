@@ -53,9 +53,10 @@ public class MyBannerAd {
 	 */
 	public void getBannerAd(Context context){
 
-
-		if (!AppConfiguration.getInstance(context).isAdEnable){
-			return;
+		if (AppConfiguration.getInstance(context).isPaid) {
+			if (!AppConfiguration.getInstance(context).isAdEnable) {
+				return;
+			}
 		}
 		loadAdMobAds();
 
@@ -69,9 +70,7 @@ public class MyBannerAd {
 	private void loadAdMobAds(){
 		adView = new AdView(_activity);
 		adView.setAdSize(AdSize.BANNER);
-		adView.setAdUnitId("ca-app-pub-2649338194133294/5664154967");
-
-
+		adView.setAdUnitId("ca-app-pub-6861315319947017/4755713884");
 		adView.setAdListener(new AdListener() {
 
 			@Override

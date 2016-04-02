@@ -494,8 +494,8 @@ android {
         }
         meeaagi{
             applicationId "com.applop.meeaagiapp"
-            versionCode 2016031412
-            versionName "1.2"
+            versionCode 2016032912
+            versionName "1.3"
         }
         hellohome{
             applicationId "com.applop.hellohome"

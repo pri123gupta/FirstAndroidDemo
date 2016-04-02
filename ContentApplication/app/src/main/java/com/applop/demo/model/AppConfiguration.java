@@ -26,6 +26,7 @@ public class AppConfiguration {
     public String payUMerchantKey="";
     public String payUSaltKey="";
     public boolean isPaymentEnable=true;
+    public boolean isPaid=false;
     public boolean isShareEnable=true;
     public boolean isAdEnable=true;
     public boolean isEnquryEnable=true;
@@ -168,6 +169,13 @@ public class AppConfiguration {
             {
                 isPaymentEnable = false;
             }
+            try{
+                isPaid = data.getBoolean("isPaid");
+            }
+            catch (Exception ex)
+            {
+                isPaid = false;
+            }
 
             try{
                 isBookingEnable = data.getBoolean("isBookingEnable");
@@ -199,6 +207,7 @@ public class AppConfiguration {
             }
             try{
                 isAdEnable = data.getBoolean("isAdEnable");
+                isAdEnable = false;
             }
             catch (Exception ex)
             {

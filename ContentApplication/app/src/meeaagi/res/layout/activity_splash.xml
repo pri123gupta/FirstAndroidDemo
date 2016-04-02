@@ -18,7 +18,7 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/splash_logo"
             android:scaleType="fitCenter"/>
-        <TextView
+        <!--<TextView
 
             android:layout_below="@id/image"
             android:layout_marginBottom="20dp"
@@ -32,7 +32,7 @@
             android:layout_width="fill_parent"
             android:textSize="24dp"
             android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" />-->
 
 
     </RelativeLayout>

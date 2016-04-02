@@ -49,9 +49,15 @@ public class MyInterstitialAd {
 					.build();
 		*/
 		adRequest = new AdRequest.Builder().build();
-		interstitial.setAdUnitId("ca-app-pub-2649338194133294/7140888169");
-		if (AppConfiguration.getInstance(context).isAdEnable)
+		interstitial.setAdUnitId("ca-app-pub-6861315319947017/6232447085");
+		if (AppConfiguration.getInstance(context).isPaid) {
+			interstitial.setAdUnitId("ca-app-pub-6861315319947017/6232447085");
+			if (AppConfiguration.getInstance(context).isAdEnable)
 				interstitial.loadAd(adRequest);
+		}else {
+			interstitial.setAdUnitId("ca-app-pub-6861315319947017/6232447085");
+			interstitial.loadAd(adRequest);
+		}
 
 		
 		interstitial.setAdListener(new AdListener() {
